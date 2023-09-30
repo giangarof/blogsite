@@ -1,16 +1,25 @@
 import express from 'express';
 const router = express.Router();
+import passport from 'passport';
 
 import {
-    loginUser, logoutUser, signupUser, deleteUser, userProfile, userUpdateProfile
+    signinUser,
+    loginUser,
+    logoutUser, 
+    signupUser, 
+    deleteUser, 
+    userProfile, 
+    userUpdateProfile
 } from '../controllers/user.js';
 
-router.get('/login', loginUser)
+router.get('/login', signinUser)
 router.post('/signup', signupUser)
-router.get('/logout', logoutUser)
+router.post('/login', passport.authenticate("local", {failureFlash: true, failureRedirect: '/api/user/login'}), loginUser);
 
-router.get('/delete/:id', deleteUser)
-router.get('/profile/:id', userProfile)
-router.get('/profile/:id', userUpdateProfile)
+// router.post('/logout', logoutUser)
+
+// router.get('/delete/:id', deleteUser)
+// router.get('/profile/:id', userProfile)
+// router.get('/profile/:id', userUpdateProfile)
 
 export default router;

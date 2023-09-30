@@ -1,10 +1,21 @@
 import User from '../models/users.js'
 
-// auth user & get the token
+const signinUser = (req,res) => {
+    res.send(req)
+}
+
+// login user
 // route: /api/user/login
-// POST
+// Post
 const loginUser = async(req,res) => {
-    res.send('login')
+    try{
+        // req.flash('success', `Welcome back ${req.body.username}`);
+        res.send('logged in');
+
+    } catch(e){
+        res.send(e.message)
+    }
+    // res.send(req.body)
 }
 
 // registration for new user
@@ -40,7 +51,7 @@ const signupUser = async(req,res) => {
 // route: /api/user/logout
 // POST
 const logoutUser = async(req,res) => {
-    res.send('logout')
+    req.logout();
 }
 
 // delete user from database
@@ -66,6 +77,7 @@ const userUpdateProfile = async(req,res) => {
 
 
 export {
+    signinUser,
     loginUser,
     logoutUser,
     signupUser,
