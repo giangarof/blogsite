@@ -21,10 +21,9 @@ import post from './routes/post.js'
 connectDB();
 
 const app = express();
-const port = process.env.PORT || 3000;
 
 // body parser middleware
-    //make sure to write the body parser middleware prior to the routes.
+//make sure to write the body parser middleware prior to the routes.
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
@@ -32,10 +31,11 @@ app.use(cookieParser())
 
 // Create the session
 app.use(session(sessionConfig));
-app.use(connectFlash());
+
 //Passport middleware for authentication
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(connectFlash());
 passport.use(new LocalStrategy(User.authenticate()))
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -51,4 +51,5 @@ app.use((req, res, next) => {
 app.use('/api/user', user)
 app.use('/api/post', post)
 
+const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`running on port ${port}`))

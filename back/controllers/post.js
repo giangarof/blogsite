@@ -1,5 +1,14 @@
 import Post from '../models/post.js'
 
+const getAll = async (req,res) => {
+    try {
+        const post = await Post.find({})
+        console.log(post)
+    } catch (e) {
+        res.send(e.message)
+    }
+}
+
 const createPost = async(req, res) => {
     try{
         const post = new Post(req.body)
@@ -56,5 +65,6 @@ export {
     createPost,
     findPost,
     updatePost,
-    deletePost
+    deletePost,
+    getAll
 }

@@ -1,3 +1,4 @@
+import { json } from 'express';
 import User from '../models/users.js'
 
 const signinUser = (req,res) => {
@@ -10,12 +11,13 @@ const signinUser = (req,res) => {
 const loginUser = async(req,res) => {
     try{
         // req.flash('success', `Welcome back ${req.body.username}`);
-        res.send('logged in');
+        // res.send('logged in');
+        res.status(200).json({message:'Logged In'})
 
     } catch(e){
         res.send(e.message)
     }
-    // res.send(req.body)
+    
 }
 
 // registration for new user

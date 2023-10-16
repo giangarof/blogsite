@@ -13,8 +13,8 @@ import {
 } from '../controllers/user.js';
 
 router.get('/login', signinUser)
+router.post('/signin', passport.authenticate('local', {failureFlash: true, failureRedirect: '/api/post/', failureFlash:true}), loginUser);
 router.post('/signup', signupUser)
-router.post('/login', passport.authenticate("local", {failureFlash: true, failureRedirect: '/api/user/login'}), loginUser);
 
 // router.post('/logout', logoutUser)
 
