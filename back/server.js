@@ -1,5 +1,6 @@
 import path from 'path'
 import dotenv from 'dotenv'
+import cors from 'cors'
 dotenv.config()
 
 import express from "express";
@@ -20,6 +21,7 @@ import post from './routes/post.js'
 // run mongodb
 connectDB();
 
+// const port = process.env.PORT || 3000;
 const app = express();
 
 // body parser middleware
@@ -27,6 +29,9 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
+app.use(cors({
+    origin: "*"
+}))
 
 
 // Create the session
@@ -51,5 +56,5 @@ app.use((req, res, next) => {
 app.use('/api/user', user)
 app.use('/api/post', post)
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`running on port ${port}`))

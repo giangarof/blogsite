@@ -1,6 +1,10 @@
-import { AppBar, Toolbar, IconButton, Typography, Box } from "@mui/material";
+import { 
+  AppBar, 
+  Toolbar, 
+  // IconButton, 
+  Typography, Box } from "@mui/material";
 export default function Register() {
-  const pages = ['home', 'main', 'more']
+  // const pages = ['home', 'main', 'more']
   const sx = {
     m:2, textDecoration:"none", color:'inherit'
   }
@@ -24,6 +28,7 @@ export default function Register() {
                       </Typography>))}
                   </Box> */}
                   <Box sx={{ display:'flex', m:2}} >
+                    <Typography sx={sx} component="a" href="/home">Home</Typography>
                     <Typography sx={sx} component="a" href="/register">Register</Typography>
                     <Typography sx={sx} component="a" href="/signin">Login</Typography>
                     <Typography sx={sx} component="a" href="">Blog</Typography>
