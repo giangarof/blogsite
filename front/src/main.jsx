@@ -13,6 +13,7 @@ import {
 import AllPosts from './screen/AllPosts.jsx'
 import Signin from './screen/Signin.jsx'
 import Register from './screen/Register.jsx'
+import NewPost from './screen/newPost.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,6 +21,7 @@ const router = createBrowserRouter(
       <Route index={true} path='/home' element={<AllPosts/>} />
       <Route path='/signin' element={<Signin/>} />
       <Route path='/register' element={<Register/>} />
+      <Route path='/new' element={<NewPost/>}/>
     </Route>
   )
 )

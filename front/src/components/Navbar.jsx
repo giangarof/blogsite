@@ -31,8 +31,9 @@ export default function Register() {
                     <Typography sx={sx} component="a" href="/home">Home</Typography>
                     <Typography sx={sx} component="a" href="/register">Register</Typography>
                     <Typography sx={sx} component="a" href="/signin">Login</Typography>
-                    <Typography sx={sx} component="a" href="">Blog</Typography>
-                    <Typography sx={sx} component="a" href="">About</Typography>
+                    <Typography sx={sx} component="a" href="/new">New Post</Typography>
+                    {/* <Typography sx={sx} component="a" href="">Blog</Typography> */}
+                    {/* <Typography sx={sx} component="a" href="">About</Typography> */}
                   </Box>
                 </Toolbar>
               </AppBar>
