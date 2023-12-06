@@ -1,4 +1,4 @@
-import CloudinaryStorage from "multer-storage-cloudinary";
+import {CloudinaryStorage} from "multer-storage-cloudinary";
 import { v2 as cloudinary } from 'cloudinary'
 
 
@@ -11,7 +11,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary,
     params: {
-        folder: 'blog',
+        folder: 'Rnet',
         allowedFormats: ['png', 'jpeg', 'jpg']
     }
 });

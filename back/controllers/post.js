@@ -13,8 +13,9 @@ const getAll = async (req,res) => {
 const createPost = async(req, res) => {
     try{
         const post = new Post(req.body)
+        post.image = req.files.map(f => ({url: f.path, filename: f.filename}));
         await post.save()
-        res.status(201).json(post);
+        res.status(201).json(req.body)
     } catch(e){
         res.send(e.message)
     }
