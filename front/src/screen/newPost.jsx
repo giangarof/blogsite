@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
-import { Box, TextField, Stack, Button } from "@mui/material";
+import { Box, TextField, Stack, Button, styled } from "@mui/material";
 import { Typography } from "@mui/joy";
 
 import axios from 'axios';
@@ -12,13 +12,24 @@ export default function NewPost() {
     const [description, setDescription] = useState('')
     const [image, setImage] = useState('')
 
+    const FileUpload = (e) => {
+        setImage(e.target.files)
+    }
+
     const newPost = async(e) => {
         e.preventDefault()
         try {
-            const data = {title, description, image}
-            const post = await axios.post('/api/post/new', data)
+            // const data = {title, description, image}
+            const formData = new FormData();
+            formData.append("title", title);
+            formData.append("description", description);
+            formData.append("image", image);
+
+            const post = await axios.post('/api/post/new', formData)
             navigate('/home')
+            console.log(post)
             return post
+            
             
         } catch (err) {
             console.error(err)
@@ -41,13 +52,14 @@ export default function NewPost() {
                         {/* enable file upload */}
 
                         <Button  id="outlined-basic" label="Image" variant="outlined" 
-                                    value={image} onChange={(e) => setImage(e.target.value) }>
+                                    value={image} onChange={(e) => setImage(e.target.value) } >
                                         Upload Image
+                                    <input type='file' onChange={FileUpload}/>
                         </Button>
 
                         <Button variant="contained" size="large"
                                 onClick={newPost}>
-                                Submit
+                                    Submit
                         </Button>
                 </Stack>
             </Box>

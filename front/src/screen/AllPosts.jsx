@@ -67,7 +67,11 @@ export default function AllPosts() {
                                 <CardContent>
                                     <Typography variant="h5" color="text.secondary">{item.title}</Typography>
                                     <Typography variant="body1">{item.description}</Typography>
-                                    <Typography variant="body1"> {item.image[0].url}</Typography>
+                                    {/* <Typography variant="body1">{item.image.url}</Typography> */}
+
+                                    {Array.isArray(item.image) && item.image.length > 0 && (
+                                        <Typography variant="body1">{item.image[0].url}</Typography>
+                                    )}
                                    
                                     {/* add btns -> see post & like */}
                                 </CardContent>
