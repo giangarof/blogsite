@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
-import { Box, TextField, Stack, Button, styled } from "@mui/material";
+import { Box, TextField, Stack, Button } from "@mui/material";
 import { Typography } from "@mui/joy";
 
 import axios from 'axios';
@@ -13,7 +13,9 @@ export default function NewPost() {
     const [image, setImage] = useState('')
 
     const FileUpload = (e) => {
-        setImage(e.target.files)
+        const file = e.target.files[0]
+        setImage(file)
+        console.log(file)
     }
 
     const newPost = async(e) => {
@@ -27,8 +29,8 @@ export default function NewPost() {
 
             const post = await axios.post('/api/post/new', formData)
             navigate('/home')
-            console.log(post)
-            return post
+            console.log(post.data.image)
+            // return post
             
             
         } catch (err) {
@@ -39,7 +41,7 @@ export default function NewPost() {
     return (
         <>
             <Box sx={{mt:10}}>
-                <Stack direction="column" justifyContent="center" alignItems="center" spacing={4}>
+                <Stack direction="column" justifyContent="center" alignItems="center" spacing={4} >
                         <Typography level="h3">New Post</Typography>
 
                         <TextField  id="outlined-basic" label="Title" variant="outlined" 
@@ -51,11 +53,11 @@ export default function NewPost() {
 
                         {/* enable file upload */}
 
-                        <Button  id="outlined-basic" label="Image" variant="outlined" 
+                        <input type='File' onChange={FileUpload}/>
+                        {/* <Button  id="outlined-basic" label="Image" variant="outlined" 
                                     value={image} onChange={(e) => setImage(e.target.value) } >
                                         Upload Image
-                                    <input type='file' onChange={FileUpload}/>
-                        </Button>
+                        </Button> */}
 
                         <Button variant="contained" size="large"
                                 onClick={newPost}>

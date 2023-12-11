@@ -70,9 +70,10 @@ export default function AllPosts() {
                                     {/* <Typography variant="body1">{item.image.url}</Typography> */}
 
                                     {Array.isArray(item.image) && item.image.length > 0 && (
-                                        <Typography variant="body1">{item.image[0].url}</Typography>
+                                        // <Typography variant="body1">{item.image[0].url}</Typography>
+                                        <img src={item.image[0].url} width={250} height={250}/>     
                                     )}
-                                   
+                                                                  
                                     {/* add btns -> see post & like */}
                                 </CardContent>
                                 
@@ -86,4 +87,4 @@ export default function AllPosts() {
         </div>
         // </>
     )
-}
+}       
