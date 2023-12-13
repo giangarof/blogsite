@@ -36,14 +36,18 @@ const updatePost = async(req,res) => {
     try{
         const {title, description,image} = req.body;
         const {id} = req.params;
-        const post = await Post.findById(id)
-        if(post){
+        const post = await Post.findByIdAndUpdate(id)
+        const imgs = req.files.map(f => ({url: f.path, filename: f.filename}));
+        if(!post){
+            throw new Error('something went wrong!')
+        } else {
             post.title = title;
             post.description = description;
-            post.image = image;
-
+            post.image = imgs;
+    
             const savedPost = await post.save()
             res.json(savedPost)
+
         }
 
     }catch(e){
