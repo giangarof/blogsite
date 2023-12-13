@@ -74,9 +74,7 @@ export default function () {
                                                                   
                                 </CardContent>
                                 <Button variant="contained" onClick={() => deletePost(post._id)}>
-                                    <Typography variant="h5" color="error" 
-                                                
-                                                >Delete</Typography>
+                                    <Typography variant="h5" color="error">Delete</Typography>
                                 </Button>
                                 
                             </Card>

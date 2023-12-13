@@ -34,16 +34,16 @@ const findPost = async(req,res) => {
 
 const updatePost = async(req,res) => {
     try{
-        const {title, description} = req.body;
+        const {title, description,image} = req.body;
         const {id} = req.params;
         const post = await Post.findById(id)
-
         if(post){
             post.title = title;
             post.description = description;
+            post.image = image;
 
-            await post.save()
-            res.send(post)
+            const savedPost = await post.save()
+            res.json(savedPost)
         }
 
     }catch(e){

@@ -7,7 +7,7 @@ router.get('/', getAll)
 router.get('/:id', findPost)
 
 router.post('/new', multerPost, createPost);
-router.put('/:id', updatePost);
+router.put('/:id', multerPost, updatePost);
 router.delete('/:id', deletePost);
 
 export default router
