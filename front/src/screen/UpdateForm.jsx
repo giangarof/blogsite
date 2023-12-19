@@ -11,24 +11,43 @@ export default function UpdateForm() {
     const {id} = useParams()
     const [post, setPost] = useState([])
     const [isLoading, setIsLoading] = useState(null)
+    // const [isBtnDisable, setIsBtnDisable] = useState(Boolean)
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [image, setImage] = useState('')
+    const [postId, setPostId] = useState('')
     
+    // Fetch post
     const fetchPosts = async() =>{
         try {
-            const data = await axios.get(`/api/post/${id}`)
-            const res = data
-            console.log(data)
-            setPost(res.data)
-            return res.data
+            const res = await axios.get(`/api/post/${id}`)
+            const updateData = res.data;
+            setTitle(updateData.title)
+            setDescription(updateData.description)
+            setPostId(updateData._id)
+            
+            return updateData
             
         } catch (err) {
+            if(err.res){
+                console.error('Response data:', err.res.data);
+                console.error('Response status:', err.res.status);
+                console.error('Response headers:', err.res.headers);
+            }
             console.log('something went wrong: ', err.message)
         }
     }
 
+    // Handle change events
+    const handleTitle = (e) => {
+        setTitle(e.target.value)
+    }
+    const handleDescription = (e) => {
+        setDescription(e.target.value)
+    }
+
+    // Delete post
     const deletePost = async(id) => {
         try {
             const data = await axios.delete(`/api/post/${id}`)
@@ -42,30 +61,50 @@ export default function UpdateForm() {
         }
     }
 
+    // Upload file
     const FileUpload = (e) => {
         const file = e.target.files[0]
         setImage(file)
-        console.log(file)
+        // console.log(file)
     }
 
-    const updatePost= async(id) => {
+    // Submit update logic
+    const submitUpdate= async(id) => {
         try {
+
             const formData = new FormData();
             formData.append("title", title);
             formData.append("description", description);
             formData.append("image", image);
 
-            const data = await axios.put(`/api/post/${id}`, formData)
-            console.log(data)
-            navigate('/home')
+            const data = axios.put(`/api/post/${id}`, formData)
+                .then((response) => {
+                    const result = {
+                        ok:response.data.message, 
+                        data:response.data.savedPost 
+                    }
+                    navigate(`/post/${id}`)
+                    return result
+                    
+                })
+                .catch((error) => {
+                    throw new Error(error.response.data.error, {err: 'provide new details to update at least in one field'})
+                })
+
+                const result = await data;
+                console.log(result);
+                // Handle the result as needed
+
+            
         } catch (error) {
-            throw new error('Something went wrong... try again later.')
+            throw new Error('Something went wrong... try again later.')
         }
     }
 
     useEffect(() => {
         fetchPosts()
     }, [id])
+
 
     return (
         <>
@@ -97,33 +136,34 @@ export default function UpdateForm() {
 
                                     {/* <Typography variant="h5" color="text.secondary">{post.title}</Typography> */}
                                     <TextField  id="outlined-basic" variant="outlined" 
-                                        placeholder={post.title} 
-                                        onChange={(e) => setTitle(e.target.value) }/>
+                                        value={title} 
+                                        onChange={handleTitle}
+                                        />
 
                                     <Typography variant="h5" color="error">Previous Image</Typography>
-                                    {Array.isArray(post.image) && post.image.length > 0 && (
-                                        <img src={post.image[0].url} width={250} height={250} />     
+                                    {Array.isArray(image) && image.length > 0 && (
+                                        <img src={image[0].url} width={250} height={250} />     
                                     )}
 
                                     <Typography variant="h5" color="error">New Image</Typography>
-                                    {Array.isArray(post.image) && post.image.length > 0 && (
+                                    {Array.isArray(image) && image.length > 0 && (
                                         // <img src={post.image[0].url} width={250} height={250} />     
-                                        <input type='File' src={post.image[0].url} onChange={FileUpload}/>       
+                                        <input type='File' src={image[0].url} onChange={FileUpload}/>       
                                     )}
 
                                     {/* <Typography variant="body1">{post.description}</Typography> */}
                                     <TextField  id="outlined-basic" variant="outlined" 
-                                        placeholder={post.description} 
-                                        onChange={(e) => setDescription(e.target.value) }/>
+                                        value={description} 
+                                        onChange={handleDescription}/>
                                 </CardContent>
 
 
-                                <Button variant="contained" onClick={() => deletePost(post._id)}>
+                                <Button variant="contained" onClick={() => deletePost(postId)}>
                                     <Typography variant="h5" color="error">Delete</Typography>
                                 </Button>
 
-                                <Button variant="contained" onClick={() => updatePost(post._id)}>
-                                    <Typography variant="h5" color="">Update</Typography>
+                                <Button variant="contained" onClick={() => submitUpdate(postId)} >
+                                    <Typography variant="h5">Update</Typography>
                                 </Button>
                                 
                             </Card>
@@ -136,4 +176,14 @@ export default function UpdateForm() {
         
         </>
   )
+}
+
+const style = {
+    btn: {
+        cursor: 'not-allowed',
+        color:'red',
+        margin: '10px',
+        backgroundColor: 'red'
+        
+    }
 }

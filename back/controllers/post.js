@@ -34,11 +34,16 @@ const findPost = async(req,res) => {
 
 const updatePost = async(req,res) => {
     try{
-        const {title, description,image} = req.body;
+        const {title, description, image} = req.body;
         const {id} = req.params;
         const post = await Post.findByIdAndUpdate(id)
         const imgs = req.files.map(f => ({url: f.path, filename: f.filename}));
-        if(!post){
+
+        const titleChanged = title !== post.title;
+        const descriptionChanged = description !== post.description;
+        if (!titleChanged && !descriptionChanged) {
+            return res.status(400).json({ error: 'No changes were made.' });
+        } else if(!post){
             throw new Error('something went wrong!')
         } else {
             post.title = title;
@@ -46,7 +51,7 @@ const updatePost = async(req,res) => {
             post.image = imgs;
     
             const savedPost = await post.save()
-            res.json(savedPost)
+            res.status(200).json({savedPost, message: 'Post updated successfuly'})
 
         }
 

@@ -14,7 +14,7 @@ export default function () {
         try {
             const data = await axios.get(`/api/post/${id}`)
             const res = data
-            console.log(res.data)
+            // console.log(res.data)
             setPost(res.data)
             return res.data
             
@@ -23,31 +23,8 @@ export default function () {
         }
     }
 
-    const deletePost = async(id) => {
-        try {
-            const data = await axios.delete(`/api/post/${id}`)
-            const res = data
-            console.log(res.data)
-            navigate('/home')
-            return res.data
-            
-        } catch (err) {
-            console.log('something went wrong: ', err.message)
-        }
-    }
-
-    const updatePost = async(id) => {
-        // alert('ok')
+    const updatePostScreen = async(id) => {
         navigate(`/post/update/${id}`)
-        // try {
-        //     // const data = await axios.get(`/api/post/${id}`)
-        //     // const res = data
-        //     // console.log(res.data)
-        //     return res.data
-            
-        // } catch (err) {
-        //     console.log('something went wrong: ', err.message)
-        // }
     }
       
       useEffect(() => {
@@ -84,14 +61,9 @@ export default function () {
                                             <img src={post.image[0].url} width={250} height={250} />     
                                         )}
                                         <Typography variant="body1">{post.description}</Typography>
-                                        {post._id}                              
                                     </CardContent>
 
-                                    {/* <Button variant="contained" onClick={() => deletePost(post._id)}>
-                                        <Typography variant="h5" color="error">Delete</Typography>
-                                    </Button> */}
-
-                                    <Button variant="contained" onClick={() => updatePost(post._id)}>
+                                    <Button variant="contained" onClick={() => updatePostScreen(post._id)}>
                                         <Typography variant="h5" color="">Options</Typography>
                                     </Button>
                                     
