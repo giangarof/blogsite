@@ -9,34 +9,38 @@ import axios from 'axios';
 export default function UpdateForm() {
     const navigate = useNavigate()
     const {id} = useParams()
-    const [post, setPost] = useState([])
     const [isLoading, setIsLoading] = useState(null)
-    // const [isBtnDisable, setIsBtnDisable] = useState(Boolean)
-
+    
+    const [post, setPost] = useState([])
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [image, setImage] = useState('')
+    // const [imageNew, setImageNew] = useState('')
     const [postId, setPostId] = useState('')
     
     // Fetch post
     const fetchPosts = async() =>{
-        try {
-            const res = await axios.get(`/api/post/${id}`)
-            const updateData = res.data;
-            setTitle(updateData.title)
-            setDescription(updateData.description)
-            setPostId(updateData._id)
+        const res = await axios.get(`/api/post/${id}`)
+        const updateData = res.data;
+        setTitle(updateData.title)
+        setDescription(updateData.description)
+        // Display Image
+        setImage(updateData.image)
+
+        setPostId(updateData._id)
+        // console.log(res, res.data.image[0].url)
+        // console.log(image)
+        return updateData
+        // try {
             
-            return updateData
-            
-        } catch (err) {
-            if(err.res){
-                console.error('Response data:', err.res.data);
-                console.error('Response status:', err.res.status);
-                console.error('Response headers:', err.res.headers);
-            }
-            console.log('something went wrong: ', err.message)
-        }
+        // } catch (err) {
+        //     if(err.res){
+        //         console.error('Response data:', err.res.data);
+        //         console.error('Response status:', err.res.status);
+        //         console.error('Response headers:', err.res.headers);
+        //     }
+        //     console.log('something went wrong: ', err.message)
+        // }
     }
 
     // Handle change events
@@ -65,40 +69,34 @@ export default function UpdateForm() {
     const FileUpload = (e) => {
         const file = e.target.files[0]
         setImage(file)
-        // console.log(file)
+        console.log(file)
     }
 
     // Submit update logic
     const submitUpdate= async(id) => {
-        try {
-
-            const formData = new FormData();
-            formData.append("title", title);
-            formData.append("description", description);
-            formData.append("image", image);
-
-            const data = axios.put(`/api/post/${id}`, formData)
-                .then((response) => {
-                    const result = {
-                        ok:response.data.message, 
-                        data:response.data.savedPost 
-                    }
-                    navigate(`/post/${id}`)
-                    return result
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("image", image);
+        
+        const data = axios.put(`/api/post/${id}`, formData)
+            .then((response) => {
+                const result = {
+                    ok:response.data.message, 
+                    data:response.data.savedPost,
                     
-                })
-                .catch((error) => {
-                    throw new Error(error.response.data.error, {err: 'provide new details to update at least in one field'})
-                })
+                }
+                navigate(`/post/${id}`)
+                // console.log(result)
+                return result
+                
+            })
+            .catch((error) => {
+                throw new Error(error.response.data.error, {err: 'provide new details to update at least in one field'})
+            })
 
-                const result = await data;
-                console.log(result);
-                // Handle the result as needed
-
-            
-        } catch (error) {
-            throw new Error('Something went wrong... try again later.')
-        }
+            const result = await data;
+            console.log(result);
     }
 
     useEffect(() => {
@@ -141,15 +139,17 @@ export default function UpdateForm() {
                                         />
 
                                     <Typography variant="h5" color="error">Previous Image</Typography>
+                                    {/* <p>{currentImage}</p> */}
                                     {Array.isArray(image) && image.length > 0 && (
-                                        <img src={image[0].url} width={250} height={250} />     
+                                    <img src={image[0].url} width={250} height={250} />     
                                     )}
 
                                     <Typography variant="h5" color="error">New Image</Typography>
-                                    {Array.isArray(image) && image.length > 0 && (
+                                    <input type='file' onChange={FileUpload} />   
+                                    {/* {image[0].filename}     */}
+                                    {/* {Array.isArray(image) && image.length > 0 && (
                                         // <img src={post.image[0].url} width={250} height={250} />     
-                                        <input type='File' src={image[0].url} onChange={FileUpload}/>       
-                                    )}
+                                    )} */}
 
                                     {/* <Typography variant="body1">{post.description}</Typography> */}
                                     <TextField  id="outlined-basic" variant="outlined" 

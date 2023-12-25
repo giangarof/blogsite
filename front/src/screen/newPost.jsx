@@ -29,7 +29,7 @@ export default function NewPost() {
 
             const post = await axios.post('/api/post/new', formData)
             navigate('/home')
-            console.log(post.data.image)
+            console.log(post)
             // return post
             
             

@@ -14,7 +14,7 @@ export default function AllPosts() {
         try {
             const data = await axios.get('/api/post')
             const res = data
-            console.log(res.data)
+            // console.log(res.data)
             setPost(res.data)
             return res.data
             

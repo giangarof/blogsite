@@ -18,7 +18,7 @@ const postSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    image: [{url:String,filename:String}],
+    image: [{url:String,filename:String,originalname:String}],
     // likes: [
     //     {
     //         type: mongoose.Schema.Types.ObjectId,
