@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from "react";
+import {useNavigate} from 'react-router-dom'
 import { Box, TextField, Stack, Button } from "@mui/material";
 import { Typography } from "@mui/joy";
 import axios from 'axios';
 
 
 export default function Register() {
+  const navigate = useNavigate()
   const [name, setFullname] = useState('')
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -16,10 +18,12 @@ export default function Register() {
     try {
       const credentials = {name, username, email, password}
       const newUser = await axios.post('/api/user/signup', credentials)
+      console.log(newUser)
+      navigate(`/signin`)
       return newUser
       
     } catch (error) {
-      console.log(error.message)
+      console.log(error.response.data)
     }
   }
 

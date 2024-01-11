@@ -22,7 +22,7 @@ const router = createBrowserRouter(
     <Route path='/' element={<App/>}>
       <Route index={true} path='/home' element={<AllPosts/>} />
       <Route path='/signin' element={<Signin/>} />
-      <Route path='/register' element={<Register/>} />
+      <Route path='/signup' element={<Register/>} />
       <Route path='/new' element={<NewPost/>}/>
       <Route path='/post/:id' element={<Post/>}/>
       <Route path='/post/update/:id' element={<UpdateForm/>}/>

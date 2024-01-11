@@ -6,10 +6,8 @@ dotenv.config()
 import express from "express";
 import cookieParser from 'cookie-parser';
 import connectDB from "./config/db.js";
-import passport from 'passport';
-import LocalStrategy from 'passport-local'
 import session from 'express-session'
-import connectFlash from 'connect-flash';
+// import connectFlash from 'connect-flash';
 
 import User from './models/users.js';
 import sessionConfig from './config/session.js';
@@ -25,33 +23,21 @@ connectDB();
 const app = express();
 
 // body parser middleware
-//make sure to write the body parser middleware prior to the routes.
+// make sure to write the body parser middleware prior the routes.
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 app.use(cors({
-    origin: "*"
+    origin: "*",
+    credentials: true,
+    
 }))
 
 
 // Create the session
 app.use(session(sessionConfig));
 
-//Passport middleware for authentication
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(connectFlash());
-passport.use(new LocalStrategy(User.authenticate()))
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
-//flash middleware
-app.use((req, res, next) => {
-    res.locals.currentUser = req.user;
-    res.locals.success = req.flash('success');
-    res.locals.error = req.flash('error');
-    next()
-})
+// app.use(connectFlash());
 
 app.use('/api/user', user)
 app.use('/api/post', post)

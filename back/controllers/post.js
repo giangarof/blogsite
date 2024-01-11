@@ -3,7 +3,7 @@ import Post from '../models/post.js'
 const getAll = async (req,res) => {
     try {
         const post = await Post.find({})
-        console.log(post)
+        // console.log(post)
         res.status(200).json(post)
     } catch (e) {
         res.send(e.message)
