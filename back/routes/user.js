@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import asyncHandler from '../config/asyncHandler.js'
-import {admin, protect, auth} from '../config/authMiddleware.js'
+import {admin, protect} from '../config/authMiddleware.js'
 
 import {
     // signinUser,
@@ -20,7 +20,7 @@ router.post('/signup', signupUser)
 router.post('/logout', logoutUser)
 
 // router.get('/delete/:id', deleteUser)
-router.get('/profile', asyncHandler(userProfile))
+router.get('/profile/:id', protect, asyncHandler(userProfile))
 // router.get('/profile/:id', userUpdateProfile)
 
 export default router;

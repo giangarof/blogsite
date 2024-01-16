@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import passportLocalMongoose from 'passport-local-mongoose'
+// import passportLocalMongoose from 'passport-local-mongoose'
 import bcrypt from 'bcrypt'
 
 const userSchema = new mongoose.Schema({
@@ -49,7 +49,7 @@ userSchema.pre('save', async function (next) {
     this.password = await bcrypt.hash(this.password, salt);
 })
 
-userSchema.plugin(passportLocalMongoose);
+// userSchema.plugin(passportLocalMongoose);
 
 const User = mongoose.model('User', userSchema);
 export default User;

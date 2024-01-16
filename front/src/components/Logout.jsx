@@ -16,8 +16,10 @@ export default function Logout() {
 
       const logout = async() => {
         const logoutUser = await axios.post('/api/user/logout')
+        localStorage.removeItem('name')
         console.log(logoutUser)
         navigate('/signin')
+        location.reload()
       }
   return (
     <>

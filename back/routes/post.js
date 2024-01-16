@@ -1,14 +1,15 @@
 import express from 'express';
 import {createPost, updatePost, deletePost, findPost, getAll} from '../controllers/post.js';
-import {admin, protect, auth} from '../config/authMiddleware.js'
+import {admin, protect} from '../config/authMiddleware.js'
+import asyncHandler from '../config/asyncHandler.js';
 import {multerPost} from '../config/multer.js'
 const router = express.Router();
 
-router.get('/', auth, getAll)
+router.get('/', asyncHandler(getAll))
 router.get('/:id', findPost)
 
 router.post('/new', protect, admin, multerPost, createPost);
-router.put('/:id', multerPost, updatePost);
-router.delete('/:id', deletePost);
+router.put('/:id', protect, admin, multerPost, updatePost);
+router.delete('/:id', protect, admin, deletePost);
 
 export default router

@@ -3,8 +3,6 @@ import axios from "axios"
 
 import { Box, Card, Button, CardContent, Typography } from "@mui/material";
 
-
-
 export default function AllPosts() {
     const [post, setPost] = useState([])
     const [isLoading, setIsLoading] = useState(null)

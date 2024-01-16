@@ -10,24 +10,32 @@ export default function Signin() {
 
   const [password, setPswd] = useState('')
   const [email, setEmail] = useState('')
-  const [profile, setProfile] = useState('')
+
   
   const loginUser = async () => {
     const credentials = {email, password}
-    const loginUser = await axios.post('/api/user/signin', credentials)
+    const login = await axios.post('/api/user/signin', credentials)
       .then((response) => {
         const result = {
             message:response.data.message, 
             data:response.data,
+            id:response.data._id
           }
           console.log(result)
+          // setMessage(result.message)
+          localStorage.setItem("name", result.data.userProfile.name)
+          
+          navigate(`/profile/${result.id}`)
+          location.reload()
         })
         .catch((error) => {
           console.log({'Login Failed': error})
         })
-        // setProfile(result.message)
-      navigate(`/home`)
   }
+      useEffect(() => {
+        
+
+      },[])
   
         return(
             <>

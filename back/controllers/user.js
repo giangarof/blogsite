@@ -8,18 +8,19 @@ import jwt from "jsonwebtoken";
 const loginUser = async(req,res) => {
     const {email, password} = req.body;
     const user = await User.findOne({email})
-
+    console.log(user)
     if(user && (await user.matchPassword(password))){
         const token = generateToken(res, user._id)
 
-        res.status(200).json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            isAdmin: user.isAdmin,
-            message:`Welcome back, ${user.name}`,
-            token: token
-        })
+        // res.status(200).json({
+        //     _id: user._id,
+        //     name: user.name,
+        //     email: user.email,
+        //     isAdmin: user.isAdmin,
+        //     message:`Welcome back, ${user.name}`,
+        //     token: token
+        // })
+        res.status(200).json({userProfile: user, _id: user._id})
     } else {
         res.status(401)
         throw new Error('Invalid email or password')
@@ -68,10 +69,6 @@ const signupUser = async(req,res) => {
 // route: /api/user/logout
 // POST
 const logoutUser = async(req,res) => {
-    // req.logout(function(err) {
-    //     if (err) { return next(err); }
-    //     res.redirect('/login');
-    //   });
     res.cookie('jwt', '', {
         httpOnly: true,
         expires: new Date(0)
@@ -90,7 +87,22 @@ const deleteUser = async(req,res) => {
 // route: /api/user/profile/:id
 // Get
 const userProfile = async(req,res) => { 
-    res.send('ok')
+    
+    // Query parameters or path parameters are more standard for GET requests.
+    try {
+        const userId = req.params.id
+        const user = await User.findById(userId).select('-password')
+        if(!user){
+            res.send(404)
+        }else{
+            res.status(200).json({user})
+            return user;
+        }
+    } catch (error) {
+        // Handle error (e.g., user not found)
+        console.error('Error fetching user:', error);
+        throw error; // Optionally rethrow the error
+    }
 }
 
 // profile update user
