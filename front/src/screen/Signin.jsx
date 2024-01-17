@@ -24,6 +24,7 @@ export default function Signin() {
           console.log(result)
           // setMessage(result.message)
           localStorage.setItem("name", result.data.userProfile.name)
+          localStorage.setItem("userId", result.data.userProfile._id)
           
           navigate(`/profile/${result.id}`)
           location.reload()

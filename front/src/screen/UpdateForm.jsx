@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import {useNavigate, useParams} from 'react-router-dom'
+import axios from 'axios';
 import { Box, Card, CardContent, TextField, Stack, Button } from "@mui/material";
-
 import { Typography } from "@mui/joy";
 
-import axios from 'axios';
+import DeletePost from "../components/DeletePost";
+
 
 export default function UpdateForm() {
     const navigate = useNavigate()
@@ -49,20 +50,6 @@ export default function UpdateForm() {
     }
     const handleDescription = (e) => {
         setDescription(e.target.value)
-    }
-
-    // Delete post
-    const deletePost = async(id) => {
-        try {
-            const data = await axios.delete(`/api/post/${id}`)
-            const res = data
-            console.log(res.data)
-            navigate('/home')
-            return res.data
-            
-        } catch (err) {
-            console.log('something went wrong: ', err.message)
-        }
     }
 
     // Upload file
@@ -156,15 +143,11 @@ export default function UpdateForm() {
                                         value={description} 
                                         onChange={handleDescription}/>
                                 </CardContent>
-
-
-                                <Button variant="contained" onClick={() => deletePost(postId)}>
-                                    <Typography variant="h5" color="error">Delete</Typography>
-                                </Button>
-
+                                
                                 <Button variant="contained" onClick={() => submitUpdate(postId)} >
                                     <Typography variant="h5">Update</Typography>
                                 </Button>
+                                    
                                 
                             </Card>
 

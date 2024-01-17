@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 
-import { Box, Card, Button, CardContent, Typography } from "@mui/material";
+import { Box, Card, Button, CardContent, CardMedia, Typography } from "@mui/material";
 
 export default function AllPosts() {
     const [post, setPost] = useState([])
@@ -59,23 +59,30 @@ export default function AllPosts() {
                         {post.map((item) => (
                             <Card 
                                 key={item._id} 
-                                spacing={3} 
-                                sx={{marginTop:4}}
+                                sx={{marginTop:5}}
+                                
                             >
                                 
-                                {/* <CardHeader title={item.title} /> */}
-                                <CardContent>
-                                    <Typography variant="h5" color="text.secondary">{item.title}</Typography>
-                                    {Array.isArray(item.image) && item.image.length > 0 && (
+                                <CardMedia 
+                                    sx={{height:'auto'}} 
+                                    style={{
+                                        width: "600",
+                                        maxHeight: "600px",
+                                      }}
+                                    component='image'
+                                    image={item.image[0].url}
+                                />
+                                    {/* {Array.isArray(item.image) && item.image.length > 0 && (
                                         // <Typography variant="body1">{item.image[0].url}</Typography>
-                                        <img src={item.image[0].url} width={250} height={250} />     
-                                    )}
-                                    <Typography variant="body1">{item.description}</Typography>
-                                    {item._id}
-                                                                  
-                                    {/* add btns -> see post & like */}
-                                </CardContent>
-                                <Button variant="contained" size="large" >
+                                        <img src={item.image[0].url} />     
+                                        )} */}
+                                {/* </CardMedia> */}
+                        
+                                {/* </CardContent> */}
+                                <Typography variant="h5" color="text.secondary">{item.title}</Typography>
+                                <Typography variant="body1">{item.description}</Typography>
+
+                                <Button variant="contained" size="medium" >
                                     <Typography variant="h5" color="text.secondary" component='a' href={`/post/${item._id}`}>Go</Typography>
                                 </Button>
                                 
