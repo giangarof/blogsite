@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import {useNavigate, useParams} from 'react-router-dom'
 import axios from 'axios';
-import { Box, Card, CardContent, TextField, Stack, Button } from "@mui/material";
-import { Typography } from "@mui/joy";
+import { Box, Card, CardContent, TextField, Button, CardMedia} from "@mui/material";
+import { Typography, Textarea } from "@mui/joy";
 
 import DeletePost from "../components/DeletePost";
 
@@ -71,12 +71,10 @@ export default function UpdateForm() {
                 const result = {
                     ok:response.data.message, 
                     data:response.data.savedPost,
-                    
                 }
                 navigate(`/post/${id}`)
                 // console.log(result)
                 return result
-                
             })
             .catch((error) => {
                 throw new Error(error.response.data.error, {err: 'provide new details to update at least in one field'})
@@ -100,57 +98,70 @@ export default function UpdateForm() {
                 <div>
                     
                     <Box sx={{
-                            width:'30%',
-                            // marginTop:4, 
-                            display:'grid', 
-                            alignContent:'center', 
-                            // gridTemplateColumns: 'repeat(2, 1fr)', 
-                            gap:3, 
-                            margin:'auto'
+                            width:'100%',
+                            display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'
                     }}>
 
                             <Card 
                                 key={post._id} 
                                 spacing={3} 
-                                sx={{marginTop:4}}
+                                sx={{
+                                    width:'50%',
+                                    marginTop:4, marginBottom:4,
+                                }}
                             >
-                                
-                                <CardContent>
 
-                                    <Typography variant="h5" color="error">Update Control</Typography>
+                                    {Array.isArray(image) && image.length > 0 && (
+                                        <CardMedia
+                                            component='img'
+                                            image={image[0].url}
+                                        />
+                                        )}
 
-                                    {/* <Typography variant="h5" color="text.secondary">{post.title}</Typography> */}
+                                <CardContent 
+                                    sx={{
+                                        display:'flex', flexDirection:'column', alignContent:'center',
+                                        backgroundColor:'rgb(0, 0, 0, 0.12)',
+                                    }}>
+
+                                    <Typography>New Image</Typography>
+                                    <input type='file' onChange={FileUpload} />
+
+                                    <Typography sx={{marginTop:4}} variant="h5" color="error">Update Control</Typography>
                                     <TextField  id="outlined-basic" variant="outlined" 
                                         value={title} 
                                         onChange={handleTitle}
-                                        />
+                                        sx={{marginBottom:4, backgroundColor:'#fff'}}
+                                    />
 
-                                    <Typography variant="h5" color="error">Previous Image</Typography>
-                                    {/* <p>{currentImage}</p> */}
+                                    {/* <Typography>Previous Image</Typography>
                                     {Array.isArray(image) && image.length > 0 && (
-                                    <img src={image[0].url} width={250} height={250} />     
+                                        <CardMedia
+                                            component='img'
+                                            image={image[0].url}
+                                            sx={{marginBottom:4}}/>
                                     )}
 
-                                    <Typography variant="h5" color="error">New Image</Typography>
-                                    <input type='file' onChange={FileUpload} />   
-                                    {/* {image[0].filename}     */}
-                                    {/* {Array.isArray(image) && image.length > 0 && (
-                                        // <img src={post.image[0].url} width={250} height={250} />     
-                                    )} */}
+                                    <Typography>New Image</Typography>
+                                    <input type='file' onChange={FileUpload} />    */}
 
-                                    {/* <Typography variant="body1">{post.description}</Typography> */}
-                                    <TextField  id="outlined-basic" variant="outlined" 
-                                        value={description} 
+                                    <Typography>Description</Typography>
+                                    <Textarea 
+                                        value={description}
                                         onChange={handleDescription}/>
-                                </CardContent>
-                                
-                                <Button variant="contained" onClick={() => submitUpdate(postId)} >
-                                    <Typography variant="h5">Update</Typography>
-                                </Button>
-                                    
-                                
-                            </Card>
 
+                                    <Button 
+                                        sx={{marginTop:4}}
+                                        variant="contained"
+                                        size='small' 
+                                        onClick={() => submitUpdate(postId)} 
+                                    >
+                                        <Typography sx={{color:'white'}}>Update</Typography>
+                                    </Button>
+
+                                </CardContent>
+
+                            </Card>
                     </Box>
                 </div>
             )}

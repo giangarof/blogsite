@@ -5,6 +5,7 @@ import { Box, Card, Button, CardContent, CardMedia, Typography } from "@mui/mate
 
 export default function AllPosts() {
     const [post, setPost] = useState([])
+    const [img, setImg] = useState('')
     const [isLoading, setIsLoading] = useState(null)
 
     // first way
@@ -12,7 +13,7 @@ export default function AllPosts() {
         try {
             const data = await axios.get('/api/post')
             const res = data
-            // console.log(res.data)
+            console.log(res.data)
             setPost(res.data)
             return res.data
             
@@ -45,50 +46,69 @@ export default function AllPosts() {
                 <p>Loading...</p>
             ) : (
                 <div>
-                    {/* Render or use 'post' */}
                     <Box sx={{
                             width:'70%',
-                            // marginTop:4, 
                             display:'grid', 
                             alignContent:'center', 
                             gridTemplateColumns: 'repeat(2, 1fr)', 
                             gap:3, 
-                            margin:'auto'
+                            margin:'auto', 
+                            marginBottom:4
                     }}>
 
                         {post.map((item) => (
                             <Card 
                                 key={item._id} 
-                                sx={{marginTop:5}}
-                                
+                                sx={{marginTop:5, boxShadow:'0px 0px 20px 0px'}}
+                                style={{
+                                    width:"500px",
+                                  }}
                             >
                                 
+                            {Array.isArray(item.image) && item.image.length > 0 && (
                                 <CardMedia 
                                     sx={{height:'auto'}} 
                                     style={{
-                                        width: "600",
-                                        maxHeight: "600px",
-                                      }}
-                                    component='image'
+                                        height:"350px",
+                                        objectFit:'contain',
+                                    }}
+                                    component='img'
                                     image={item.image[0].url}
                                 />
-                                    {/* {Array.isArray(item.image) && item.image.length > 0 && (
-                                        // <Typography variant="body1">{item.image[0].url}</Typography>
-                                        <img src={item.image[0].url} />     
-                                        )} */}
-                                {/* </CardMedia> */}
-                        
-                                {/* </CardContent> */}
-                                <Typography variant="h5" color="text.secondary">{item.title}</Typography>
-                                <Typography variant="body1">{item.description}</Typography>
+                            )}
 
-                                <Button variant="contained" size="medium" >
-                                    <Typography variant="h5" color="text.secondary" component='a' href={`/post/${item._id}`}>Go</Typography>
-                                </Button>
-                                
+                                <CardContent sx={{
+                                    backgroundColor:'rgb(0, 0, 0, 0.12)',
+                                    
+                                }}
+                                >
+                                    <Typography variant="h4">{item.title}</Typography>
+                                    <Typography 
+                                        variant="h5" 
+                                        sx={{
+                                            whiteSpace:'nowrap', 
+                                            overflow:'hidden', 
+                                            textOverflow:'ellipsis',
+                                            }}
+                                    >
+                                        {item.description}
+                                    </Typography>
+                                    <Button 
+                                        variant="contained" 
+                                        size="small" 
+                                        sx={{marginTop:"10px"}}
+                                    >
+                                    <Typography  
+                                        component='a' 
+                                        href={`/post/${item._id}`} 
+                                        sx={{textDecoration:"none", color:"white"}}
+                                    >
+                                    Read Article
+                                    </Typography>
+                                    </Button>
+                                </CardContent>
                             </Card>
                         ))}
-
                     </Box>
                 </div>
             )}

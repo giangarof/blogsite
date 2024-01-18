@@ -7,7 +7,6 @@ import axios from 'axios';
 
 export default function NewPost() {
     const navigate = useNavigate()
-
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [image, setImage] = useState('')
@@ -21,7 +20,6 @@ export default function NewPost() {
     const newPost = async(e) => {
         e.preventDefault()
         try {
-            // const data = {title, description, image}
             const formData = new FormData();
             formData.append("title", title);
             formData.append("description", description);
@@ -41,7 +39,8 @@ export default function NewPost() {
     return (
         <>
             <Box sx={{mt:10}}>
-                <Stack direction="column" justifyContent="center" alignItems="center" spacing={4} >
+                <Stack direction="column" justifyContent="center" alignItems="center" spacing={4} 
+                >
                         <Typography level="h3">New Post</Typography>
 
                         <TextField  id="outlined-basic" label="Title" variant="outlined" 

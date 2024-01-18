@@ -24,7 +24,11 @@ export default function DeletePost(props) {
     }
   return (
     <>
-        <Button variant="contained" onClick={() => deleteBtn(props.postId)}>
+        <Button 
+            sx={{backgroundColor:'red'}}
+            variant="contained" 
+            onClick={() => deleteBtn(props.postId)}
+        >
             <Typography variant="h5" color="error">Delete</Typography>
         </Button>
     </>

@@ -40,7 +40,7 @@ export default function AdminPanel() {
         {/* table to show all the posts */}
         {/* id, description, link to post itself, link to repo, see more, delete */}
         
-        <TableContainer>
+        <TableContainer >
             <Table>
                 <TableHead>
                     <TableRow>
@@ -49,7 +49,7 @@ export default function AdminPanel() {
                         <TableCell>Description</TableCell>
                         <TableCell>Repo</TableCell>
                         <TableCell>Post</TableCell>
-                        <TableCell>See More</TableCell>
+                        <TableCell>Update</TableCell>
                         <TableCell>Delete</TableCell>
                     </TableRow>
                 </TableHead>
@@ -58,10 +58,15 @@ export default function AdminPanel() {
                         <TableRow key={p._id}>
                             <TableCell>{p._id}</TableCell>
                             <TableCell>{p.createdAt}</TableCell>
-                            <TableCell>{p.description}</TableCell>
+                            <TableCell sx={{
+                                        whiteSpace:'nowrap', 
+                                        overflow:'hidden', 
+                                        textOverflow:'ellipsis',
+                                        maxWidth:'150px'
+                                        }}>{p.description}</TableCell>
                             <TableCell>Repo Link</TableCell>
                             <TableCell>Link</TableCell>
-                            <TableCell>Post itself</TableCell>
+                            <TableCell>Post update</TableCell>
                             <TableCell>
                                 <DeletePost postId={p._id}/>
                             </TableCell>
