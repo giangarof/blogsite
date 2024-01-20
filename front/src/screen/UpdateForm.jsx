@@ -18,6 +18,10 @@ export default function UpdateForm() {
     const [image, setImage] = useState('')
     // const [imageNew, setImageNew] = useState('')
     const [postId, setPostId] = useState('')
+    const [repo, setRepo] = useState('')
+    const [link, setLink] = useState('')
+    const [tech, setTech] = useState('')
+    const [errorMsg, setErrorMsg] = useState('')
     
     // Fetch post
     const fetchPosts = async() =>{
@@ -25,10 +29,13 @@ export default function UpdateForm() {
         const updateData = res.data;
         setTitle(updateData.title)
         setDescription(updateData.description)
+        setRepo(updateData.repo)
+        setLink(updateData.link)
+        setTech(updateData.tech)
         // Display Image
         setImage(updateData.image)
-
         setPostId(updateData._id)
+        
         // console.log(res, res.data.image[0].url)
         // console.log(image)
         return updateData
@@ -52,6 +59,18 @@ export default function UpdateForm() {
         setDescription(e.target.value)
     }
 
+    const handleRepo = (e) => {
+        setRepo(e.target.value)
+    }
+
+    const handleLink = (e) => {
+        setLink(e.target.value)
+    }
+
+    const handleTech = (e) => {
+        setTech(e.target.value)
+    }
+
     // Upload file
     const FileUpload = (e) => {
         const file = e.target.files[0]
@@ -65,6 +84,9 @@ export default function UpdateForm() {
         formData.append("title", title);
         formData.append("description", description);
         formData.append("image", image);
+        formData.append("repo", repo);
+        formData.append("link", link);
+        formData.append("tech", tech);
         
         const data = axios.put(`/api/post/${id}`, formData)
             .then((response) => {
@@ -77,7 +99,9 @@ export default function UpdateForm() {
                 return result
             })
             .catch((error) => {
-                throw new Error(error.response.data.error, {err: 'provide new details to update at least in one field'})
+                // throw new Error(error.response.data.error, {err: 'provide new details to update at least in one field'})
+                console.error(error.response.data.error)
+                setErrorMsg(error.response.data.error)
             })
 
             const result = await data;
@@ -127,11 +151,11 @@ export default function UpdateForm() {
                                     <Typography>New Image</Typography>
                                     <input type='file' onChange={FileUpload} />
 
-                                    <Typography sx={{marginTop:4}} variant="h5" color="error">Update Control</Typography>
-                                    <TextField  id="outlined-basic" variant="outlined" 
+                                    <Typography sx={{marginTop:4}} variant="h5" color="error">Title</Typography>
+                                    <Textarea  id="outlined-basic" variant="outlined" 
                                         value={title} 
                                         onChange={handleTitle}
-                                        sx={{marginBottom:4, backgroundColor:'#fff'}}
+                                        // sx={{backgroundColor:'#fff'}}
                                     />
 
                                     {/* <Typography>Previous Image</Typography>
@@ -145,10 +169,29 @@ export default function UpdateForm() {
                                     <Typography>New Image</Typography>
                                     <input type='file' onChange={FileUpload} />    */}
 
+                                    <Typography>Github</Typography>
+                                    <Textarea 
+                                        value={repo}
+                                        onChange={handleRepo}/>
+
+                                    <Typography>Full Project</Typography>
+                                    <Textarea 
+                                        value={link}
+                                        onChange={handleLink}/>
+
                                     <Typography>Description</Typography>
                                     <Textarea 
                                         value={description}
                                         onChange={handleDescription}/>
+
+                                    <Typography>Technologies</Typography>
+                                    <Textarea 
+                                        value={tech}
+                                        onChange={handleTech}/>
+
+                                    {errorMsg ? (
+                                        <Typography level="body-lg" textColor='red'>{errorMsg}</Typography>
+                                    ) : ''}
 
                                     <Button 
                                         sx={{marginTop:4}}

@@ -7,8 +7,7 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-
+import {Link as A } from "@mui/material";
 import DeletePost from "../components/DeletePost";
 
 
@@ -47,9 +46,9 @@ export default function AdminPanel() {
                         <TableCell>ID</TableCell>
                         <TableCell>Posted</TableCell>
                         <TableCell>Description</TableCell>
-                        <TableCell>Repo</TableCell>
-                        <TableCell>Post</TableCell>
-                        <TableCell>Update</TableCell>
+                        <TableCell>Full Project</TableCell>
+                        <TableCell>Repository</TableCell>
+                        <TableCell>Update Form</TableCell>
                         <TableCell>Delete</TableCell>
                     </TableRow>
                 </TableHead>
@@ -64,9 +63,9 @@ export default function AdminPanel() {
                                         textOverflow:'ellipsis',
                                         maxWidth:'150px'
                                         }}>{p.description}</TableCell>
-                            <TableCell>Repo Link</TableCell>
-                            <TableCell>Link</TableCell>
-                            <TableCell>Post update</TableCell>
+                            <TableCell><A href={p.link}>Full Project</A></TableCell>
+                            <TableCell sx={{cursor:'pointer'}}><A href={p.repo}>Github Code</A></TableCell>
+                            <TableCell sx={{cursor:'pointer'}}><A href={`/post/update/${p._id}`}>Update Post Form</A></TableCell>
                             <TableCell>
                                 <DeletePost postId={p._id}/>
                             </TableCell>

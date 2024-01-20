@@ -20,7 +20,7 @@ const loginUser = async(req,res) => {
         //     message:`Welcome back, ${user.name}`,
         //     token: token
         // })
-        res.status(200).json({userProfile: user, _id: user._id})
+        res.status(200).json({userProfile: user, _id: user._id, message: 'Welcome Back!'})
     } else {
         res.status(401)
         throw new Error('Invalid email or password')

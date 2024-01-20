@@ -1,10 +1,16 @@
 import { 
   AppBar, 
   Toolbar, 
-  Typography, Box } from "@mui/material";
+  Typography, Box, Tooltip, IconButton, Icon } from "@mui/material";
 
 import { useEffect, useState } from "react";
 import Logout from './Logout.jsx'
+import PersonIcon from '@mui/icons-material/Person';
+import HomeIcon from '@mui/icons-material/Home';
+import LoginIcon from '@mui/icons-material/Login';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import AddIcon from '@mui/icons-material/Add';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
   
 export default function Navbar(props) {
   const [userInfo, setUserInfo] = useState(null)
@@ -29,20 +35,36 @@ export default function Navbar(props) {
               {userInfo ? (
               <AppBar 
                 position="static" 
-                sx={{backgroundColor:'rgb(50, 98, 171)', boxShadow:'0px 10px 20px 0px #000'}}>
+                sx={{boxShadow:'0px 10px 20px 0px #000'}}>
                 <Toolbar display="center">
                 <Typography variant="h4">
                     RNET
                   </Typography>
                   <Box sx={{ display:'flex', m:2}} >
-                    <Typography sx={sx} component="a" href="/home">Home</Typography>
+                    <Typography sx={sx} component="a" href="/home">
+                      <Tooltip title='login'>
+                        <HomeIcon/>
+                      </Tooltip>
+                    </Typography>
                     {isAdmin == true ? 
                       <>
-                        <Typography sx={sx} component="a" href="/new">New Post</Typography>
-                        <Typography sx={sx} component="a" href="/adminpanel">Admin</Typography> 
+                        <Typography sx={sx} component="a" href="/adminpanel">
+                          <Tooltip title="Admin Panel">
+                            <AdminPanelSettingsIcon/>
+                          </Tooltip>
+                        </Typography> 
                       </> : ''
                     }
-                    <Typography sx={sx} component="a"href={`/profile/${userId}`}>Profile</Typography>
+                    <Typography sx={sx} component="a" href={`/profile/${userId}`}>
+                      <Tooltip title='Profile'>
+                        <PersonIcon/>
+                      </Tooltip>
+                    </Typography>
+                    <Typography sx={sx} component="a" href="https://gigadev.onrender.com/">
+                        <Tooltip title='About me'>
+                          <AccountCircleIcon/>
+                        </Tooltip>
+                      </Typography>
                     <Logout/>
                   </Box>
                 </Toolbar>
@@ -55,9 +77,22 @@ export default function Navbar(props) {
                         RNET
                       </Typography>
                     <Box sx={{ display:'flex', m:2}} >
-                      <Typography sx={sx} component="a" href="/home">Home</Typography>
+                      <Typography sx={sx} component="a" href="/home">
+                        <Tooltip title='login'>
+                            <HomeIcon/>
+                        </Tooltip>
+                      </Typography>
                       <Typography sx={sx} component="a" href="/signup">Register</Typography>
-                      <Typography sx={sx} component="a" href="/signin">Login</Typography>
+                      <Typography sx={sx} component="a" href="https://gigadev.onrender.com/">
+                        <Tooltip title='About me'>
+                          <AccountCircleIcon/>
+                        </Tooltip>
+                      </Typography>
+                      <Typography sx={sx} component="a" href="/signin">
+                        <Tooltip title='Login'>
+                          <LoginIcon/>
+                        </Tooltip>
+                      </Typography>
                     </Box>
                     </Toolbar>
                   </AppBar>

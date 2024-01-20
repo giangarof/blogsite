@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 
-import { Box, Card, Button, CardContent, CardMedia, Typography } from "@mui/material";
+import { Box, Card, Button, CardContent, CardMedia, Typography, Tooltip } from "@mui/material";
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
 export default function AllPosts() {
     const [post, setPost] = useState([])
@@ -93,19 +94,21 @@ export default function AllPosts() {
                                     >
                                         {item.description}
                                     </Typography>
-                                    <Button 
-                                        variant="contained" 
-                                        size="small" 
-                                        sx={{marginTop:"10px"}}
-                                    >
-                                    <Typography  
-                                        component='a' 
-                                        href={`/post/${item._id}`} 
-                                        sx={{textDecoration:"none", color:"white"}}
-                                    >
-                                    Read Article
-                                    </Typography>
-                                    </Button>
+                                    <Tooltip title="Read article">
+                                        <Button 
+                                            variant="contained" 
+                                            size="small" 
+                                            sx={{marginTop:"10px"}}
+                                        >
+                                        <Typography  
+                                            component='a' 
+                                            href={`/post/${item._id}`} 
+                                            sx={{textDecoration:"none", color:"white"}}
+                                        >
+                                            <AutoStoriesIcon/>
+                                        </Typography>
+                                        </Button>
+                                    </Tooltip>
                                 </CardContent>
                             </Card>
                         ))}

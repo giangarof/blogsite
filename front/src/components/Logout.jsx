@@ -5,7 +5,8 @@ import {
     AppBar, 
     Toolbar, 
     // IconButton, 
-    Typography, Box } from "@mui/material";
+    Typography, Box, Tooltip } from "@mui/material";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 
 export default function Logout() {
@@ -25,7 +26,11 @@ export default function Logout() {
       }
   return (
     <>
-        <Typography sx={sx} component="a" onClick={logout}>Logout</Typography>
+        <Typography sx={sx} component="a" onClick={logout}>
+          <Tooltip title='logout'>
+            <LogoutIcon sx={{cursor:'pointer'}}/>
+          </Tooltip>
+        </Typography>
     </>
 
   )

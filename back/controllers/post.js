@@ -17,7 +17,8 @@ const createPost = async(req, res) => {
         await post.save()
         res.status(201).json(req.body)
     } catch(e){
-        res.send(e.message)
+        res.status(400).json({e, error: 'Please fill out all fields'})
+        // res.send(e.message)
     }
 }
 
@@ -34,7 +35,7 @@ const findPost = async(req,res) => {
 
 const updatePost = async(req,res) => {
     const {id} = req.params;
-    const {title, description, image} = req.body;
+    const {title, description, image, repo, link, tech} = req.body;
     // const post = await Post.findByIdAndUpdate(id, {...req.body})
     const post = await Post.findById(id)
 
@@ -67,6 +68,9 @@ const updatePost = async(req,res) => {
                 // post.image = imgs;
                 post.title = title;
                 post.description = description;
+                post.repo = repo;
+                post.link = link;
+                post.tech = tech;
     
                 const savedPost = await post.save()
                 res.status(200).json({savedPost, message: 'Post updated successfuly'})
@@ -76,7 +80,8 @@ const updatePost = async(req,res) => {
             }
 
     }catch(e){
-        res.send(e.message)
+        // res.send(e.message)
+        res.status(400).json({e, error: 'Please dont leave fields empty.'})
     }
 }
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from "react-router-dom"
-import { Box, Card, Button, CardContent, Typography, CardMedia } from "@mui/material";
+import { Box, Card, Button, CardContent, CardMedia, Link as A } from "@mui/material";
+import Typography from '@mui/joy/Typography';
 
 import axios from "axios"
 
@@ -52,8 +53,8 @@ export default function () {
 
                                 <Card 
                                     key={post._id} 
-                                    spacing={3} 
                                     sx={{
+                                        gap:5,
                                         marginTop:5,
                                         marginBottom:5,
                                         width: '50%',
@@ -62,26 +63,31 @@ export default function () {
                                     }}
                                 >
                                     <CardMedia
-                                    style={{
-                                        objectFit:'contain',
-                                        display:'flex', 
-                                        flexDirection:'row', 
-                                        justifyContent:'center', 
-                                        alignItems:'center'
-                                    }}
+                                        style={{
+                                            objectFit:'contain',
+                                            // display:'flex', 
+                                            // flexDirection:'row', 
+                                            // justifyContent:'center', 
+                                            // alignItems:'center'
+                                        }}
                                         component="img"
                                         image={img}
                                     />
                                     <CardContent
                                         sx={{
+                                            display:'flex', flexDirection:'column', gap:2,
                                             backgroundColor:'rgb(0, 0, 0, 0.12)',
                                             }}
                                         >
                                         {/* {Array.isArray(post.image) && post.image.length > 0 && (
                                             <img src={post.image[0].url} width={250} height={250} />     
                                             )} */}
-                                        <Typography variant="h5" color="text.secondary">{post.title}</Typography>
-                                        <Typography variant="body1">{post.description}</Typography>
+                                        <Typography level="h2" color="text.secondary">{post.title}</Typography>
+                                        <Typography level="body-md" >{post.description}</Typography>
+                                        <A style={{width:'100px'}} sx={{display:'inline-block', cursor:'pointer'}} href={post.repo}>Github Code</A>
+                                        <A style={{width:'100px'}} sx={{cursor:'pointer'}} href={post.link}>Full Project</A>
+                                        <Typography level="title-sm" color="text.secondary">Technologies used: {post.tech}</Typography>
+                                        
                                         {isAdmin == true ? 
                                         <>
                                             <Button 
@@ -93,6 +99,7 @@ export default function () {
                                                 <Typography 
                                                     // variant="h5" 
                                                     size="small"
+                                                    color='white'
                                                 >
                                                 Options
                                             </Typography>

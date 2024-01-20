@@ -5,14 +5,16 @@ import { Box, TextField, Stack, Button } from "@mui/material";
 import { Typography } from "@mui/joy";
 import axios from 'axios';
 
+import Message from "../components/Message.jsx";
+
 export default function Signin() {
   const navigate = useNavigate()
 
   const [password, setPswd] = useState('')
   const [email, setEmail] = useState('')
-
   
   const loginUser = async () => {
+
     const credentials = {email, password}
     const login = await axios.post('/api/user/signin', credentials)
       .then((response) => {
@@ -21,19 +23,20 @@ export default function Signin() {
             data:response.data,
             id:response.data._id
           }
-          console.log(result)
-          // setMessage(result.message)
+          // console.log(result);
+
           localStorage.setItem("name", result.data.userProfile.name)
           localStorage.setItem("userId", result.data.userProfile._id)
           localStorage.setItem("isAdmin", result.data.userProfile.isAdmin)
           
           navigate(`/profile/${result.id}`)
-          location.reload()
+          // location.reload()
         })
         .catch((error) => {
           console.log({'Login Failed': error})
         })
   }
+
       useEffect(() => {
         
 
@@ -86,6 +89,8 @@ export default function Signin() {
                       onClick={loginUser}>Sign In</Button>
                     
                 </Stack>
+
+                <Message/>
 
               </Box>
             </>
