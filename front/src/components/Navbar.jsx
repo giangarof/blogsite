@@ -36,13 +36,15 @@ export default function Navbar(props) {
               {userInfo ? (
               <AppBar 
                 sx={{
-                  boxShadow:'0px 10px 20px 0px #000',
+                  position:'sticky'
                 }}>
                 <Toolbar display="center">
                 <Typography variant="h4">
                     RNET
                   </Typography>
-                  <Box sx={{ display:'flex', m:2}} >
+                  <Box 
+                    // sx={{ display:'flex'}} 
+                    >
                     <Typography sx={sx} component="a" href="/home">
                       <Tooltip title='login'>
                         <HomeIcon/>

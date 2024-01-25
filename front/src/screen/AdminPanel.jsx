@@ -3,7 +3,7 @@ import axios from "axios"
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -33,6 +33,22 @@ export default function AdminPanel() {
         fetchPosts()
     }, [])
 
+    const box = {
+        color: '#fff',
+        textDecoration: 'none',
+        '&:hover':{
+            textDecoration: 'underline',
+            color: '#fff'
+        },
+        cursor:'pointer',
+        whiteSpace:'nowrap', 
+        overflow:'hidden', 
+        textOverflow:'ellipsis',
+        maxWidth: '150px'
+    }
+
+
+
   return (
     <>
         {/* remember to create a new ctrl - 'maybe' */}
@@ -55,17 +71,12 @@ export default function AdminPanel() {
                 <TableBody>
                     {post.map(p =>(
                         <TableRow key={p._id}>
-                            <TableCell>{p._id}</TableCell>
-                            <TableCell>{p.createdAt}</TableCell>
-                            <TableCell sx={{
-                                        whiteSpace:'nowrap', 
-                                        overflow:'hidden', 
-                                        textOverflow:'ellipsis',
-                                        maxWidth:'150px'
-                                        }}>{p.description}</TableCell>
-                            <TableCell><A href={p.link}>Full Project</A></TableCell>
-                            <TableCell sx={{cursor:'pointer'}}><A href={p.repo}>Github Code</A></TableCell>
-                            <TableCell sx={{cursor:'pointer'}}><A href={`/post/update/${p._id}`}>Update Post Form</A></TableCell>
+                            <TableCell sx={{color:'#fff'}}>{p._id}</TableCell>
+                            <TableCell sx={{color:'#fff'}}>{p.createdAt}</TableCell>
+                            <TableCell sx={{color:'#fff'}}>{p.description}</TableCell>
+                            <TableCell><A sx={box} href={p.link}>Full Project</A></TableCell>
+                            <TableCell><A sx={box} href={p.repo}>Github Code</A></TableCell>
+                            <TableCell><A sx={box} href={`/post/update/${p._id}`}>Update Post Form</A></TableCell>
                             <TableCell>
                                 <DeletePost postId={p._id}/>
                             </TableCell>

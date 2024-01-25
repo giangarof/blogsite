@@ -30,32 +30,38 @@ export default function Profile() {
   useEffect(() => {
     fetchUser()
   }, [id])
+
+  const box = {
+    color: '#fff'
+  }
     
   return (
     <>
     {/* Profile */}
       <>
-      <Container sx={{marginTop:5}}>
-        <Typography level="body-lg">Name: {name}</Typography>
-        <Typography level="body-lg">Email: {email}</Typography>
-        <Typography level="body-lg">Username: {username}</Typography>
+      <Container sx={{margin:10}} >
+        <Typography sx={box} level="body-lg">Name: {name}</Typography>
+        <Typography sx={box} level="body-lg">Email: {email}</Typography>
+        <Typography  sx={box}level="body-lg">Username: {username}</Typography>
       
         {isAdmin === true ? (
           <>
-           <Typography level="body-lg">Admin: Administrator</Typography>
+          <Typography sx={box} level="body-lg">Admin: Administrator</Typography>
           <Stack display="flex" flexDirection="row" gap={4}>
             <Typography component="a" href="/new">
-              <Tooltip title="Add new post"><AddIcon/></Tooltip>
+              <Tooltip title="Add new post">
+                <AddIcon sx={box}/>
+              </Tooltip>
             </Typography>
             <Typography  component="a" href="/adminpanel">
               <Tooltip title="Admin Panel">
-                <AdminPanelSettingsIcon/>
+                <AdminPanelSettingsIcon sx={box}/>
               </Tooltip>
             </Typography> 
 
             <Typography component="a" href="https://gigadev.onrender.com/">
               <Tooltip title='About me'>
-                <AccountCircleIcon/>
+                <AccountCircleIcon sx={box}/>
               </Tooltip>
             </Typography>
           </Stack>
@@ -63,14 +69,13 @@ export default function Profile() {
           </>
 
         ) : (
-          <Typography level="body-lg">Admin: No Admin Privilege</Typography>
+          <Typography sx={box} level="body-lg">Admin: No Admin Privilege</Typography>
         )
           }
 
     
       </Container>
       </>      
-      
     </>
   )
 }

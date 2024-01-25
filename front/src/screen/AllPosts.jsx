@@ -49,34 +49,34 @@ export default function AllPosts() {
             ) : (
                 <div>
                     <Container sx={{
-                            width: {sm:'100%', lg:'70%'},
+                            // width: {sm:'100%', lg:'70%'},
                             display:{
                                 md:'flex', lg:'grid'
                             },
                             alignContent:'center', 
                             gridTemplateColumns: 'repeat(2, 1fr)', 
                             gap:3, 
-                            margin:'auto', 
-                            paddingTop:15,
-                            marginBottom:4
+                            margin:'20px auto 20px auto', 
+                            // paddingTop:15,
+                            // marginBottom:4
                     }}>
 
-                        {post.map((item) => (
+                        {post.slice().reverse().map((item) => (
                             <Card 
                                 key={item._id} 
-                                sx={{marginTop:5, boxShadow:'0px 0px 20px 0px'}}
-                                style={{
-                                    width:"500px",
-                                  }}
+                                // sx={{marginTop:5, boxShadow:'0px 0px 20px 0px'}}
+                                // style={{
+                                //     width:"500px",
+                                //   }}
                             >
                                 
                             {Array.isArray(item.image) && item.image.length > 0 && (
                                 <CardMedia 
-                                    sx={{height:'auto'}} 
-                                    style={{
-                                        height:"350px",
-                                        objectFit:'contain',
-                                    }}
+                                    // sx={{height:'auto'}} 
+                                    // style={{
+                                    //     height:"350px",
+                                    //     objectFit:'contain',
+                                    // }}
                                     component='img'
                                     image={item.image[0].url}
                                 />
