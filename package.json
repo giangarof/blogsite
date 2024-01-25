@@ -7,9 +7,10 @@
   "scripts": {
     "server": "nodemon back/server.js",
     "client": "npm run dev --prefix front",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "npm install & npm install --prefix front && npm run build --prefix front"
   },
-  "author": "",
+  "author": "Giangarof",
   "license": "ISC",
   "dependencies": {
     "@emotion/react": "^11.11.1",

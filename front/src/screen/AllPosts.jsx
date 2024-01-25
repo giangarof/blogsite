@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 
+import { Container } from '@mui/system';
 import { Box, Card, Button, CardContent, CardMedia, Typography, Tooltip } from "@mui/material";
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
@@ -47,13 +48,16 @@ export default function AllPosts() {
                 <p>Loading...</p>
             ) : (
                 <div>
-                    <Box sx={{
-                            width:'70%',
-                            display:'grid', 
+                    <Container sx={{
+                            width: {sm:'100%', lg:'70%'},
+                            display:{
+                                md:'flex', lg:'grid'
+                            },
                             alignContent:'center', 
                             gridTemplateColumns: 'repeat(2, 1fr)', 
                             gap:3, 
                             margin:'auto', 
+                            paddingTop:15,
                             marginBottom:4
                     }}>
 
@@ -112,7 +116,7 @@ export default function AllPosts() {
                                 </CardContent>
                             </Card>
                         ))}
-                    </Box>
+                    </Container>
                 </div>
             )}
 

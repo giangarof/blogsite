@@ -27,20 +27,22 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
-// app.use(cors({
-//     origin: "*",
-//     credentials: true,
 
-// }))
-
-
-// Create the session
-// app.use(session(sessionConfig));
-
-// app.use(connectFlash());
 
 app.use('/api/user', user)
 app.use('/api/post', post)
+
+if(process.env.NODE_ENV === 'production'){
+    const __dirname = path.resolve();
+    //set static folder
+    app.use(express.static(path.join(__dirname, 'front/dist')))
+    //any route that is not api will be redirected to index.html
+    app.get('*', (req,res) => res.sendFile(path.resolve(__dirname, 'front', 'dist', 'index.html')))
+} else {
+    app.get('/', (req,res) => {
+        res.send('API is running.')
+    })
+}
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`running on port ${port}`))

@@ -2,6 +2,7 @@ import {
   AppBar, 
   Toolbar, 
   Typography, Box, Tooltip, IconButton, Icon } from "@mui/material";
+import { Container } from '@mui/system';
 
 import { useEffect, useState } from "react";
 import Logout from './Logout.jsx'
@@ -34,8 +35,9 @@ export default function Navbar(props) {
             <>
               {userInfo ? (
               <AppBar 
-                position="static" 
-                sx={{boxShadow:'0px 10px 20px 0px #000'}}>
+                sx={{
+                  boxShadow:'0px 10px 20px 0px #000',
+                }}>
                 <Toolbar display="center">
                 <Typography variant="h4">
                     RNET
