@@ -72,11 +72,12 @@ export default function AllPosts() {
                                 <CardMedia 
                                     component='img'
                                     image={item.image[0].url}
+                                    
                                 />
                             )}
 
                                 <CardContent sx={{
-                                    backgroundColor:'rgb(0, 0, 0, 0.12)',
+                                    backgroundColor:'rgb(0, 0, 0, 0.12)',                            
                                     
                                 }}
                                 >

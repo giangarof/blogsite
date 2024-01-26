@@ -30,6 +30,10 @@ export default function () {
     const updatePostScreen = async(id) => {
         navigate(`/post/update/${id}`)
     }
+
+    const goBack = async() => {
+        navigate(`/home`)
+    }
     
     useEffect(() => {
           const isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
@@ -88,9 +92,9 @@ export default function () {
                                             <img src={post.image[0].url} width={250} height={250} />     
                                             )} */}
                                         <Typography level="h2" color="text.secondary">{post.title}</Typography>
-                                        <Typography level="body-md" >{post.description}</Typography>
-                                        <A style={{width:'100px'}} sx={{display:'inline-block', cursor:'pointer'}} href={post.repo}>Github Code</A>
-                                        <A style={{width:'100px'}} sx={{cursor:'pointer'}} href={post.link}>Full Project</A>
+                                        <Typography level="body-md">{post.description}</Typography>
+                                        <A style={{width:'100px'}} sx={{display:'inline-block', cursor:'pointer'}} href={post.repo} target="_blank" >Github Code</A>
+                                        <A style={{width:'100px'}} sx={{cursor:'pointer'}} href={post.link} target="_blank">Full Project</A>
                                         <Typography level="title-sm" color="text.secondary">Technologies used: {post.tech}</Typography>
                                         
                                         {isAdmin == true ? 
@@ -107,6 +111,20 @@ export default function () {
                                                     color='white'
                                                 >
                                                 Options
+                                            </Typography>
+                                            </Button>
+                                            <Button 
+                                                variant="contained" 
+                                                size='small' 
+                                                onClick={goBack}
+                                                sx={{marginTop:"10px"}}
+                                            >
+                                                <Typography 
+                                                    // variant="h5" 
+                                                    size="small"
+                                                    color='white'
+                                                >
+                                                Go Back
                                             </Typography>
                                             </Button>
                                         </>

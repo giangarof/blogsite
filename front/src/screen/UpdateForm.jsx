@@ -78,6 +78,10 @@ export default function UpdateForm() {
         console.log(file)
     }
 
+    const admin = async() => {
+        navigate(`/adminpanel`)
+    }
+
     // Submit update logic
     const submitUpdate= async(id) => {
         const formData = new FormData();
@@ -201,6 +205,20 @@ export default function UpdateForm() {
                                     >
                                         <Typography sx={{color:'white'}}>Update</Typography>
                                     </Button>
+                                    <Button 
+                                                variant="contained" 
+                                                size='small' 
+                                                onClick={admin}
+                                                sx={{marginTop:"10px"}}
+                                            >
+                                                <Typography 
+                                                    // variant="h5" 
+                                                    size="small"
+                                                    color='white'
+                                                >
+                                                Admin Panel
+                                            </Typography>
+                                            </Button>
 
                                 </CardContent>
 

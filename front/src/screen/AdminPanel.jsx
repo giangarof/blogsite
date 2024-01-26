@@ -74,8 +74,8 @@ export default function AdminPanel() {
                             <TableCell sx={{color:'#fff'}}>{p._id.substr(-4)}</TableCell>
                             <TableCell sx={{color:'#fff'}}>{p.createdAt.substr(0,10)}</TableCell>
                             <TableCell sx={{color:'#fff'}}>{p.title}</TableCell>
-                            <TableCell><A sx={box} href={p.link}>Full Project</A></TableCell>
-                            <TableCell><A sx={box} href={p.repo}>Github Code</A></TableCell>
+                            <TableCell><A sx={box} href={p.link} target="_blank">Full Project</A></TableCell>
+                            <TableCell><A sx={box} href={p.repo} target="_blank">Github Code</A></TableCell>
                             <TableCell><A sx={box} href={`/post/update/${p._id}`}>Update Post Form</A></TableCell>
                             <TableCell>
                                 <DeletePost postId={p._id}/>
