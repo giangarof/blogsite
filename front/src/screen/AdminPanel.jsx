@@ -44,7 +44,7 @@ export default function AdminPanel() {
         whiteSpace:'nowrap', 
         overflow:'hidden', 
         textOverflow:'ellipsis',
-        maxWidth: '150px'
+        maxWidth: '250px'
     }
 
 
@@ -61,7 +61,7 @@ export default function AdminPanel() {
                     <TableRow>
                         <TableCell>ID</TableCell>
                         <TableCell>Posted</TableCell>
-                        <TableCell>Description</TableCell>
+                        <TableCell>Title</TableCell>
                         <TableCell>Full Project</TableCell>
                         <TableCell>Repository</TableCell>
                         <TableCell>Update Form</TableCell>
@@ -69,11 +69,11 @@ export default function AdminPanel() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {post.map(p =>(
+                    {post.slice().reverse().map(p =>(
                         <TableRow key={p._id}>
-                            <TableCell sx={{color:'#fff'}}>{p._id}</TableCell>
-                            <TableCell sx={{color:'#fff'}}>{p.createdAt}</TableCell>
-                            <TableCell sx={{color:'#fff'}}>{p.description}</TableCell>
+                            <TableCell sx={{color:'#fff'}}>{p._id.substr(-4)}</TableCell>
+                            <TableCell sx={{color:'#fff'}}>{p.createdAt.substr(0,10)}</TableCell>
+                            <TableCell sx={{color:'#fff'}}>{p.title}</TableCell>
                             <TableCell><A sx={box} href={p.link}>Full Project</A></TableCell>
                             <TableCell><A sx={box} href={p.repo}>Github Code</A></TableCell>
                             <TableCell><A sx={box} href={`/post/update/${p._id}`}>Update Post Form</A></TableCell>
