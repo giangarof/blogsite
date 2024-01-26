@@ -49,16 +49,14 @@ export default function AllPosts() {
             ) : (
                 <div>
                     <Container sx={{
-                            // width: {sm:'100%', lg:'70%'},
-                            display:{
-                                md:'flex', lg:'grid'
-                            },
+                            display: 'grid',
                             alignContent:'center', 
-                            gridTemplateColumns: 'repeat(2, 1fr)', 
-                            gap:3, 
+                            gridTemplateColumns: {
+                                sm: 'repeat(1, 1fr)',  
+                                md: 'repeat(2, 1fr)',  
+                            },
+                            gap: 5,
                             margin:'20px auto 20px auto', 
-                            // paddingTop:15,
-                            // marginBottom:4
                     }}>
 
                         {post.slice().reverse().map((item) => (
@@ -72,11 +70,6 @@ export default function AllPosts() {
                                 
                             {Array.isArray(item.image) && item.image.length > 0 && (
                                 <CardMedia 
-                                    // sx={{height:'auto'}} 
-                                    // style={{
-                                    //     height:"350px",
-                                    //     objectFit:'contain',
-                                    // }}
                                     component='img'
                                     image={item.image[0].url}
                                 />

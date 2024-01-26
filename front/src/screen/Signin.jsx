@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from 'react-router-dom'
 
-import { Box, TextField, Stack, Button } from "@mui/material";
-import { Typography } from "@mui/joy";
+import { Box, TextField, Stack, Button, Typography, } from "@mui/material";
+import { Container } from '@mui/system';
+// import { Typography } from "@mui/joy";
 import axios from 'axios';
 
 import Message from "../components/Message.jsx";
@@ -12,11 +13,11 @@ export default function Signin() {
 
   const [password, setPswd] = useState('')
   const [email, setEmail] = useState('')
-  
+  const [errorMsg, setErrorMsg] = useState('')
   const loginUser = async () => {
 
-    const credentials = {email, password}
-    const login = await axios.post('/api/user/signin', credentials)
+  const credentials = {email, password}
+  const login = await axios.post('/api/user/signin', credentials)
       .then((response) => {
         const result = {
             message:response.data.message, 
@@ -30,10 +31,11 @@ export default function Signin() {
           localStorage.setItem("isAdmin", result.data.userProfile.isAdmin)
           
           navigate(`/profile/${result.id}`)
-          // location.reload()
+          location.reload()
         })
         .catch((error) => {
-          console.log({'Login Failed': error})
+          console.log({'Login Failed': error.response.data.message})
+          setErrorMsg(error.response.data.message)
         })
   }
 
@@ -45,50 +47,65 @@ export default function Signin() {
         return(
             <>
               <Box sx={{
-                mt: 10,
-                width:'100%',
+                width: {
+                  sm:'100%',
+                  md:'100%'
+                },
                 display:'flex', 
-                flexDirection:'column', 
+                flexDirection:'row', 
                 justifyContent:'center', 
-                alignItems:'center',
+                margin: 'auto auto 15px auto'
+                // gap:8
                 }}>
-                <Stack 
+                <Container 
                   sx={{
-                    display:'flex', flexDirection:'column', alignItems:'center',
-                    maxWidth:'100%',
-                    minWidth: '40%',
-                    backgroundColor:'white',
-                    boxShadow:'0 0 20px 0',
-                    // backgroundColor:'rgb(0, 0, 0, 0.12)',
-                    gap:3
+                    width:{
+                      sm:'100%',
+                      md:'40%'
+                    },
+                    display:'flex', 
+                    flexDirection:'column', 
+                    alignItems:'center',
+                    gap:5,
                   }}
                 >
                     <Typography level="h3" sx={{marginTop:4}}>Credentials</Typography>
 
                     {/* <TextField id="outlined-basic" label="Full Name" variant="outlined" /> */}
-                    <TextField 
+                    <TextField
+                      fullWidth
+                      multiline
                       id="outlined-basic" 
                       label="Email" 
-                      variant="outlined" 
+                      maxRows={4}
+                      variant="filled"
                       value={email} onChange={(e) => setEmail(e.target.value) }
                       sx={{backgroundColor:'#fff'}}
                       />
                     {/* <TextField id="outlined-basic" label="Email" variant="outlined" /> */}
                     <TextField 
-                        id="outlined-basic" 
+                        fullWidth
+                        maxRows={4}
+                        variant="filled"
+                        id="outlined-basic"
+                        type="password"
                         label="Password" 
-                        variant="outlined" 
                         value={password} onChange={(e) => setPswd(e.target.value)} 
                         sx={{backgroundColor:'#fff'}}
                     />
 
                     <Button 
                       variant="contained" 
-                      
-                      sx={{marginBottom:4}} 
+                      fullWidth
+                      // sx={{marginBottom:4}} 
                       onClick={loginUser}>Sign In</Button>
                     
-                </Stack>
+                  <Typography 
+                    sx={{
+                      color:'red',
+                      
+                    }}>{errorMsg}</Typography>
+                </Container>
 
                 <Message/>
 

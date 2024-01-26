@@ -9,21 +9,27 @@ const loginUser = async(req,res) => {
     const {email, password} = req.body;
     const user = await User.findOne({email})
     console.log(user)
-    if(user && (await user.matchPassword(password))){
-        const token = generateToken(res, user._id)
-
-        // res.status(200).json({
-        //     _id: user._id,
-        //     name: user.name,
-        //     email: user.email,
-        //     isAdmin: user.isAdmin,
-        //     message:`Welcome back, ${user.name}`,
-        //     token: token
-        // })
-        res.status(200).json({userProfile: user, _id: user._id, message: 'Welcome Back!'})
-    } else {
-        res.status(401)
-        throw new Error('Invalid email or password')
+    try {
+        if(user && (await user.matchPassword(password))){
+            const token = generateToken(res, user._id)
+    
+            // res.status(200).json({
+            //     _id: user._id,
+            //     name: user.name,
+            //     email: user.email,
+            //     isAdmin: user.isAdmin,
+            //     message:`Welcome back, ${user.name}`,
+            //     token: token
+            // })
+            res.status(200).json({userProfile: user, _id: user._id, message: 'Welcome Back!'})
+        } else {
+            res.status(401)
+            throw new Error('Invalid email or password')
+        }
+        
+    } catch (error) {
+        res.status(401).json({error, message:'Email or password are incorrect'})
+        
     }
     
 }

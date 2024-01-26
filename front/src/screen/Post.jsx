@@ -48,16 +48,21 @@ export default function () {
                         <Box sx={{
                                 // width:'100%',
                                 // height:'100%',
-                                display:'flex', flexDirection:'row', justifyContent:'center'
+                                display:'flex', flexDirection:'row', justifyContent:'center',
+                                width:{
+                                    sm: '100%',
+                                    md: '100%'
+                                }
                         }}>
 
                                 <Card 
                                     key={post._id} 
                                     sx={{
-                                        gap:5,
-                                        marginTop:5,
-                                        marginBottom:5,
-                                        width: '50%',
+                                        width:{
+                                            sm: '90%',
+                                            md: '60%'
+                                        },
+                                        margin: '2rem 0 2rem 0',
                                         boxShadow:'0px 0px 20px 0px'
 
                                     }}

@@ -1,8 +1,8 @@
 import { 
   AppBar, 
   Toolbar, 
-  Typography, Box, Tooltip, IconButton, Icon } from "@mui/material";
-import { Container } from '@mui/system';
+  Typography, Box, Tooltip, IconButton, Icon, Avatar, Stack } from "@mui/material";
+import img from '../assets/react.svg'
 
 import { useEffect, useState } from "react";
 import Logout from './Logout.jsx'
@@ -40,8 +40,8 @@ export default function Navbar(props) {
                 }}>
                 <Toolbar display="center">
                 <Typography variant="h4">
-                    RNET
-                  </Typography>
+                  <Avatar alt="React logo" src={img} />
+                </Typography>
                   <Box 
                     // sx={{ display:'flex'}} 
                     >
@@ -86,7 +86,7 @@ export default function Navbar(props) {
                             <HomeIcon/>
                         </Tooltip>
                       </Typography>
-                      <Typography sx={sx} component="a" href="/signup">Register</Typography>
+                      {/* <Typography sx={sx} component="a" href="/signup">Register</Typography> */}
                       <Typography sx={sx} component="a" href="https://gigadev.onrender.com/">
                         <Tooltip title='About me'>
                           <AccountCircleIcon/>
