@@ -45,8 +45,8 @@ export default function Navbar(props) {
                   <Box 
                     // sx={{ display:'flex'}} 
                     >
-                    <Typography sx={sx} component="a" href="/home">
-                      <Tooltip title='login'>
+                    <Typography sx={sx} component="a" href="/">
+                      <Tooltip title='Home'>
                         <HomeIcon/>
                       </Tooltip>
                     </Typography>
@@ -81,7 +81,7 @@ export default function Navbar(props) {
                         RNET
                       </Typography>
                     <Box sx={{ display:'flex', m:2}} >
-                      <Typography sx={sx} component="a" href="/home">
+                      <Typography sx={sx} component="a" href="/">
                         <Tooltip title='login'>
                             <HomeIcon/>
                         </Tooltip>

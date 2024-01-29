@@ -22,7 +22,7 @@ import AdminPanel from './screen/AdminPanel.jsx'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App/>}>
-      <Route index={true} path='/home' element={<AllPosts/>} />
+      <Route index={true} path='/' element={<AllPosts/>} />
       <Route path='/signin' element={<Signin/>} />
       <Route path='/signup' element={<Register/>} />
       <Route path='/new' element={<NewPost/>}/>

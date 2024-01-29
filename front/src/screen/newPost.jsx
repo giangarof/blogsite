@@ -34,7 +34,7 @@ export default function NewPost() {
             formData.append("tech", tech)
 
             const post = await axios.post('/api/post/new', formData)
-            navigate('/home')
+            navigate('/')
             // console.log(post)
             // return post
             

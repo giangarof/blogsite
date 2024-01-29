@@ -32,7 +32,7 @@ export default function () {
     }
 
     const goBack = async() => {
-        navigate(`/home`)
+        navigate(`/`)
     }
     
     useEffect(() => {

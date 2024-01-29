@@ -27,7 +27,7 @@ export default function Logout() {
   return (
     <>
         <Typography sx={sx} component="a" onClick={logout}>
-          <Tooltip title='logout'>
+          <Tooltip title='Logout'>
             <LogoutIcon sx={{cursor:'pointer'}}/>
           </Tooltip>
         </Typography>
