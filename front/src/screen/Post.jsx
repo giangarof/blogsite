@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from "react-router-dom"
-import { Box, Card, Button, CardContent, CardMedia, Link as A } from "@mui/material";
-import Typography from '@mui/joy/Typography';
+import { Box, Card, Button, CardContent, CardMedia, Typography, Link as A } from "@mui/material";
+// import Typography from '@mui/joy/Typography';
 
 import axios from "axios"
 
@@ -50,8 +50,6 @@ export default function () {
                     <div>
                         {/* Render or use 'post' */}
                         <Box sx={{
-                                // width:'100%',
-                                // height:'100%',
                                 display:'flex', flexDirection:'row', justifyContent:'center',
                                 width:{
                                     sm: '100%',
@@ -91,11 +89,11 @@ export default function () {
                                         {/* {Array.isArray(post.image) && post.image.length > 0 && (
                                             <img src={post.image[0].url} width={250} height={250} />     
                                             )} */}
-                                        <Typography level="h2" color="text.secondary">{post.title}</Typography>
-                                        <Typography level="body-md">{post.description}</Typography>
-                                        <A style={{width:'100px'}} sx={{display:'inline-block', cursor:'pointer'}} href={post.repo} target="_blank" >Github Code</A>
-                                        <A style={{width:'100px'}} sx={{cursor:'pointer'}} href={post.link} target="_blank">Full Project</A>
-                                        <Typography level="title-sm" color="text.secondary">Technologies used: {post.tech}</Typography>
+                                        <Typography variant="h5" >{post.title}</Typography>
+                                        <Typography variant='p'>{post.description}</Typography>
+                                        <A variant='p' style={{width:'100px'}} sx={{display:'inline-block', cursor:'pointer'}} href={post.repo} target="_blank" >Github Code</A>
+                                        <A variant='p' style={{width:'100px'}} sx={{cursor:'pointer'}} href={post.link} target="_blank">Full Project</A>
+                                        <Typography variant='p'>Technologies used: {post.tech}</Typography>
                                         
                                         {isAdmin == true ? 
                                         <>

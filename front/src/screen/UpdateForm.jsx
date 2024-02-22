@@ -122,7 +122,8 @@ export default function UpdateForm() {
         <Grid container justifyContent="center" >
             <Box 
                 sx={{
-                    mt:10,
+                    mt:3,
+                    mb:3,
                     width:{
                         xs:'90%',
                         lg: '50%'

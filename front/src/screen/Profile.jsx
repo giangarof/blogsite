@@ -32,7 +32,7 @@ export default function Profile() {
   }, [id])
 
   const box = {
-    color: '#fff'
+    // color: '#fff'
   }
     
   return (
