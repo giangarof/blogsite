@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
-import { Box, TextField, Stack, Button } from "@mui/material";
+import { Box, TextField, Stack, Button, Grid } from "@mui/material";
 import { Typography, Textarea } from "@mui/joy";
 
 import axios from 'axios';
@@ -47,14 +47,20 @@ export default function NewPost() {
 
     return (
         <>
-            <Box sx={{mt:10, width:'100%'}}>
-                <Stack 
-                    sx={{width:'100%'}} 
-                    direction="column" 
-                    justifyContent="center" 
-                    alignItems="center" 
-                    spacing={4} 
-                >
+        <Grid container justifyContent="center" >
+            <Box 
+                    sx={{
+                        mt:10,
+                        width:{
+                        xs:'90%',
+                        lg: '50%'
+                        }
+                    }} 
+                    display="flex"
+                    flexDirection="column"
+                    gap={3}
+                    
+                >   
                         <Typography level="h3">New Post</Typography>
 
                         <TextField  id="outlined-basic" label="Title" variant="outlined" 
@@ -71,7 +77,7 @@ export default function NewPost() {
                                     onChange={(e) => setTech(e.target.value) }/>
                         <Textarea  id="outlined-basic" placeholder="Description" variant="outlined"
                                     minRows={5}  
-                                    sx={{width:'20%'}}
+                                    xs={{width:'90%'}}
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value) }/>
 
@@ -90,8 +96,8 @@ export default function NewPost() {
                                 onClick={newPost}>
                                     Submit
                         </Button>
-                </Stack>
             </Box>
+        </Grid>
         </>
   )
 }

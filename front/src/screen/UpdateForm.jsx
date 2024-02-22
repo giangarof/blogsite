@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {useNavigate, useParams} from 'react-router-dom'
 import axios from 'axios';
-import { Box, Card, CardContent, TextField, Button, CardMedia} from "@mui/material";
+import { Box, Card, CardContent, TextField, Button, CardMedia, Grid} from "@mui/material";
 import { Typography, Textarea } from "@mui/joy";
 
 import DeletePost from "../components/DeletePost";
@@ -119,115 +119,118 @@ export default function UpdateForm() {
 
     return (
         <>
-            <div>
-            {isLoading ? (
-                <p>Loading...</p>
-            ) : (
-                <div>
-                    
-                    <Box sx={{
-                            width:'100%',
-                            display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'
-                    }}>
+        <Grid container justifyContent="center" >
+            <Box 
+                sx={{
+                    mt:10,
+                    width:{
+                        xs:'90%',
+                        lg: '50%'
+                    }
+                }}     
+            >
 
-                            <Card 
-                                key={post._id} 
-                                spacing={3} 
-                                sx={{
-                                    width:'50%',
-                                    marginTop:4, marginBottom:4,
-                                }}
-                            >
+                <Card 
+                    key={post._id} 
+                    spacing={3} 
+                >
 
-                                    {Array.isArray(image) && image.length > 0 && (
-                                        <CardMedia
-                                            component='img'
-                                            image={image[0].url}
-                                        />
+                    {Array.isArray(image) && image.length > 0 && (
+                        <CardMedia
+                            component='img'
+                            image={image[0].url}
+                            sx={{
+                                        
+                                display: 'flex',
+                                justifyContent: 'center', /* Horizontally center the content */
+                                alignItems: 'center', /* Vertically center the content */
+                                height: '40vh',
+                                objectFit:'contain'
+                            }}
+                        />
+                        )}
+
+                    <CardContent 
+                        sx={{
+                            display:'flex', 
+                            flexDirection:'column', 
+                            alignContent:'center',
+                            backgroundColor:'rgb(0, 0, 0, 0.12)',
+                        }}>
+
+                            <Typography>New Image</Typography>
+                            <input type='file' onChange={FileUpload} />
+
+                            <Typography sx={{marginTop:4}} variant="h5" color="error">Title</Typography>
+                            <Textarea  id="outlined-basic" variant="outlined" 
+                                value={title} 
+                                onChange={handleTitle}
+                                // sx={{backgroundColor:'#fff'}}
+                            />
+
+                            {/* <Typography>Previous Image</Typography>
+                            {Array.isArray(image) && image.length > 0 && (
+                                <CardMedia
+                                    component='img'
+                                    image={image[0].url}
+                                    sx={{marginBottom:4}}/>
                                         )}
 
-                                <CardContent 
-                                    sx={{
-                                        display:'flex', flexDirection:'column', alignContent:'center',
-                                        backgroundColor:'rgb(0, 0, 0, 0.12)',
-                                    }}>
+                                        <Typography>New Image</Typography>
+                                        <input type='file' onChange={FileUpload} />    */}
 
-                                    <Typography>New Image</Typography>
-                                    <input type='file' onChange={FileUpload} />
+                            <Typography>Github</Typography>
+                            <Textarea 
+                                value={repo}
+                                onChange={handleRepo}/>
 
-                                    <Typography sx={{marginTop:4}} variant="h5" color="error">Title</Typography>
-                                    <Textarea  id="outlined-basic" variant="outlined" 
-                                        value={title} 
-                                        onChange={handleTitle}
-                                        // sx={{backgroundColor:'#fff'}}
-                                    />
+                            <Typography>Full Project</Typography>
+                            <Textarea 
+                                value={link}
+                                onChange={handleLink}/>
 
-                                    {/* <Typography>Previous Image</Typography>
-                                    {Array.isArray(image) && image.length > 0 && (
-                                        <CardMedia
-                                            component='img'
-                                            image={image[0].url}
-                                            sx={{marginBottom:4}}/>
-                                    )}
+                            <Typography>Description</Typography>
+                            <Textarea 
+                                value={description}
+                                onChange={handleDescription}/>
 
-                                    <Typography>New Image</Typography>
-                                    <input type='file' onChange={FileUpload} />    */}
+                            <Typography>Technologies</Typography>
+                            <Textarea 
+                                value={tech}
+                                onChange={handleTech}/>
 
-                                    <Typography>Github</Typography>
-                                    <Textarea 
-                                        value={repo}
-                                        onChange={handleRepo}/>
+                            {errorMsg ? (
+                                <Typography level="body-lg" textColor='red'>{errorMsg}</Typography>
+                            ) : ''}
 
-                                    <Typography>Full Project</Typography>
-                                    <Textarea 
-                                        value={link}
-                                        onChange={handleLink}/>
+                            <Button 
+                                sx={{marginTop:4}}
+                                variant="contained"
+                                size='small' 
+                                onClick={() => submitUpdate(postId)} 
+                            >
+                            <Typography sx={{color:'white'}}>Update Changes</Typography>
+                            </Button>
+                            <Button 
+                                variant="contained" 
+                                size='small' 
+                                onClick={admin}
+                                sx={{marginTop:"10px"}}
+                            >
+                                <Typography 
+                                    // variant="h5" 
+                                    size="small"
+                                    color='white'
+                                >
+                                Admin Panel
+                            </Typography>
+                            </Button>
 
-                                    <Typography>Description</Typography>
-                                    <Textarea 
-                                        value={description}
-                                        onChange={handleDescription}/>
+                    </CardContent>
 
-                                    <Typography>Technologies</Typography>
-                                    <Textarea 
-                                        value={tech}
-                                        onChange={handleTech}/>
-
-                                    {errorMsg ? (
-                                        <Typography level="body-lg" textColor='red'>{errorMsg}</Typography>
-                                    ) : ''}
-
-                                    <Button 
-                                        sx={{marginTop:4}}
-                                        variant="contained"
-                                        size='small' 
-                                        onClick={() => submitUpdate(postId)} 
-                                    >
-                                        <Typography sx={{color:'white'}}>Update</Typography>
-                                    </Button>
-                                    <Button 
-                                                variant="contained" 
-                                                size='small' 
-                                                onClick={admin}
-                                                sx={{marginTop:"10px"}}
-                                            >
-                                                <Typography 
-                                                    // variant="h5" 
-                                                    size="small"
-                                                    color='white'
-                                                >
-                                                Admin Panel
-                                            </Typography>
-                                            </Button>
-
-                                </CardContent>
-
-                            </Card>
-                    </Box>
-                </div>
-            )}
-
-        </div>
+                </Card>
+            </Box>
+        </Grid> 
         
         </>
   )

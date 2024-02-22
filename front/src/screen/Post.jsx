@@ -72,12 +72,12 @@ export default function () {
                                     }}
                                 >
                                     <CardMedia
-                                        style={{
-                                            objectFit:'contain',
-                                            // display:'flex', 
-                                            // flexDirection:'row', 
-                                            // justifyContent:'center', 
-                                            // alignItems:'center'
+                                        sx={{
+                                            display: 'flex',
+                                            justifyContent: 'center', /* Horizontally center the content */
+                                            alignItems: 'center', /* Vertically center the content */
+                                            height: '50vh',
+                                            objectFit:'contain'
                                         }}
                                         component="img"
                                         image={img}

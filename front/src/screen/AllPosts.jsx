@@ -49,64 +49,82 @@ export default function AllPosts() {
             ) : (
                 <div>
                     <Container sx={{
+                        
                             display: 'grid',
                             alignContent:'center', 
                             gridTemplateColumns: {
                                 sm: 'repeat(1, 1fr)',  
                                 md: 'repeat(2, 1fr)',  
                             },
-                            gap: 5,
-                            margin:'20px auto 20px auto', 
+                            gap: 4,
+                            marginBottom:5
                     }}>
 
                         {post.slice().reverse().map((item) => (
                             <Card 
                                 key={item._id} 
-                                // sx={{marginTop:5, boxShadow:'0px 0px 20px 0px'}}
-                                // style={{
-                                //     width:"500px",
-                                //   }}
+                                sx={{marginTop:5, boxShadow:'0px 0px 10px 0px'}}
                             >
                                 
                             {Array.isArray(item.image) && item.image.length > 0 && (
                                 <CardMedia 
                                     component='img'
+                                    // style={{width:'100%', objectFit:'fill'}}
                                     image={item.image[0].url}
+                                    sx={{
+                                        
+                                        display: 'flex',
+                                        justifyContent: 'center', /* Horizontally center the content */
+                                        alignItems: 'center', /* Vertically center the content */
+                                        height: '33vh',
+                                        objectFit:'contain'
+                                    }}
                                     
                                 />
                             )}
 
-                                <CardContent sx={{
-                                    backgroundColor:'rgb(0, 0, 0, 0.12)',                            
-                                    
-                                }}
+                                <CardContent 
+                                    sx={{
+                                        backgroundColor:'rgb(0, 0, 0, 0.12)',
+                                        display:'flex', 
+                                        flexDirection:"column", 
+                                        justifyContent:'center',                        
+                                    }}
                                 >
-                                    <Typography variant="h4">{item.title}</Typography>
-                                    <Typography 
-                                        variant="h5" 
+                                    <Container 
                                         sx={{
-                                            whiteSpace:'nowrap', 
-                                            overflow:'hidden', 
-                                            textOverflow:'ellipsis',
+                                            display:'flex', 
+                                            flexDirection:"column", 
+                                            justifyContent:'center'
+                                        }}>
+                                        <Typography variant="h5">{item.title}</Typography>
+                                        <Typography 
+                                            variant="p" 
+                                            sx={{
+                                                whiteSpace:'nowrap', 
+                                                overflow:'hidden', 
+                                                textOverflow:'ellipsis',
                                             }}
-                                    >
-                                        {item.description}
-                                    </Typography>
-                                    <Tooltip title="Read article">
-                                        <Button 
-                                            variant="contained" 
-                                            size="small" 
-                                            sx={{marginTop:"10px"}}
                                         >
-                                        <Typography  
-                                            component='a' 
-                                            href={`/post/${item._id}`} 
-                                            sx={{textDecoration:"none", color:"white"}}
-                                        >
-                                            <AutoStoriesIcon/>
+                                            {item.description}
                                         </Typography>
-                                        </Button>
-                                    </Tooltip>
+                                        <Tooltip title="Read article">
+                                            <Button 
+                                                variant="contained" 
+                                                size="small" 
+                                                
+                                                sx={{width:"10px"}}
+                                            >
+                                            <Typography  
+                                                component='a' 
+                                                href={`/post/${item._id}`} 
+                                                sx={{textDecoration:"none", color:"white"}}
+                                            >
+                                                <AutoStoriesIcon/>
+                                            </Typography>
+                                            </Button>
+                                        </Tooltip>
+                                    </Container>
                                 </CardContent>
                             </Card>
                         ))}
