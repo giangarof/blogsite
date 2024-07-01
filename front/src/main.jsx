@@ -10,7 +10,7 @@ import {
 } from 'react-router-dom'
 
 // screens
-import AllPosts from './screen/AllPosts.jsx'
+import Main from './screen/Main.jsx'
 import Signin from './screen/Signin.jsx'
 import Register from './screen/Register.jsx'
 import NewPost from './screen/newPost.jsx'
@@ -22,7 +22,7 @@ import AdminPanel from './screen/AdminPanel.jsx'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App/>}>
-      <Route index={true} path='/' element={<AllPosts/>} />
+      <Route index={true} path='/' element={<Main/>} />
       <Route path='/signin' element={<Signin/>} />
       <Route path='/signup' element={<Register/>} />
       <Route path='/new' element={<NewPost/>}/>
