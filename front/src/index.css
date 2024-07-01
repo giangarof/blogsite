@@ -5,6 +5,32 @@
     font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-style: normal;
-    
-    
 }
+
+.description{
+    padding-top: 25px;
+}
+  
+  .typing-effect {
+    letter-spacing: 10px;
+    font-family: monospace;
+    border-right: 5px solid;
+    width: 300px;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: 
+        typing 2s steps(13),
+        cursor .4s step-end infinite alternate
+  } 
+
+  @keyframes cursor{
+    50% {border-color: transparent;}
+  }
+
+  @keyframes typing {
+    from {width: 0;}
+  }
+
+
+
+  

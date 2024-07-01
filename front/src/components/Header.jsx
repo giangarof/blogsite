@@ -75,13 +75,16 @@ export default function Header() {
                 
                 sx={BoxHeader}>
                 <Container sx={{width:'100%', textAlign:'start'}}>
-
-                    <h1>Hello there!</h1>
-                    <p>Welcome to my portfolio; feel free to check my projects. </p>
-                    <p>I'm a Fullstack Developer, Data Analyst, and Cyber Analyst when it's about to find vulnerabilities.</p>
-                    <p>Skillful in frontend and backend,  adept in databases both SQL and NoSQL</p>
-                    <p>Star Wars ambassador, The Big Bang Theory fan, lifelong learner</p>
-                    <p> </p>
+                    <div className="typing-effect">
+                        <h1 >Hello there!</h1>
+                    </div>
+                    <div className="description">
+                        <p>Welcome to my portfolio; feel free to check my projects. </p>
+                        <p>I'm a Fullstack Developer, Data Analyst, and Cyber Analyst when it's about to find vulnerabilities.</p>
+                        <p>Skillful in frontend and backend,  adept in databases both SQL and NoSQL</p>
+                        <p>Star Wars ambassador, The Big Bang Theory fan, lifelong learner</p>
+                        <p> </p>
+                    </div>
                 </Container>
 
                 <Box>
