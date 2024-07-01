@@ -12,10 +12,10 @@ const BoxHeader = {
 
 const boxStyle = {
     display:'flex',
-    flexDirection:{sm: 'column',md:'row'},
+    flexDirection:{xs: 'column',md:'row'},
     justifyContent:{sm: 'center', md:'space-around'},
     alignItems:{sm:'center'},
-    gap:{sm:'10px'},
+    gap:{xs:'10px', sm:'10px'},
     // width: '100%',
     padding:'4%',
 
@@ -74,7 +74,7 @@ export default function Header() {
             <Box 
                 
                 sx={BoxHeader}>
-                <Container sx={{width:'50%', textAlign:'start'}}>
+                <Container sx={{width:'100%', textAlign:'start'}}>
 
                     <h1>Hello there!</h1>
                     <p>Welcome to my portfolio; feel free to check my projects. </p>
