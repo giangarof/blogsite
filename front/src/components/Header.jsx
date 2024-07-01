@@ -1,4 +1,4 @@
-import { Box, Typography,Tooltip, Card, Button } from "@mui/material"
+import { Box, Typography,Tooltip, Card, Button, Container } from "@mui/material"
 
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -12,30 +12,37 @@ const BoxHeader = {
 
 const boxStyle = {
     display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-around',
-    width: '100%',
+    flexDirection:{sm: 'column',md:'row'},
+    justifyContent:{sm: 'center', md:'space-around'},
+    alignItems:{sm:'center'},
+    gap:{sm:'10px'},
+    // width: '100%',
     padding:'4%',
 
 }
 
 const cardStyle = {
     display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center',
-    width: '30%', 
+    width: {sm: '99%', md:'30%'}, 
     height: '200px',
     gap:'10px'
     
+}
+
+const IconsStyle = {
+    textDecoration:"none", color:"#000", cursor:"pointer", 
+    fontSize: {sm:'20px', lg:'60px'}
 }
 
 const IconsBox = () => {
     return (
         <>
         <Typography component="a" href="https://github.com/giangarof98">
-        <GitHubIcon sx={{fontSize:'60px', textDecoration:"none", color:"#000", cursor:"pointer"}}/>
+        <GitHubIcon sx={IconsStyle}/>
         </Typography>             
 
         <Typography component="a" href="">      
-            <LinkedInIcon sx={{fontSize:'60px', textDecoration:"none", color:"#000", cursor:"pointer"}}/>
+            <LinkedInIcon sx={IconsStyle}/>
         </Typography>
         </>
     )
@@ -67,17 +74,19 @@ export default function Header() {
             <Box 
                 
                 sx={BoxHeader}>
+                <Container sx={{width:'50%', textAlign:'start'}}>
 
-                <h1>Hello there!</h1>
-                <p>Welcome to my portfolio; feel free to check my projects. </p>
-                <p>I'm a Fullstack Developer, Data Analyst, and Cyber Analyst when it's about to find vulnerabilities.</p>
-                <p>Skillful in frontend and backend,  adept in databases both SQL and NoSQL</p>
-                <p>Star Wars ambassador, The Big Bang Theory fan, lifelong learner</p>
-                <p> </p>
+                    <h1>Hello there!</h1>
+                    <p>Welcome to my portfolio; feel free to check my projects. </p>
+                    <p>I'm a Fullstack Developer, Data Analyst, and Cyber Analyst when it's about to find vulnerabilities.</p>
+                    <p>Skillful in frontend and backend,  adept in databases both SQL and NoSQL</p>
+                    <p>Star Wars ambassador, The Big Bang Theory fan, lifelong learner</p>
+                    <p> </p>
+                </Container>
 
                 <Box>
                     <BoxInfo/>
-                    <h1>My social media</h1>
+                    <p>My social media</p>
                     <Box sx={{
                         display:'flex', 
                         // flexDirection:"row", 
