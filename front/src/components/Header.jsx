@@ -90,17 +90,17 @@ export default function Header() {
                 sx={BoxHeader}>
                 <Container sx={{width:'100%', textAlign:'start'}}>
                     <div className="typing-effect">
-                        <h1 >Hello there!</h1>
+                        <h1>Hello there!</h1>
                     </div>
                     <div className="description">
-                        <p>Welcome to my portfolio; feel free to check my projects.</p>
-                        <p>I'm a software developer, data analyst, and cyber Analyst when it's about to find vulnerabilities.</p>
-                        <p>Skillful in frontend and backend,  adept in databases both sql and nosql.</p>
-                        <p>In the tech world; I'm a fullstack developer who enjoy to build websites using react, vue, and angular.</p>
-                        <p>In the backend mostly I do use node.js with mongodb. 
-                            Nevertheles, I do also write python and sql.</p>
-                        <p>For data analysis: excel, tableau, power bi, python and sql are my weapons.</p>
-                        <p>Star Wars ambassador, The Big Bang Theory fan, lifelong learner.</p>
+                            <p className="line">Welcome to my portfolio; feel free to check my projects.</p>
+                            <p className="line">I'm a software developer, data analyst, and cyber Analyst when it's about to find vulnerabilities.</p>
+                            <p className="line">Skillful in frontend and backend,  adept in databases both sql and nosql.</p>
+                            <p className="line">In the tech world; I'm a fullstack developer who enjoy to build websites using react, vue, and angular.</p>
+                            <p className="line">In the backend mostly I do use node.js with mongodb. 
+                                Nevertheles, I do also write python and sql.</p>
+                            <p className="line">For data analysis: excel, tableau, power bi, python and sql are my weapons.</p>
+                            <p className="line">Star Wars ambassador, The Big Bang Theory fan, lifelong learner.</p>
                     </div>
                 </Container>
 
