@@ -7,30 +7,6 @@
     font-style: normal;
 }
 
-.description{
-    color: #fff;
-    letter-spacing: 1.3px;
-    /* text-align: center; */
-    border-radius: 20px;
-    background-color: rgba(0, 0, 0, 0.1);
-    width: 55%;
-    height: 100px;
-    margin-top: 20px;
-    overflow: hidden;
-    /* line-height: 75px; */
-    padding: 0 20px 0 20px;
-}
-
- .line{
-    height: 100px;
-    white-space: normal;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex-wrap: wrap;
-    white-space: normal;
-}
-
 .line:first-child{
     animation: move 33s infinite ease-in-out;
 }
@@ -130,13 +106,6 @@
 .gradient:hover > .show-card {
     transform: translateY(0);
 }
-
-
-
-
-
-
-
 
 /* hello there typing effect */
   .typing-effect {

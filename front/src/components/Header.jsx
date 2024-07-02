@@ -15,19 +15,17 @@ const boxStyle = {
     flexDirection:{xs: 'column',md:'row'},
     justifyContent:{sm: 'center', md:'space-around'},
     alignItems:{sm:'center'},
-    gap:{xs:'10px', sm:'10px'},
-    // width: '100%',
+    gap:{xs:'10px'},
+    // width: {sm:'100%'},
     padding:'4%',
 
 }
 
 const cardStyle = {
-    
     display:'flex', flexDirection:'column', justifyContent:'center',
     width: {sm: '99%', md:'30%'}, 
     height: '250px',
     gap:'10px'
-    
 }
 
 const IconsStyle = {
@@ -39,21 +37,48 @@ const btnStyle = {
     color:'#fff'
 }
 
-const IconsBox = () => {
-    return (
-        <>
-        <Typography component="a" href="https://github.com/giangarof98">
-        <GitHubIcon sx={IconsStyle}/>
-        </Typography>             
-
-        <Typography component="a" href="">      
-            <LinkedInIcon sx={IconsStyle}/>
-        </Typography>
-        </>
-    )
+const view = {
+    display:'flex', flexDirection:'row', justifyContent:'center',
+    width: {sm: '50%', md:'20%'}
 }
 
+const descriptionBox = {
+    width: {xs: '100%', md:'50%'},
+    // width: 55%;
+    height: '100px',
+    marginTop: '20px',
+    overflow: 'hidden',
+    padding: '0 20px 0 20px',
+    color:'#fff',
+    letterSpacing: '1.3px',
+    borderRadius: '20px',
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+}
 
+const lines = {
+    height: '100px',
+    whiteSpace: 'normal',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    whiteSpace: 'normal',
+}
+
+const BoxDescription = () => {
+    return (
+        <Box>
+            <Typography sx={lines} className="line">Welcome to my portfolio; feel free to check my projects.</Typography>
+            <Typography sx={lines} className="line">I'm a software developer, data analyst, and cyber Analyst when it's about to find vulnerabilities.</Typography>
+            <Typography sx={lines} className="line">Skillful in frontend and backend,  adept in databases both sql and nosql.</Typography>
+            <Typography sx={lines} className="line">In the tech world; I'm a fullstack developer who enjoy to build websites using react, vue, and angular.</Typography>
+            <Typography sx={lines} className="line">In the backend mostly I do use node.js with mongodb. 
+                Nevertheles, I do also write python and sql.</Typography>
+            <Typography sx={lines} className="line">For data analysis: excel, tableau, power bi, python and sql are my weapons.</Typography>
+            <Typography sx={lines} className="line">Star Wars ambassador, The Big Bang Theory fan, lifelong learner.</Typography>
+        </Box>
+    )
+}
 const BoxInfo = () =>{
     return (
         <Box sx={boxStyle}>
@@ -82,27 +107,36 @@ const BoxInfo = () =>{
         </Box>
     )
 }
+
+
+const IconsBox = () => {
+    return (
+        <>
+            <Typography component="a" href="https://github.com/giangarof98">
+            <GitHubIcon sx={IconsStyle}/>
+            </Typography>             
+
+            <Typography component="a" href="">      
+                <LinkedInIcon sx={IconsStyle}/>
+            </Typography>
+        </>
+    )
+}
 export default function Header() {
     return (
         <>
             <Box 
-                
                 sx={BoxHeader}>
-                <Container sx={{width:'100%', textAlign:'start'}}>
-                    <div className="typing-effect">
-                        <h1>Hello there!</h1>
-                    </div>
-                    <div className="description">
-                            <p className="line">Welcome to my portfolio; feel free to check my projects.</p>
-                            <p className="line">I'm a software developer, data analyst, and cyber Analyst when it's about to find vulnerabilities.</p>
-                            <p className="line">Skillful in frontend and backend,  adept in databases both sql and nosql.</p>
-                            <p className="line">In the tech world; I'm a fullstack developer who enjoy to build websites using react, vue, and angular.</p>
-                            <p className="line">In the backend mostly I do use node.js with mongodb. 
-                                Nevertheles, I do also write python and sql.</p>
-                            <p className="line">For data analysis: excel, tableau, power bi, python and sql are my weapons.</p>
-                            <p className="line">Star Wars ambassador, The Big Bang Theory fan, lifelong learner.</p>
-                    </div>
-                </Container>
+                <Box sx={boxStyle}>
+                    <Box sx={view}>
+                        <Box className="typing-effect">
+                            <h1>Hello there!</h1>
+                        </Box>
+                    </Box>
+                    <Box sx={descriptionBox}>
+                        <BoxDescription/>
+                    </Box>
+                </Box>
 
                 <Box>
                     <BoxInfo/>
