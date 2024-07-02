@@ -69,7 +69,7 @@ const BoxDescription = () => {
     return (
         <Box>
             <Typography sx={lines} className="line">Welcome to my portfolio; feel free to check my projects.</Typography>
-            <Typography sx={lines} className="line">I'm a software developer, data analyst, and cyber Analyst when it's about to find vulnerabilities.</Typography>
+            <Typography sx={lines} className="line">I'm a software developer, data analyst, and cyber analyst when it's about to find vulnerabilities.</Typography>
             <Typography sx={lines} className="line">Skillful in frontend and backend,  adept in databases both sql and nosql.</Typography>
             <Typography sx={lines} className="line">In the tech world; I'm a fullstack developer who enjoy to build websites using react, vue, and angular.</Typography>
             <Typography sx={lines} className="line">In the backend mostly I do use node.js with mongodb. 
