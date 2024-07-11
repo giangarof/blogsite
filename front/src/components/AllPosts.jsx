@@ -41,7 +41,6 @@ export default function AllPosts() {
     return (
         <>
         <Container id="AllPosts">
-            <h1>Projects</h1>
             <Container
                 sx={{
                     display: 'grid',

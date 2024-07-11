@@ -12,7 +12,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 export default function Logout() {
     const navigate = useNavigate()
     const sx = {
-        m:2, textDecoration:"none", color:'inherit'
+      textDecoration:"none", color:'inherit'
       }
 
       const logout = async() => {

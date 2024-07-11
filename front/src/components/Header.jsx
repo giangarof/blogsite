@@ -1,4 +1,4 @@
-import { Box, Typography,Tooltip, Card, Button, Container } from "@mui/material"
+import { Box, Typography,Tooltip, Card, Button, Container, Backdrop } from "@mui/material"
 
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -7,7 +7,9 @@ const BoxHeader = {
     marginBottom:4,
     textAlign:'center',
     paddingTop:4, paddingBottom:4, 
-    background:"linear-gradient(0deg, rgba(217,226,223,1) 0%, rgba(254,254,254,1) 28%, rgba(74,113,187,1) 100%)"
+    // background: "#000"
+    background: "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(97,97,97,1) 59%, rgba(0,0,0,1) 100%)"
+    // background:"linear-gradient(0deg, rgba(217,226,223,1) 0%, rgba(254,254,254,1) 28%, rgba(74,113,187,1) 100%)"
 }
 
 const boxStyle = {
@@ -25,11 +27,13 @@ const cardStyle = {
     display:'flex', flexDirection:'column', justifyContent:'center',
     width: {sm: '99%', md:'30%'}, 
     height: '250px',
-    gap:'10px'
+    gap:'10px',
+    color:'#fff',
+    
 }
 
 const IconsStyle = {
-    textDecoration:"none", color:"#000", cursor:"pointer", 
+    textDecoration:"none", color:"#fff", cursor:"pointer", 
     fontSize: {sm:'20px', lg:'60px'}
 }
 
@@ -38,6 +42,7 @@ const btnStyle = {
 }
 
 const view = {
+    color:"#fff",
     display:'flex', flexDirection:'row', justifyContent:'center',
     width: {sm: '50%', md:'20%'}
 }
@@ -97,9 +102,9 @@ const BoxInfo = () =>{
                 </div>
             </Card>
             <Card sx={cardStyle} className="gradient">
-                <span className="center">My Blog</span>
+                <span className="center">Now</span>
                 <div className="show-card" >
-                    {/* <Button sx={btnStyle} className="showed">Click</Button> */}
+                    <Button sx={btnStyle} href="/now" className="showed">Click</Button>
                     <p className="showed">Under development</p>
 
                 </div>
@@ -138,7 +143,7 @@ export default function Header() {
                     </Box>
                 </Box>
 
-                <Box>
+                <Box sx={{color:"#fff"}}>
                     <BoxInfo/>
                     <p>My social media</p>
                     <Box sx={{

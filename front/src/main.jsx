@@ -18,6 +18,7 @@ import Post from './screen/Post.jsx'
 import Profile from './screen/Profile.jsx'
 import UpdateForm from './screen/UpdateForm.jsx'
 import AdminPanel from './screen/AdminPanel.jsx'
+import Now from './screen/Now.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
       <Route path='/profile/:id' element={<Profile/>}/>
       <Route path='/post/update/:id' element={<UpdateForm/>}/>
       <Route path='/adminpanel' element={<AdminPanel/>}/>
+      <Route path='/now' element={<Now/>}/>
     </Route>
   )
 )

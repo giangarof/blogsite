@@ -1,7 +1,7 @@
 import { 
   AppBar, 
   Toolbar, 
-  Typography, Box, Tooltip, IconButton, Icon, Avatar, Stack } from "@mui/material";
+  Typography, Box, Tooltip, IconButton, Icon, Avatar, Stack, Container } from "@mui/material";
 import img from '../assets/react.svg'
 
 import { useEffect, useState } from "react";
@@ -18,7 +18,7 @@ export default function Navbar(props) {
   const [userId, setUserId] = useState('')
   const [isAdmin, setIsAdmin] = useState(false)
   const sx = {
-    m:2, textDecoration:"none", color:'inherit'
+    textDecoration:"none", color:'inherit'
   }
   
   useEffect(() => {
@@ -34,72 +34,87 @@ export default function Navbar(props) {
         return(
             <>
               {userInfo ? (
-              <AppBar 
-                sx={{
-                  position:'sticky'
-                }}>
-                <Toolbar display="center">
-                <Typography variant="h4">
-                  <Avatar alt="React logo" src={img} />
-                </Typography>
-                  <Box 
-                    // sx={{ display:'flex'}} 
-                    >
-                    <Typography sx={sx} component="a" href="/">
-                      <Tooltip title='Home'>
-                        <HomeIcon/>
-                      </Tooltip>
-                    </Typography>
-                    {isAdmin == true ? 
-                      <>
-                        <Typography sx={sx} component="a" href="/adminpanel">
-                          <Tooltip title="Admin Panel">
-                            <AdminPanelSettingsIcon/>
-                          </Tooltip>
-                        </Typography> 
-                      </> : ''
-                    }
-                    <Typography sx={sx} component="a" href={`/profile/${userId}`}>
-                      <Tooltip title='Profile'>
-                        <PersonIcon/>
-                      </Tooltip>
-                    </Typography>
-                    <Typography sx={sx} component="a" href="https://gigadev.onrender.com/">
-                        <Tooltip title='About me'>
-                          <AccountCircleIcon/>
-                        </Tooltip>
-                      </Typography>
-                    <Logout/>
-                  </Box>
-                </Toolbar>
-              </AppBar>
-              ): (
-                // <div>
-                  <AppBar position="static">
-                    <Toolbar display="center">
-                      <Typography variant="h4">
-                        RNET
-                      </Typography>
-                    <Box sx={{ display:'flex', m:2}} >
+              <Box sx={{backgroundColor:"#000", color:'#fff'}}>
+                <Toolbar sx={{backgroundColor:"#000", color:'#fff'}}>
+                  <Box sx={{ display:'flex', justifyContent:'space-between', width:'100%'}} >
+                    <Box sx={{ display:'flex', gap:'10px'}}>
                       <Typography sx={sx} component="a" href="/">
-                        <Tooltip title='login'>
-                            <HomeIcon/>
-                        </Tooltip>
+                        <h2>Home</h2>
                       </Typography>
-                      {/* <Typography sx={sx} component="a" href="/signup">Register</Typography> */}
                       <Typography sx={sx} component="a" href="https://gigadev.onrender.com/">
-                        <Tooltip title='About me'>
-                          <AccountCircleIcon/>
-                        </Tooltip>
+                        <h2>About Me</h2>
                       </Typography>
-                      <Typography sx={sx} component="a" href="/signin">
-                        <Tooltip title='Login'>
-                          <LoginIcon/>
-                        </Tooltip>
+                      <Typography sx={sx} component="a" href="#AllPosts">
+                        <h2>Projects</h2>
+                      </Typography>
+                      <Typography sx={sx} component="a" href="/">
+                        <h2>Now</h2>
                       </Typography>
                     </Box>
+                    <Box sx={{display:'flex', gap:'10px', alignItems:"center"}}>
+                      <Typography sx={sx} component="a" href={`/profile/${userId}` }>
+                        <h2>Profile</h2>
+                      </Typography>
+                      
+                      <Typography sx={sx}>
+                        <Logout/>
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Toolbar>
+              </Box>
+              ) : (
+                // <div>
+                  <Box sx={{backgroundColor:"#000", color:'#fff'}}>
+                    <Toolbar sx={{backgroundColor:"#000", color:'#fff'}}>
+                      <Box sx={{
+                          display:'flex', 
+                          justifyContent:'space-between', 
+                          width:'100%', textAlign:'center'
+                        }}>
+                        <Box sx={{
+                          display:'flex',
+                          gap:'10px',
+                          flexDirection:'row',
+                          // justifyContent:{xs:"center",md:'space-between'},
+                        }}>
+                          <Typography sx={sx} component="a" href="/">
+                            <h2>Home</h2>
+                          </Typography>
+                          {/* <Typography sx={sx} component="a" href="https://gigadev.onrender.com/">
+                            <h2>About Me</h2>
+                          </Typography>
+                          <Typography sx={sx} component="a" href="/#AllPosts">
+                            <h2>Projects</h2>
+                          </Typography>
+                          <Typography sx={sx} component="a" href="/now">
+                            <h2>Now</h2>
+                          </Typography> */}
+                        </Box>
+                        <Box>
+                          <Typography sx={sx} component="a" href="/signin">
+                            <h2>Login</h2>
+                          </Typography>
+                        </Box>
+                        {/* <Typography sx={sx} component="a" href="/">
+                          <Tooltip title='login'>
+                              <HomeIcon/>
+                          </Tooltip>
+                        </Typography>
+                        <Typography sx={sx} component="a" href="/signup">Register</Typography>
+                        <Typography sx={sx} component="a" href="https://gigadev.onrender.com/">
+                          <Tooltip title='About me'>
+                            <AccountCircleIcon/>
+                          </Tooltip>
+                        </Typography>
+                        <Typography sx={sx} component="a" href="/signin">
+                          <Tooltip title='Login'>
+                            <LoginIcon/>
+                          </Tooltip>
+                        </Typography> */}
+                      </Box>
                     </Toolbar>
-                  </AppBar>
+                  </Box>
                 // </div>
               )}
             </>

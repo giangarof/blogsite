@@ -38,11 +38,11 @@ export default function Footer() {
                         href="https://github.com/giangarof98"
                         sx={{textDecoration:"none", color:"white", cursor:"pointer"}}
                     >
-                        Developed by: Myself
+                        Gianmarco Garofalo &#169; 2024
                     </Typography>
 
                 </Box>
-                <LinkIcons/>
+                <LinkIcons/> 
 
             </Container>
         </Box>
