@@ -19,11 +19,13 @@ import Profile from './screen/Profile.jsx'
 import UpdateForm from './screen/UpdateForm.jsx'
 import AdminPanel from './screen/AdminPanel.jsx'
 import Now from './screen/Now.jsx'
+import AllPosts from './components/AllPosts.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App/>}>
       <Route index={true} path='/' element={<Main/>} />
+      <Route path='/search/:keyword' element={<Main/>} />
       <Route path='/signin' element={<Signin/>} />
       <Route path='/signup' element={<Register/>} />
       <Route path='/new' element={<NewPost/>}/>

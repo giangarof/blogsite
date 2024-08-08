@@ -18,7 +18,6 @@ const boxStyle = {
     justifyContent:{sm: 'center', md:'space-around'},
     alignItems:{sm:'center'},
     gap:{xs:'10px'},
-    // width: {sm:'100%'},
     padding:'4%',
 
 }
@@ -27,8 +26,7 @@ const cardStyle = {
     display:'flex', flexDirection:'column', justifyContent:'center',
     width: {sm: '99%', md:'30%'}, 
     height: '250px',
-    gap:'10px',
-    color:'#fff',
+    gap:'10px', color:'#fff'
     
 }
 
@@ -38,7 +36,8 @@ const IconsStyle = {
 }
 
 const btnStyle = {
-    color:'#fff'
+    color:'#fff',
+    backgroundColor:'rgba(0,0,0, .1)'
 }
 
 const view = {
@@ -105,7 +104,7 @@ const BoxInfo = () =>{
                 <span className="center">Now</span>
                 <div className="show-card" >
                     <Button sx={btnStyle} href="/now" className="showed">Click</Button>
-                    <p className="showed">Under development</p>
+                    <p className="showed">What I'm doing now</p>
 
                 </div>
             </Card>

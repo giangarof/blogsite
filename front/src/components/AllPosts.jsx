@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
-import Header from "../components/Header.jsx";
+import {useParams, useNavigate} from 'react-router-dom'
 import { Container } from '@mui/system';
 import { Box, Card, Button, CardContent, CardMedia, Typography, Tooltip, Hidden } from "@mui/material";
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+// import { useParams } from "react-router-dom";
+
 export default function AllPosts() {
+    const {keyword} = useParams()
     const [post, setPost] = useState([])
     // const [img, setImg] = useState('')
     // const [isLoading, setIsLoading] = useState(null)
@@ -12,11 +15,14 @@ export default function AllPosts() {
     // first way
     const fetchPosts = async() =>{
         try {
-            const data = await axios.get('/api/post')
+            const { data } = await axios.get('/api/post', {
+                params: { keyword } // Send the keyword as a query parameter
+            });
             const res = data
-            console.log(res.data)
-            setPost(res.data)
-            return res.data
+            console.log(res)
+            setPost(data)
+            console.log(keyword)
+            return res
             
         } catch (err) {
             console.log('something went wrong: ', err.message)
@@ -25,7 +31,12 @@ export default function AllPosts() {
       
       useEffect(() => {
           fetchPosts()
-      }, [])
+      }, [keyword])
+
+      const emptyQ = {
+        color:'red',
+        marginTop:'1rem'
+      }
 
     // second way
     
@@ -53,7 +64,7 @@ export default function AllPosts() {
                     marginBottom:5
             }}>
                         
-                    {post.slice().reverse().map((item) => (
+                    {post.length > 0 ? (post.slice().reverse().map((item) => (
                         <Card 
                             key={item._id} 
                             sx={{
@@ -122,10 +133,18 @@ export default function AllPosts() {
                         </Container>
                         </CardContent>
                     </Card>
-                    ))}
+                    ))): 
+                        <Typography sx={emptyQ}>
+                        Your query doesn't match with a technology; try again.
+                        </Typography>
+                    }
+                      
+                    
+                    
             </Container>
         </Container>
 
         </>
+        
     )
 }

@@ -1,9 +1,11 @@
 import Post from '../models/post.js'
 
 const getAll = async (req,res) => {
+    const keyword = req.query.keyword ? {description: {$regex: req.query.keyword, $options: 'i'}} : {};
+
     try {
-        const post = await Post.find({})
-        // console.log(post)
+        const post = await Post.find({...keyword})
+        console.log(post)
         res.status(200).json(post)
     } catch (e) {
         res.send(e.message)
