@@ -41,15 +41,15 @@ export default function Navbar(props) {
                       <Typography sx={sx} component="a" href="/">
                         <h2>Home</h2>
                       </Typography>
-                      <Typography sx={sx} component="a" href="https://gigadev.onrender.com/">
+                      {/* <Typography sx={sx} component="a" href="https://gigadev.onrender.com/">
                         <h2>About Me</h2>
-                      </Typography>
-                      <Typography sx={sx} component="a" href="#AllPosts">
+                      </Typography> */}
+                      {/* <Typography sx={sx} component="a" href="/#AllPosts">
                         <h2>Projects</h2>
-                      </Typography>
-                      <Typography sx={sx} component="a" href="/">
+                      </Typography> */}
+                      {/* <Typography sx={sx} component="a" href="/now">
                         <h2>Now</h2>
-                      </Typography>
+                      </Typography> */}
                     </Box>
                     <Box sx={{display:'flex', gap:'10px', alignItems:"center"}}>
                       <Typography sx={sx} component="a" href={`/profile/${userId}` }>

@@ -135,7 +135,7 @@ export default function AllPosts() {
                     </Card>
                     ))): 
                         <Typography sx={emptyQ}>
-                        Your query doesn't match with a technology; try again.
+                            No technology found with your query. 
                         </Typography>
                     }
                       
