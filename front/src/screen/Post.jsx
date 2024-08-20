@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from "react-router-dom"
-import { Box, Card, Button, CardContent, CardMedia, Typography, Link as A } from "@mui/material";
-// import Typography from '@mui/joy/Typography';
+import { Box, Card, Button, CardContent, CardMedia, Typography, Tooltip, Snackbar, Link as A, SnackbarContent } from "@mui/material";
 
 import axios from "axios"
+import CopyLink from '../components/CopyLink';
 
 export default function () {
     const [post, setPost] = useState([])
@@ -12,6 +12,8 @@ export default function () {
     const [isAdmin, setIsAdmin] = useState(false)
     const {id} = useParams()
     const navigate = useNavigate()
+
+    // const [open, setOpen]= useState(false)
 
     const fetchPosts = async() =>{
         try {
@@ -40,6 +42,7 @@ export default function () {
           setIsAdmin(isAdmin)
           fetchPosts()
       }, [id])
+
   return (
 
         <>
@@ -125,8 +128,27 @@ export default function () {
                                                 Go Back
                                             </Typography>
                                             </Button>
+                                            <CopyLink/>
                                         </>
-                                         : "" }
+                                         : <>
+                                            <Button 
+                                                variant="contained" 
+                                                size='small' 
+                                                onClick={goBack}
+                                                sx={{marginTop:"10px"}}
+                                            >
+                                                <Typography 
+                                                    // variant="h5" 
+                                                    size="small"
+                                                    color='white'
+                                                >
+                                                Go Back
+                                                </Typography>
+                                            </Button>
+                                
+                                            <CopyLink/>
+                                         
+                                         </> }
                                     </CardContent>
                                 </Card>
                         </Box>

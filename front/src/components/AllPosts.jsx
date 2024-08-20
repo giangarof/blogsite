@@ -101,7 +101,8 @@ export default function AllPosts() {
                             sx={{
                                 display:'flex', 
                                 flexDirection:"column", 
-                                justifyContent:'center'
+                                justifyContent:'center',
+                                gap:'10px'
                             }}>
                             <Typography variant="h5">{item.title}</Typography>
                             <Typography 
@@ -114,20 +115,12 @@ export default function AllPosts() {
                             >
                                 {item.description}
                             </Typography>
-                            <Tooltip title="Read article">
-                                <Button 
-                                    variant="contained" 
-                                    size="small" 
-                                    
-                                    sx={{width:"10px"}}
-                                >
-                                <Typography  
-                                    component='a' 
-                                    href={`/post/${item._id}`} 
-                                    sx={{textDecoration:"none", color:"white"}}
-                                >
-                                    <AutoStoriesIcon/>
-                                </Typography>
+
+                            <Tooltip title="Read article" >
+                                <Button variant="contained" size="small" sx={{width:"10px", }} href={`/post/${item._id}`}>
+                                    {/* <Typography component='a' sx={{textDecoration:"none", color:"white"}}> */}
+                                    <AutoStoriesIcon />
+                                    {/* </Typography> */}
                                 </Button>
                             </Tooltip>
                         </Container>
