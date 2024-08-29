@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import {useParams, useNavigate} from 'react-router-dom'
-import { TextField, Box, Container, FormLabel } from "@mui/material"
+import { TextField, Box, Container, FormLabel, colors, Divider, Paper, IconButton } from "@mui/material"
+import SearchIcon from '@mui/icons-material/Search';
+
 export default function SearchBox() {
     const navigate = useNavigate('')
     const {keyword: urlKeyword} = useParams()
@@ -10,6 +12,13 @@ export default function SearchBox() {
     const sx = {
         textalign:'center',
         width:'100%'
+    }
+
+    const search ={
+        display:'flex',
+        alignItems:'center',
+        cursor:'pointer',
+        padding: '2px 4px'
     }
 
     const submitHandler = (e) => {
@@ -26,8 +35,7 @@ export default function SearchBox() {
         <>
         <Container>
             <Box>
-
-                <form onSubmit={submitHandler}>
+                <Paper component="form" onSubmit={submitHandler} sx={search}>
                     <TextField 
                         type="text" 
                         onChange={(e) => setKeyword(e.target.value)} 
@@ -35,7 +43,12 @@ export default function SearchBox() {
                         id="outlined-basic" 
                             label="Search by technology" 
                             variant="outlined"/>
-                </form>
+                    <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+                    <IconButton type="submit" aria-label="search">
+                        <SearchIcon />
+                    </IconButton>
+                </Paper>
+               
             </Box>
 
         </Container>
