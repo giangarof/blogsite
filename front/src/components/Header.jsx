@@ -122,7 +122,7 @@ const BoxInfo = () =>{
 const IconsBox = () => {
     return (
         <>
-            <Typography component="a" href="https://github.com/giangarof98">
+            <Typography component="a" href="https://github.com/giangarof">
             <GitHubIcon sx={IconsStyle}/>
             </Typography>             
 

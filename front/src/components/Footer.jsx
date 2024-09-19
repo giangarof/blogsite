@@ -16,7 +16,7 @@ export default function Footer() {
     const LinkIcons = () => {
         return (
             <Box>
-                    <Typography component="a" href="https://github.com/giangarof98">
+                    <Typography component="a" href="https://github.com/giangarof">
                     <GitHubIcon sx={{fontSize:'30px', textDecoration:"none", color:"#fff", cursor:"pointer"}}/>
                     </Typography>             
 
@@ -35,7 +35,7 @@ export default function Footer() {
                 <Box >
                     <Typography  
                         component='a' 
-                        href="https://github.com/giangarof98"
+                        href="https://github.com/giangarof"
                         sx={{textDecoration:"none", color:"white", cursor:"pointer"}}
                     >
                         Gianmarco Garofalo &#169; 2024
