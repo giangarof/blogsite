@@ -15,6 +15,7 @@ import sessionConfig from './config/session.js';
 // routes
 import user from './routes/user.js'
 import post from './routes/post.js'
+import note from './routes/note.js'
 
 // run mongodb
 connectDB();
@@ -31,6 +32,7 @@ app.use(cookieParser())
 
 app.use('/api/user', user)
 app.use('/api/post', post)
+app.use('/api/note', note)
 
 if(process.env.NODE_ENV === 'production'){
     const __dirname = path.resolve();

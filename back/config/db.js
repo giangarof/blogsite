@@ -8,9 +8,7 @@ const connectDB = async () => {
     //     console.log(`Error: ${error.message}`)
     //     process.exit(1)
     // }
-    mongoose.connect(process.env.DB_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true})
+    mongoose.connect(process.env.DB_URI)
         .then(() => console.log('connected with mongodb'))
         .catch((error) => console.error(error))
     

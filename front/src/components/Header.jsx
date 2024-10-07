@@ -62,15 +62,15 @@ const descriptionBox = {
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
 }
 
-const lines = {
-    height: '100px',
-    whiteSpace: 'normal',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
-    whiteSpace: 'normal',
-}
+// const lines = {
+//     height: '100px',
+//     whiteSpace: 'normal',
+//     display: 'flex',
+//     flexDirection: 'column',
+//     justifyContent: 'center',
+//     flexWrap: 'wrap',
+//     whiteSpace: 'normal'
+// }
 
 const BoxDescription = () => {
     return (

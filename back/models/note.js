@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import User from "./users.js";
 
-const postSchema = new mongoose.Schema({
+const noteSchema = new mongoose.Schema({
     // author: {
     //     id: {
     //         type: mongoose.Schema.Types.ObjectId,
@@ -17,23 +17,10 @@ const postSchema = new mongoose.Schema({
     description: {
         type:String,
         required:false
-    },
-    repo: {
-        type:String,
-        required:false
-    },
-    link: {
-        type:String,
-        required:false
-    },
-    tech: {
-        type:String,
-        required:false
-    },
-    // image: [{url:String,filename:String,originalname:String}],
+    }
 },{
     timestamps:true
-})
+});
 
-const Post = mongoose.model('Post', postSchema);
-export default Post;
+const Note = mongoose.model('Note', noteSchema);
+export default Note;

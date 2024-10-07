@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', asyncHandler(getAll))
 router.get('/:id', findPost)
 
-router.post('/new', protect, admin, multerPost, createPost);
+router.post('/new', createPost);
 router.put('/:id', protect, admin, multerPost, updatePost);
 router.delete('/:id', protect, admin, deletePost);
 
