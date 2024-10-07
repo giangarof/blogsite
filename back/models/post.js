@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import User from "./users.js";
 
 const postSchema = new mongoose.Schema({
     // author: {
@@ -30,7 +29,7 @@ const postSchema = new mongoose.Schema({
         type:String,
         required:false
     },
-    // image: [{url:String,filename:String,originalname:String}],
+    image: [{url:String,filename:String,originalname:String}],
 },{
     timestamps:true
 })

@@ -7,16 +7,13 @@ import axios from "axios"
 
 export default function DeletePost(props) {
     const {id, navigate} = props
-    console.log(props.postId)
     
     // Delete post
     const deleteBtn = async(id) => {
         try {
             const data = await axios.delete(`/api/post/${id}`)
             const res = data
-            // console.log(res.data)
-            location.reload()
-            navigate('')
+            props.refetch()
             return res.data
             
         } catch (err) {

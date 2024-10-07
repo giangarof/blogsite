@@ -19,7 +19,7 @@ export default function AdminPanel() {
         try {
             const data = await axios.get('/api/post')
             const res = data
-            console.log(res.data)
+            // console.log(res.data)
             setPost(res.data)
             
             return res.data
@@ -78,7 +78,7 @@ export default function AdminPanel() {
                             <TableCell><A sx={box} href={p.repo} target="_blank">Github Code</A></TableCell>
                             <TableCell><A sx={box} href={`/post/update/${p._id}`}>Update Post Form</A></TableCell>
                             <TableCell>
-                                <DeletePost postId={p._id}/>
+                                <DeletePost postId={p._id} refetch={fetchPosts}/>
                             </TableCell>
                         </TableRow>
                     ))}

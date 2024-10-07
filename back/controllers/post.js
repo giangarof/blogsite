@@ -15,9 +15,9 @@ const getAll = async (req,res) => {
 const createPost = async(req, res) => {
     try{
         const post = new Post(req.body)
-        // post.image = req.files.map(f => ({url: f.path, filename: f.filename, originalname:f.originalname}));
+        post.image = req.files.map(f => ({url: f.path, filename: f.filename, originalname:f.originalname}));
         await post.save()
-        res.status(201).json(req.body)
+        res.status(201).json({post})
     } catch(e){
         res.status(400).json({e, error: 'Please fill out all fields'})
         // res.send(e.message)
@@ -61,7 +61,7 @@ const updatePost = async(req,res) => {
             // IF there is a previous IMG, but not a new one is provided, the previous one will prevail
 
             if (imgs.length > 0) {
-                post.image = imgs;
+                post.images = imgs;
             }
             
             // Same here, if new title/description are provided, it'll update
