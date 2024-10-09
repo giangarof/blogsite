@@ -8,6 +8,7 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AddIcon from '@mui/icons-material/Add';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import CreateIcon from '@mui/icons-material/Create';
 
 export default function Profile() {
   const {id} = useParams();
@@ -35,6 +36,20 @@ export default function Profile() {
   }, [id])
 
   const box = {
+    display:'flex', flexDirection:'column', gap:'1rem',
+    // backgroundColor:'red',
+    // width:'500px'
+  }
+
+  const container = {
+    borderRadius:'8px',
+    margin:'10px',
+    backgroundColor:'rgba(0,0,0,0.07)',
+    padding:'10px',
+    width:'50%'
+  }
+
+  const icons_inner = {
     display:'flex', flexDirection:'column', gap:'1rem'
   }
     
@@ -42,7 +57,7 @@ export default function Profile() {
     <>
     {/* Profile */}
       <>
-      <Container sx={{margin:10}}>
+      <Container sx={container}>
         <Box sx={box}>
           <Typography level="body-lg">
             Name: {name}
@@ -64,16 +79,37 @@ export default function Profile() {
             <>
             <Typography sx={box} level="body-lg">Admin: {isAdmin ? "Admin roles" : 'No admin'}</Typography>
             <Stack display="flex" flexDirection="row" gap={4}>
-              <Typography component="a" href="/new">
-                <Tooltip title="Add new post">
-                  <AddIcon sx={box}/>
-                </Tooltip>
-              </Typography>
-              <Typography  component="a" href="/adminpanel">
-                <Tooltip title="Admin Panel">
-                  <AdminPanelSettingsIcon sx={box}/>
-                </Tooltip>
-              </Typography> 
+
+              {/* Posts */}
+              <Box sx={icons_inner}>
+                <Typography component="a" href="/new">
+                  <Tooltip title="Add new post">
+                    <AddIcon sx={box}/>
+                  </Tooltip>
+                </Typography>
+                <Typography  component="a" href="/adminpanel">
+                  <Tooltip title="Admin Panel - Posts">
+                    <AdminPanelSettingsIcon sx={box}/>
+                  </Tooltip>
+                </Typography> 
+              </Box>
+
+              {/* Notes */}
+              <Box sx={icons_inner}>
+                <Typography component="a" href="/new-note">
+                  <Tooltip title="Add new note">
+                    <CreateIcon sx={box}/>
+                  </Tooltip>
+                </Typography>
+                <Typography  component="a" href="/adminpanel-notes">
+                  <Tooltip title="Admin Panel - Notes">
+                    <AdminPanelSettingsIcon sx={box}/>
+                  </Tooltip>
+                </Typography> 
+              </Box>
+
+
+
 
               <Typography component="a" href="/user/update">
                 <Tooltip title='Update'>

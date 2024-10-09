@@ -14,6 +14,7 @@ import Main from './screen/Main.jsx'
 import Signin from './screen/Signin.jsx'
 import Register from './screen/Register.jsx'
 import NewPost from './screen/newPost.jsx'
+import NewNote from './screen/newNote.jsx'
 import Post from './screen/Post.jsx'
 import Profile from './screen/Profile.jsx'
 import UpdateForm from './screen/UpdateForm.jsx'
@@ -41,6 +42,8 @@ const router = createBrowserRouter(
 
       {/* Notes */}
       <Route path='/now' element={<Now/>}/>
+      <Route path='/new-note' element={<NewNote/>}/>
+      <Route path='/adminpanel-notes' element={<AdminPanel/>}/>
 
       {/* User */}
       <Route path='/adminpanel' element={<AdminPanel/>}/>

@@ -5,7 +5,7 @@ import asyncHandler from '../config/asyncHandler.js';
 const router = express.Router();
 
 router.get('/', asyncHandler(getAll))
-router.post('/create', asyncHandler(create))
+router.post('/new', asyncHandler(create))
 
 router.get('/:id', asyncHandler(getOneById))
 
