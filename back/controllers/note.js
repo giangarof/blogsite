@@ -16,7 +16,17 @@ const create = async(req,res) => {
     res.send(note)
 }
 
+const updateNote = async(req,res) => {
+
+}
+
+const deleteNote = async(req,res) => {
+
+}
+
 export{
     getAll,
-    create
+    create,
+    updateNote,
+    deleteNote
 }

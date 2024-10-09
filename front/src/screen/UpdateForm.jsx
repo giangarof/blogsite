@@ -206,12 +206,12 @@ export default function UpdateForm() {
 
                             <Button 
                                 sx={{marginTop:4}}
-                                variant="contained"
-                                size='small' 
+                                variant="contained" size='small' 
                                 onClick={() => submitUpdate(postId)} 
                             >
-                            <Typography sx={{color:'white'}}>Update Changes</Typography>
+                                <Typography sx={{color:'white'}}>Update Changes</Typography>
                             </Button>
+                            
                             <Button 
                                 variant="contained" 
                                 size='small' 

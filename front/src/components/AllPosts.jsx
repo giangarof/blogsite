@@ -52,6 +52,7 @@ export default function AllPosts() {
     return (
         <>
         <Container id="AllPosts">
+        <Typography sx={{marginTop:'2rem'}}>Total Projects: {post.length}</Typography>
             <Container
                 sx={{
                     display: 'grid',
@@ -62,8 +63,8 @@ export default function AllPosts() {
                     },
                     gap: 4,
                     marginBottom:5
-            }}>
-                        
+            }}>   
+                    
                     {post.length > 0 ? (post.slice().reverse().map((item) => (
                         <Card 
                             key={item._id} 

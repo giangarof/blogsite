@@ -2,6 +2,8 @@ import { Box, Typography,Tooltip, Card, Button, Container, Backdrop } from "@mui
 
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const BoxHeader = {
     marginBottom:4,
@@ -49,43 +51,30 @@ const view = {
 
 const descriptionBox = {
     width: {xs: '100%', md:'50%'},
-    // width: 55%;
-    // height: '100px',
-    // marginTop: '20px',
-    // overflow: 'hidden',
-    // padding: '0 20px 0 20px',
     padding:'15px',
-    
     color:'#fff',
-    // letterSpacing: '1.3px',
     borderRadius: '20px',
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
 }
 
-// const lines = {
-//     height: '100px',
-//     whiteSpace: 'normal',
-//     display: 'flex',
-//     flexDirection: 'column',
-//     justifyContent: 'center',
-//     flexWrap: 'wrap',
-//     whiteSpace: 'normal'
-// }
-
 const BoxDescription = () => {
+    const [user, setUser] = useState('')
+    const userId = localStorage.getItem('userId')
+
+    const fetching = async() => {
+        const res = await axios.get(`/api/user/profile/${userId}`)
+    
+        setUser(res.data.user)
+    }
+
+    useEffect(() => {
+        fetching()
+    },[])
+
+
     return (
         <Box>
-            <Typography>I'm a software developer with a extensive stack, I do mainly work with MERN and MEVN. Dedicated frontend developer who loves to work with API's.</Typography>
-            <Typography>Star wars expert and The Big Bang Theory fan.</Typography>
-            
-            {/* <Typography sx={lines} className="line">Welcome to my portfolio; feel free to check my projects.</Typography>
-            <Typography sx={lines} className="line">I'm a software developer, data analyst, and cyber analyst when it's about to find vulnerabilities.</Typography>
-            <Typography sx={lines} className="line">Skillful in frontend and backend,  adept in databases both sql and nosql.</Typography>
-            <Typography sx={lines} className="line">In the tech world; I'm a fullstack developer who enjoy to build websites using react, vue, and angular.</Typography>
-            <Typography sx={lines} className="line">In the backend mostly I do use node.js with mongodb. 
-                Nevertheles, I do also write python and sql.</Typography>
-            <Typography sx={lines} className="line">For data analysis: excel, tableau, power bi, python and sql are my weapons.</Typography>
-            <Typography sx={lines} className="line">Star Wars ambassador, The Big Bang Theory fan, lifelong learner.</Typography> */}
+            <Typography>{user.about}</Typography>
         </Box>
     )
 }
@@ -132,6 +121,8 @@ const IconsBox = () => {
         </>
     )
 }
+
+
 export default function Header() {
     return (
         <>

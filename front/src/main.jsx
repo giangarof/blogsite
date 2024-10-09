@@ -20,20 +20,32 @@ import UpdateForm from './screen/UpdateForm.jsx'
 import AdminPanel from './screen/AdminPanel.jsx'
 import Now from './screen/Now.jsx'
 import AllPosts from './components/AllPosts.jsx'
+import UserUpdate from './screen/UserUpdate.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App/>}>
       <Route index={true} path='/' element={<Main/>} />
-      <Route path='/search/:keyword' element={<Main/>} />
+
+      {/* Registration */}
       <Route path='/signin' element={<Signin/>} />
       <Route path='/signup' element={<Register/>} />
+
+
+      {/* Posts */}
+      <Route path='/search/:keyword' element={<Main/>} />
       <Route path='/new' element={<NewPost/>}/>
       <Route path='/post/:id' element={<Post/>}/>
       <Route path='/profile/:id' element={<Profile/>}/>
       <Route path='/post/update/:id' element={<UpdateForm/>}/>
-      <Route path='/adminpanel' element={<AdminPanel/>}/>
+
+      {/* Notes */}
       <Route path='/now' element={<Now/>}/>
+
+      {/* User */}
+      <Route path='/adminpanel' element={<AdminPanel/>}/>
+      <Route path='/user/update' element={<UserUpdate/>}/>
+
     </Route>
   )
 )

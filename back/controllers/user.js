@@ -97,7 +97,8 @@ const userProfile = async(req,res) => {
     // Query parameters or path parameters are more standard for GET requests.
     try {
         const userId = req.params.id
-        const user = await User.findById(userId).select('-password')
+        // const user = await User.findById(userId).select('-password')
+        const user = await User.findById(userId)
         if(!user){
             res.send(404)
         }else{
@@ -115,7 +116,27 @@ const userProfile = async(req,res) => {
 // route: /api/user/profile/:id
 // PUT
 const userUpdateProfile = async(req,res) => {
-    res.send('profile user')
+    try {
+        const {name, username, email, password, about} = req.body;
+        const id = req.params.id
+    
+        const user = await User.findById(id)
+        if(user){
+            user.name = name;
+            user.username = username;
+            user.email = email;
+            user.password = password;
+            user.about = about;
+            const update = await user.save()
+            res.status(201).send({message:'Profile updated successfully', update })
+        } else {
+            res.status(400).send({error:'something went wrong in update controller.'})
+    
+        }
+        
+    } catch (error) {
+        res.send({message:error})
+    }
 }
 
 

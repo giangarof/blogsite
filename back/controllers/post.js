@@ -1,11 +1,11 @@
 import Post from '../models/post.js'
 
 const getAll = async (req,res) => {
-    const keyword = req.query.keyword ? {description: {$regex: req.query.keyword, $options: 'i'}} : {};
+    const keyword = req.query.keyword ? {tech: {$regex: req.query.keyword, $options: 'i'}} : {};
 
     try {
         const post = await Post.find({...keyword})
-        console.log(post)
+        // console.log(post)
         res.status(200).json(post)
     } catch (e) {
         res.send(e.message)
@@ -61,7 +61,7 @@ const updatePost = async(req,res) => {
             // IF there is a previous IMG, but not a new one is provided, the previous one will prevail
 
             if (imgs.length > 0) {
-                post.images = imgs;
+                post.image = imgs;
             }
             
             // Same here, if new title/description are provided, it'll update
