@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Box, Card, CardContent, TextField, Button, CardMedia, Grid} from "@mui/material";
 import { Typography, Textarea } from "@mui/joy";
 
-import DeletePost from "../components/DeletePost";
+import DeletePost from "../../components/DeleteNote";
 
 
 export default function UpdateForm() {

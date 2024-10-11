@@ -74,7 +74,7 @@ const BoxDescription = () => {
 
     return (
         <Box>
-            <Typography>{user.about}</Typography>
+            <Typography>Independent and motivated Software Developer; Star Wars ambassador and The Big Bang Theory fan.</Typography>
         </Box>
     )
 }

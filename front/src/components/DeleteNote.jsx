@@ -5,13 +5,14 @@ import { Box, Card, CardContent, TextField, Stack, Button, Tooltip } from "@mui/
 import { Typography } from "@mui/joy";
 import axios from "axios"
 
-export default function DeletePost(props) {
+export default function DeleteNote(props) {
     // const {id, navigate} = props
+    console.log(props)
     
-    // Delete post
+    // Delete note
     const deleteBtn = async(id) => {
         try {
-            const data = await axios.delete(`/api/post/${id}`)
+            const data = await axios.delete(`/api/note/${id}`)
             const res = data
             props.refetch()
             return res.data

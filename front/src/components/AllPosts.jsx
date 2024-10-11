@@ -21,7 +21,7 @@ export default function AllPosts() {
             const res = data
             console.log(res)
             setPost(data)
-            console.log(keyword)
+            // console.log(keyword)
             return res
             
         } catch (err) {

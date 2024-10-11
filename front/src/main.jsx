@@ -11,17 +11,25 @@ import {
 
 // screens
 import Main from './screen/Main.jsx'
+
 import Signin from './screen/Signin.jsx'
 import Register from './screen/Register.jsx'
-import NewPost from './screen/newPost.jsx'
-import NewNote from './screen/newNote.jsx'
-import Post from './screen/Post.jsx'
+
 import Profile from './screen/Profile.jsx'
-import UpdateForm from './screen/UpdateForm.jsx'
-import AdminPanel from './screen/AdminPanel.jsx'
-import Now from './screen/Now.jsx'
-import AllPosts from './components/AllPosts.jsx'
 import UserUpdate from './screen/UserUpdate.jsx'
+
+import NewPost from './screen/Posts/newPost.jsx'
+import AllPosts from './components/AllPosts.jsx'
+import Post from './screen/Posts/Post.jsx'
+import UpdateForm from './screen/Posts/UpdateForm.jsx'
+import AdminPanel from './screen/Posts/AdminPanel.jsx'
+
+
+import Now from './screen/Notes/Now.jsx'
+import NewNote from './screen/Notes/newNote.jsx'
+import AdminPanelNotes from './screen/Notes/AdminPanelNotes.jsx'
+import NoteById from './screen/Notes/NoteById.jsx'
+import NoteByIdUpdate from './screen/Notes/NoteByIdUpdate.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,8 +50,10 @@ const router = createBrowserRouter(
 
       {/* Notes */}
       <Route path='/now' element={<Now/>}/>
+      <Route path='/note/:id' element={<NoteById/>}/>
+      <Route path='/note/update/:id' element={<NoteByIdUpdate/>}/>
       <Route path='/new-note' element={<NewNote/>}/>
-      <Route path='/adminpanel-notes' element={<AdminPanel/>}/>
+      <Route path='/adminpanel-notes' element={<AdminPanelNotes/>}/>
 
       {/* User */}
       <Route path='/adminpanel' element={<AdminPanel/>}/>

@@ -8,7 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import {Link as A } from "@mui/material";
-import DeletePost from "../components/DeletePost";
+import DeletePost from "../../components/DeleteNote";
 
 
 export default function AdminPanel() {

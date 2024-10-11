@@ -3,7 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom"
 import { Box, Card, Button, CardContent, CardMedia, Typography, Tooltip, Snackbar, Link as A, SnackbarContent } from "@mui/material";
 
 import axios from "axios"
-import CopyLink from '../components/CopyLink';
+import CopyLink from '../../components/CopyLink';
 
 export default function () {
     const [post, setPost] = useState([])
