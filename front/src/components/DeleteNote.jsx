@@ -7,7 +7,7 @@ import axios from "axios"
 
 export default function DeleteNote(props) {
     // const {id, navigate} = props
-    console.log(props)
+    // console.log(props)
     
     // Delete note
     const deleteBtn = async(id) => {
@@ -24,7 +24,6 @@ export default function DeleteNote(props) {
   return (
     <>
     <Tooltip title="click to delete">
-
         <Button 
             sx={{
                 backgroundColor:'grey',

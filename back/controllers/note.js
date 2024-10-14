@@ -36,7 +36,7 @@ const getOneById = async(req,res) => {
 const updateNote = async(req,res) => {
     try {
         const {id} = req.params
-        const {title, description} = req.body
+        const {title, description, about} = req.body
         const note = await Note.findById(id)
 
         if(!note){
@@ -45,6 +45,7 @@ const updateNote = async(req,res) => {
     
         if(note){
             note.title = title;
+            note.anout = about;
             note.description = description;
         }
 

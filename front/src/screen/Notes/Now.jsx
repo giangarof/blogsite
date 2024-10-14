@@ -58,6 +58,11 @@ export default function Now() {
         // margin:'50px'
     }
 
+    const intro ={
+        color:'#666565',
+        fontStyle:'italic'
+    }
+
     return(
         <>
             <Container sx={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
@@ -69,7 +74,7 @@ export default function Now() {
                         {data.map((i) => (
                             <Box sx={sx} key={i._id}>
                                 <Typography>~ {i.title}</Typography>
-                                <Typography>{i.description}</Typography>
+                                <Typography sx={intro}>{i.about}</Typography>
                                 <Tooltip title="Read article" >
                                     <Button variant="contained" size="small" sx={{width:"10px" }} href={`/note/${i._id}`}>
                                         {/* <Typography component='a' sx={{textDecoration:"none", color:"white"}}> */}

@@ -1,0 +1,67 @@
+/* General styling for the content */
+.content-preview {
+    font-family: 'Arial', sans-serif; /* Default font family */
+    padding: 20px; /* General padding around the content */
+    line-height: 1.6; /* Improve readability with line height */
+    color: #333; /* Default text color */
+  }
+  
+  /* Bold text styling */
+  .content-preview b,
+  .content-preview strong {
+    font-weight: bold; /* Make bold text */
+  }
+  
+  /* Italic text styling */
+  .content-preview i,
+  .content-preview em {
+    font-style: italic; /* Make italic text */
+  }
+  
+  /* Underline text styling */
+  .content-preview u {
+    text-decoration: underline; /* Underline text */
+  }
+  
+  /* Blockquote styling */
+  .content-preview blockquote {
+    border-left: 5px solid #ccc; /* Left border for the blockquote */
+    margin: 1em 0; /* Margin above and below the blockquote */
+    padding: 10px 20px; /* Padding inside the blockquote */
+    color: #555; /* Text color for blockquote */
+    font-style: italic; /* Italicize blockquote text */
+  }
+  
+  /* Code block styling */
+  .content-preview .ql-syntax {
+    color: #ccc;
+    background-color: #000000; /* Light background for code blocks */
+    border: 1px solid #ddd; /* Border around the code block */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px; /* Padding inside the code block */
+    font-family: 'Courier New', Courier, monospace; /* Monospace font for code */
+    overflow: auto; /* Enable scrolling for long code blocks */
+  }
+  
+  /* Combined styling for unordered and ordered lists */
+  .content-preview ul,
+  .content-preview ol {
+    padding-left: 40px; /* Padding on the left side of ul and ol */
+    margin: 1em 0; /* Margin above and below the ul and ol */
+  }
+  
+  /* List item styling */
+  .content-preview li {
+    margin-bottom: 0.5em; /* Spacing between list items */
+  }
+  
+  /* Additional styling for links */
+  .content-preview a {
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove underline from links */
+  }
+  
+  .content-preview a:hover {
+    text-decoration: underline; /* Underline links on hover */
+  }
+  

@@ -13,6 +13,10 @@ const noteSchema = new mongoose.Schema({
         type:String,
         required: false
     },
+    about: {
+        type:String,
+        required:false
+    },
     description: {
         type:String,
         required:false
