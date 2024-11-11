@@ -1,26 +1,33 @@
+//react
 import React, { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from "react-router-dom"
-import { Box, Typography, Link as A, Container, } from "@mui/material";
 
+//mui
+import { Box, Typography, Link as A, Container, Button, } from "@mui/material";
+
+//dependencies
 import axios from "axios"
+
+//components
 import CopyLink from '../../components/CopyLink';
 
-
+//quill
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import '../../quill.css'
-
 import DOMPurify from 'dompurify';
+import CircularIndeterminate from '../../components/Spinner';
 
 
 export default function () {
     const [note, setNote] = useState('')
-    const [isLoading, setIsLoading] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
     const [isAdmin, setIsAdmin] = useState(false)
     const {id} = useParams()
     const navigate = useNavigate()
     
-    const fetchPosts = async() =>{
+    const fetchPosts = async() => {
+        setIsLoading(true)
         try {
             const data = await axios.get(`/api/note/${id}`)
             const res = data
@@ -30,6 +37,8 @@ export default function () {
             
         } catch (err) {
             console.log('something went wrong: ', err.message)
+        } finally{
+            setIsLoading(false)
         }
     }
     
@@ -38,7 +47,7 @@ export default function () {
     }
     
     const goBack = async() => {
-        navigate(`/`)
+        navigate(`/now`)
     }
     
     useEffect(() => {
@@ -69,10 +78,11 @@ export default function () {
 
   return (
 
-        <>
+        <Container sx={{mt:3, mb:3}}>
+            <Button variant='outlined' onClick={goBack}>Go Back</Button>
             <Box>
                 {isLoading ? (
-                <p>Loading...</p>
+                    <CircularIndeterminate/>
                 ) : (
                     <Box sx={outer}>
                         <Box sx={box}>
@@ -88,7 +98,7 @@ export default function () {
                     </Box>
             )}
             </Box>
-        </>
+        </Container>
 
   )
 }

@@ -14,6 +14,7 @@ const getAll = async (req,res) => {
 
 const createPost = async(req, res) => {
     try{
+
         const post = new Post(req.body)
         post.image = req.files.map(f => ({url: f.path, filename: f.filename, originalname:f.originalname}));
         await post.save()

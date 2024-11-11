@@ -1,14 +1,21 @@
+//react
 import React, { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from "react-router-dom"
-import { Box, Card, Button, CardContent, CardMedia, Typography, Tooltip, Snackbar, Link as A, SnackbarContent } from "@mui/material";
 
+//mui
+import { Box, Card, Button, CardContent, CardMedia, Typography, Tooltip, Snackbar, Link as A, SnackbarContent, Container } from "@mui/material";
+
+//dependencies
 import axios from "axios"
+
+//components
 import CopyLink from '../../components/CopyLink';
+import CircularIndeterminate from '../../components/Spinner';
 
 export default function () {
     const [post, setPost] = useState([])
     const [img, setImg] = useState()
-    const [isLoading, setIsLoading] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
     const [isAdmin, setIsAdmin] = useState(false)
     const {id} = useParams()
     const navigate = useNavigate()
@@ -16,6 +23,7 @@ export default function () {
     // const [open, setOpen]= useState(false)
 
     const fetchPosts = async() =>{
+        setIsLoading(true)
         try {
             const data = await axios.get(`/api/post/${id}`)
             const res = data
@@ -26,6 +34,8 @@ export default function () {
             
         } catch (err) {
             console.log('something went wrong: ', err.message)
+        } finally{
+            setIsLoading(false)
         }
     }
 
@@ -46,9 +56,13 @@ export default function () {
   return (
 
         <>
-            <div>
+            <Container sx={{mt:3}}>
+                <Button variant='outlined' onClick={goBack}>Go Back</Button>
                 {isLoading ? (
-                <p>Loading...</p>
+                    <>
+                        <CircularIndeterminate size={90} />
+                        <Typography sx={{textAlign:'center'}}>Loading... Please wait</Typography>
+                    </>
                 ) : (
                     <div>
                         {/* Render or use 'post' */}
@@ -99,62 +113,22 @@ export default function () {
                                         <Typography variant='p'>Technologies used: {post.tech}</Typography>
                                         
                                         {isAdmin == true ? 
-                                        <>
-                                            <Button 
-                                                variant="contained" 
-                                                size='small' 
-                                                onClick={() => updatePostScreen(post._id)}
-                                                sx={{marginTop:"10px"}}
-                                            >
-                                                <Typography 
-                                                    // variant="h5" 
-                                                    size="small"
-                                                    color='white'
-                                                >
-                                                Options
-                                            </Typography>
-                                            </Button>
-                                            <Button 
-                                                variant="contained" 
-                                                size='small' 
-                                                onClick={goBack}
-                                                sx={{marginTop:"10px"}}
-                                            >
-                                                <Typography 
-                                                    // variant="h5" 
-                                                    size="small"
-                                                    color='white'
-                                                >
-                                                Go Back
-                                            </Typography>
-                                            </Button>
-                                            <CopyLink/>
-                                        </>
-                                         : <>
-                                            <Button 
-                                                variant="contained" 
-                                                size='small' 
-                                                onClick={goBack}
-                                                sx={{marginTop:"10px"}}
-                                            >
-                                                <Typography 
-                                                    // variant="h5" 
-                                                    size="small"
-                                                    color='white'
-                                                >
-                                                Go Back
-                                                </Typography>
-                                            </Button>
-                                
-                                            <CopyLink/>
-                                         
-                                         </> }
+                                            <Box sx={{display:'flex', gap:'1rem'}}>
+                                                <Button variant="contained" onClick={() => updatePostScreen(post._id)}>
+                                                    <Typography>Options</Typography>
+                                                </Button>
+
+                                                <CopyLink/>
+                                            </Box>
+                                         : <Box >
+                                                <CopyLink/>
+                                            </Box> }
                                     </CardContent>
                                 </Card>
                         </Box>
                     </div>
             )}
-            </div>
+            </Container>
         </>
 
   )

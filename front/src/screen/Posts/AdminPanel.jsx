@@ -1,6 +1,8 @@
+//react
 import React, { useState, useEffect } from "react";
 import axios from "axios"
 
+//mui
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,14 +10,19 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import {Link as A } from "@mui/material";
-import DeletePost from "../../components/DeleteNote";
+
+//components
+import DeletePost from "../../components/DeletePost";
+import CircularIndeterminate from "../../components/Spinner";
 
 
 export default function AdminPanel() {
+    const [isLoading, setIsLoading] = useState(false)
     const [post, setPost] = useState([])
     
     // first way
     const fetchPosts = async() =>{
+        setIsLoading(true)
         try {
             const data = await axios.get('/api/post')
             const res = data
@@ -26,6 +33,8 @@ export default function AdminPanel() {
             
         } catch (err) {
             console.log('something went wrong: ', err.message)
+        }finally {
+            setIsLoading(false)
         }
       }
       
@@ -54,37 +63,39 @@ export default function AdminPanel() {
         {/* remember to create a new ctrl - 'maybe' */}
         {/* table to show all the posts */}
         {/* id, description, link to post itself, link to repo, see more, delete */}
-        
-        <TableContainer >
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>ID</TableCell>
-                        <TableCell>Posted</TableCell>
-                        <TableCell>Title</TableCell>
-                        <TableCell>Full Project</TableCell>
-                        <TableCell>Repository</TableCell>
-                        <TableCell>Update Form</TableCell>
-                        <TableCell>Delete</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {post.slice().reverse().map(p =>(
-                        <TableRow key={p._id}>
-                            <TableCell>{p._id.substr(-4)}</TableCell>
-                            <TableCell>{p.createdAt.substr(0,10)}</TableCell>
-                            <TableCell>{p.title}</TableCell>
-                            <TableCell><A sx={box} href={p.link} target="_blank">Full Project</A></TableCell>
-                            <TableCell><A sx={box} href={p.repo} target="_blank">Github Code</A></TableCell>
-                            <TableCell><A sx={box} href={`/post/update/${p._id}`}>Update Post Form</A></TableCell>
-                            <TableCell>
-                                <DeletePost postId={p._id} refetch={fetchPosts}/>
-                            </TableCell>
+        {isLoading ? <CircularIndeterminate /> : 
+
+            <TableContainer >
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>ID</TableCell>
+                            <TableCell>Posted</TableCell>
+                            <TableCell>Title</TableCell>
+                            <TableCell>Full Project</TableCell>
+                            <TableCell>Repository</TableCell>
+                            <TableCell>Update Form</TableCell>
+                            <TableCell>Delete</TableCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                    </TableHead>
+                    <TableBody>
+                        {post.slice().reverse().map(p =>(
+                            <TableRow key={p._id}>
+                                <TableCell>{p._id.substr(-4)}</TableCell>
+                                <TableCell>{p.createdAt.substr(0,10)}</TableCell>
+                                <TableCell>{p.title}</TableCell>
+                                <TableCell><A sx={box} href={p.link} target="_blank">Full Project</A></TableCell>
+                                <TableCell><A sx={box} href={p.repo} target="_blank">Github Code</A></TableCell>
+                                <TableCell><A sx={box} href={`/post/update/${p._id}`}>Update Post Form</A></TableCell>
+                                <TableCell>
+                                    <DeletePost postId={p._id} refetch={fetchPosts}/>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        }
     </>
   )
 }

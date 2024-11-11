@@ -1,12 +1,21 @@
+//react
 import React, { useState, useEffect } from "react"
-import axios from "axios"
 import {useParams, useNavigate} from 'react-router-dom'
-import { Container } from '@mui/system';
-import { Box, Card, Button, CardContent, CardMedia, Typography, Tooltip, Hidden } from "@mui/material";
-import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 // import { useParams } from "react-router-dom";
 
+//mui
+import { color, Container, display, positions, textAlign, width } from '@mui/system';
+import { Box, Card, Button, CardContent, CardMedia, Typography, Tooltip, Hidden } from "@mui/material";
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+
+//components
+import CircularIndeterminate from "./Spinner";
+
+//devpendencies
+import axios from "axios"
+
 export default function AllPosts() {
+    const [loading, setLoading] = useState(true);
     const {keyword} = useParams()
     const [post, setPost] = useState([])
     // const [img, setImg] = useState('')
@@ -19,8 +28,9 @@ export default function AllPosts() {
                 params: { keyword } // Send the keyword as a query parameter
             });
             const res = data
-            console.log(res)
+            // console.log(res)
             setPost(data)
+            setLoading(false)
             // console.log(keyword)
             return res
             
@@ -51,93 +61,98 @@ export default function AllPosts() {
 
     return (
         <>
-        <Container id="AllPosts">
-        <Typography sx={{marginTop:'2rem'}}>Total Projects: {post.length}</Typography>
-            <Container
-                sx={{
-                    display: 'grid',
-                    alignContent:'center', 
-                    gridTemplateColumns: {
-                        sm: 'repeat(1, 1fr)',  
-                        md: 'repeat(2, 1fr)',  
-                    },
-                    gap: 4,
-                    marginBottom:5
-            }}>   
-                    
-                    {post.length > 0 ? (post.slice().reverse().map((item) => (
-                        <Card 
-                            key={item._id} 
-                            sx={{
-                                marginTop:5, boxShadow:'0px 0px 10px 0px',
-                                // display: 'flex',
-                                // flexDirection: {xs: 'row', lg: 'column'}
-                            }}
-                        >
-                                    
-                        {Array.isArray(item.image) && item.image.length > 0 && (
-                            <CardMedia 
-                                component='img'
-                                // style={{width:'100%', objectFit:'fill'}}
-                                image={item.image[0].url}
-                                sx={{
-                                    display: 'flex',
-                                    justifyContent: 'center', /* Horizontally center the content */
-                                    alignItems: 'center', /* Vertically center the content */
-                                    height: '33vh',
-                                    objectFit:'contain'
-                                }}
-                            />
-                        )}
+            {loading ? <CircularIndeterminate sx={{position:'absolute', left: '50%', 
+        top: '50%', transform: 'translate(-50%, -50%)'}} />  : (
 
-                        <CardContent 
-                            sx={{
-                                backgroundColor:'rgb(0, 0, 0, 0.12)',
-                                display:'flex', 
-                                flexDirection:"column", 
-                                justifyContent:'center',                        
-                            }}
-                        >
-                        <Container 
-                            sx={{
-                                display:'flex', 
-                                flexDirection:"column", 
-                                justifyContent:'center',
-                                gap:'10px'
-                            }}>
-                            <Typography variant="h5">{item.title}</Typography>
-                            <Typography 
-                                variant="p" 
-                                sx={{
-                                    whiteSpace:'nowrap', 
-                                    overflow:'hidden', 
-                                    textOverflow:'ellipsis',
-                                }}
-                            >
-                                {item.description}
-                            </Typography>
+                <Container id="AllPosts">
+                    <Typography sx={{marginTop:'2rem'}}>Total Projects: {post.length}</Typography>
+                    <Container
+                        sx={{
+                            display: 'grid',
+                            alignContent:'center', 
+                            gridTemplateColumns: {
+                                sm: 'repeat(1, 1fr)',  
+                                md: 'repeat(2, 1fr)',  
+                            },
+                            gap: 4,
+                            marginBottom:5
+                    }}>   
+                            
+                            {post.length > 0 ? (post.slice().reverse().map((item) => (
+                                <Card 
+                                    key={item._id} 
+                                    sx={{
+                                        marginTop:5, boxShadow:'0px 0px 10px 0px',
+                                        // display: 'flex',
+                                        // flexDirection: {xs: 'row', lg: 'column'}
+                                    }}
+                                >
+                                            
+                                {Array.isArray(item.image) && item.image.length > 0 && (
+                                    <CardMedia 
+                                        component='img'
+                                        // style={{width:'100%', objectFit:'fill'}}
+                                        image={item.image[0].url}
+                                        sx={{
+                                            display: 'flex',
+                                            justifyContent: 'center', /* Horizontally center the content */
+                                            alignItems: 'center', /* Vertically center the content */
+                                            height: '33vh',
+                                            objectFit:'contain'
+                                        }}
+                                    />
+                                )}
 
-                            <Tooltip title="Read article" >
-                                <Button variant="contained" size="small" sx={{width:"10px", }} href={`/post/${item._id}`}>
-                                    {/* <Typography component='a' sx={{textDecoration:"none", color:"white"}}> */}
-                                    <AutoStoriesIcon />
-                                    {/* </Typography> */}
-                                </Button>
-                            </Tooltip>
-                        </Container>
-                        </CardContent>
-                    </Card>
-                    ))): 
-                        <Typography sx={emptyQ}>
-                            No technology found with your query. 
-                        </Typography>
-                    }
-                      
-                    
-                    
-            </Container>
-        </Container>
+                                <CardContent 
+                                    sx={{
+                                        backgroundColor:'rgb(0, 0, 0, 0.12)',
+                                        display:'flex', 
+                                        flexDirection:"column", 
+                                        justifyContent:'center',                        
+                                    }}
+                                >
+                                <Container 
+                                    sx={{
+                                        display:'flex', 
+                                        flexDirection:"column", 
+                                        justifyContent:'center',
+                                        gap:'10px'
+                                    }}>
+                                    <Typography variant="h5">{item.title}</Typography>
+                                    <Typography 
+                                        variant="p" 
+                                        sx={{
+                                            whiteSpace:'nowrap', 
+                                            overflow:'hidden', 
+                                            textOverflow:'ellipsis',
+                                        }}
+                                    >
+                                        {item.description}
+                                    </Typography>
 
+                                    <Tooltip title="Read article" >
+                                        <Button variant="contained" size="small" sx={{width:"10px", }} href={`/post/${item._id}`}>
+                                            {/* <Typography component='a' sx={{textDecoration:"none", color:"white"}}> */}
+                                            <AutoStoriesIcon />
+                                            {/* </Typography> */}
+                                        </Button>
+                                    </Tooltip>
+                                </Container>
+                                </CardContent>
+                            </Card>
+                            ))): 
+                                <Typography sx={emptyQ}>
+                                    No technology found with your query. 
+                                </Typography>
+                            }
+                            
+                            
+                            
+                    </Container>
+                </Container>
+            )
+            
+            }
         </>
         
     )

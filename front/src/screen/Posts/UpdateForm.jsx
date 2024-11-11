@@ -5,6 +5,7 @@ import { Box, Card, CardContent, TextField, Button, CardMedia, Grid} from "@mui/
 import { Typography, Textarea } from "@mui/joy";
 
 import DeletePost from "../../components/DeleteNote";
+import CircularIndeterminate from '../../components/Spinner';
 
 
 export default function UpdateForm() {
@@ -84,32 +85,42 @@ export default function UpdateForm() {
 
     // Submit update logic
     const submitUpdate= async(id) => {
-        const formData = new FormData();
-        formData.append("title", title);
-        formData.append("description", description);
-        formData.append("image", image);
-        formData.append("repo", repo);
-        formData.append("link", link);
-        formData.append("tech", tech);
-        
-        const data = axios.put(`/api/post/${id}`, formData)
-            .then((response) => {
-                const result = {
-                    ok:response.data.message, 
-                    data:response.data.savedPost,
-                }
-                navigate(`/post/${id}`)
-                // console.log(result)
-                return result
-            })
-            .catch((error) => {
-                // throw new Error(error.response.data.error, {err: 'provide new details to update at least in one field'})
-                console.error(error.response.data.error)
-                setErrorMsg(error.response.data.error)
-            })
+        setIsLoading(true)
+        try {
+            const formData = new FormData();
+            formData.append("title", title);
+            formData.append("description", description);
+            formData.append("image", image);
+            formData.append("repo", repo);
+            formData.append("link", link);
+            formData.append("tech", tech);
+            
+            const data = await axios.put(`/api/post/${id}`, formData)
+            console.log(data)
+            navigate(`/post/${id}`)
+        } catch (error) {
+            console.error(error.response.data.error)
+            setErrorMsg(error.response.data.error)
+        } finally{
+            setIsLoading(false)
+        }
+            // .then((response) => {
+            //     const result = {
+            //         ok:response.data.message, 
+            //         data:response.data.savedPost,
+            //     }
+            //     navigate(`/post/${id}`)
+            //     // console.log(result)
+            //     return result
+            // })
+            // .catch((error) => {
+            //     // throw new Error(error.response.data.error, {err: 'provide new details to update at least in one field'})
+            //     console.error(error.response.data.error)
+            //     setErrorMsg(error.response.data.error)
+            // })
 
-            const result = await data;
-            console.log(result);
+            // const result = await data;
+            // console.log(result);
     }
 
     useEffect(() => {
@@ -205,11 +216,12 @@ export default function UpdateForm() {
                             ) : ''}
 
                             <Button 
-                                sx={{marginTop:4}}
+                                sx={{marginTop:4, height:'50px'}}
                                 variant="contained" size='small' 
                                 onClick={() => submitUpdate(postId)} 
                             >
-                                <Typography sx={{color:'white'}}>Update Changes</Typography>
+                                {isLoading ? <CircularIndeterminate /> : <Typography sx={{color:'white'}}>Update Changes</Typography>}
+                                {/* <Typography sx={{color:'white'}}>Update Changes</Typography> */}
                             </Button>
                             
                             <Button 

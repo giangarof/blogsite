@@ -1,12 +1,20 @@
+//react
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+
+//mui
 import { Box, TextField, Stack, Button, Grid } from "@mui/material";
 import { Typography, Textarea } from "@mui/joy";
 
+//components
+import CircularIndeterminate from '../../components/Spinner';
+
+//dependencies
 import axios from 'axios';
 
 export default function NewPost() {
     const navigate = useNavigate()
+    const [isLoading, setIsLoading] = useState(false)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [image, setImage] = useState('')
@@ -19,11 +27,12 @@ export default function NewPost() {
     const FileUpload = (e) => {
         const file = e.target.files[0]
         setImage(file)
-        console.log(file)
+        // console.log(file)
     }
 
     const newPost = async(e) => {
         e.preventDefault()
+        setIsLoading(true) //starts to load
         try {
             const formData = new FormData();
             formData.append("title", title);
@@ -34,14 +43,17 @@ export default function NewPost() {
             formData.append("tech", tech)
 
             const post = await axios.post('/api/post/new', formData)
+            setIsLoading(true)
             navigate('/')
             // console.log(post)
             // return post
             
             
         } catch (err) {
-            console.error(typeof(err.response.data.error))
+            // console.error(typeof(err.response.data.error))
             setErrorMsg(err.response.data.error)
+        } finally {
+            setIsLoading(false) //stop loading
         }
     }
 
@@ -51,6 +63,7 @@ export default function NewPost() {
             <Box 
                     sx={{
                         mt:10,
+                        mb:10,
                         width:{
                         xs:'90%',
                         lg: '50%'
@@ -92,10 +105,12 @@ export default function NewPost() {
                             <Typography level="body-lg" textColor='red'>{errorMsg}</Typography>
                             ) : ''}
 
-                        <Button variant="contained" size="large"
+                        <Button variant="contained" size="large" sx={{height:'50px',}}
                                 onClick={newPost}>
-                                    Submit
+                                    {isLoading ? <CircularIndeterminate/> : "Submit"}
                         </Button>
+
+                        
             </Box>
         </Grid>
         </>

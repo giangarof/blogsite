@@ -45,7 +45,7 @@ const updateNote = async(req,res) => {
     
         if(note){
             note.title = title;
-            note.anout = about;
+            note.about = about;
             note.description = description;
         }
 
