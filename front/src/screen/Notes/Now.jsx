@@ -8,6 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 import CircularIndeterminate from "../../components/Spinner";
+import Meta from "../../components/Meta";
 
 export default function Now() {
     const [isLoading, setIsLoading] = useState(false)
@@ -18,7 +19,6 @@ export default function Now() {
     const fetching = async() => {
         setIsLoading(true)
         try {
-            
             const res = await axios.get(`/api/note/`)
             setData(res.data)
         } catch (error) {
@@ -75,45 +75,47 @@ export default function Now() {
     return(
         <>  
             {isLoading ? <CircularIndeterminate /> : (
-
-                <Container sx={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
-                    {data.length == 0 ? 
-                        <Box sx={{marginTop:'2rem'}}>
-                            <Typography>No notes yet ...</Typography>
-                        </Box> : (
-                        <>
-                            {data.map((i) => (
-                                <Box sx={sx} key={i._id}>
-                                    <Typography>~ {i.title}</Typography>
-                                    <Typography sx={intro}>{i.about}</Typography>
-                                    <Tooltip title="Read article" >
-                                        <Button variant="contained" size="small" sx={{width:"10px" }} href={`/note/${i._id}`}>
-                                            {/* <Typography component='a' sx={{textDecoration:"none", color:"white"}}> */}
-                                            <AutoStoriesIcon />
-                                            {/* </Typography> */}
-                                        </Button>
-                                    </Tooltip>
-                                    <Box sx={{display:'flex', flexDirection:'column', alignItems:'end' }}>
-                                        <Box>
-                                            {admin === true ?
-                                            <>
-                                                    <Box>
-                                                        <Tooltip title="Update">
-                                                            <A href={`/note/update/${i._id}`}>
-                                                                <EditIcon sx={iconUpdate} />
-                                                            </A>
-                                                        </Tooltip>
-                                                    </Box>
-                                            </> : ''
-                                            }
+                <>
+                    <Meta title="Notes" />
+                    <Container sx={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
+                        {data.length == 0 ? 
+                            <Box sx={{marginTop:'2rem'}}>
+                                <Typography>No notes yet ...</Typography>
+                            </Box> : (
+                            <>
+                                {data.map((i) => (
+                                    <Box sx={sx} key={i._id}>
+                                        <Typography>~ {i.title}</Typography>
+                                        <Typography sx={intro}>{i.about}</Typography>
+                                        <Tooltip title="Read article" >
+                                            <Button variant="contained" size="small" sx={{width:"10px" }} href={`/note/${i._id}`}>
+                                                {/* <Typography component='a' sx={{textDecoration:"none", color:"white"}}> */}
+                                                <AutoStoriesIcon />
+                                                {/* </Typography> */}
+                                            </Button>
+                                        </Tooltip>
+                                        <Box sx={{display:'flex', flexDirection:'column', alignItems:'end' }}>
+                                            <Box>
+                                                {admin === true ?
+                                                <>
+                                                        <Box>
+                                                            <Tooltip title="Update">
+                                                                <A href={`/note/update/${i._id}`}>
+                                                                    <EditIcon sx={iconUpdate} />
+                                                                </A>
+                                                            </Tooltip>
+                                                        </Box>
+                                                </> : ''
+                                                }
+                                            </Box>
+                                            <Typography sx={date}>Last update: {i.createdAt.slice(0,10)}</Typography>
                                         </Box>
-                                        <Typography sx={date}>Last update: {i.createdAt.slice(0,10)}</Typography>
                                     </Box>
-                                </Box>
-                            ))}
-                        </>
-                    )}
-                </Container>
+                                ))}
+                            </>
+                        )}
+                    </Container>
+                </>
             )}
         </>
     )

@@ -17,6 +17,7 @@ import 'react-quill/dist/quill.snow.css';
 import '../../quill.css'
 import DOMPurify from 'dompurify';
 import CircularIndeterminate from '../../components/Spinner';
+import Meta from '../../components/Meta';
 
 
 export default function () {
@@ -84,18 +85,21 @@ export default function () {
                 {isLoading ? (
                     <CircularIndeterminate/>
                 ) : (
-                    <Box sx={outer}>
-                        <Box sx={box}>
-                            <Box sx={inner}>
-                                <Typography>Title: {note.title}</Typography>
-                                <Typography>About: {note.about}</Typography>
-                                <Container 
-                                    className='content-preview' 
-                                    dangerouslySetInnerHTML={{ __html: sanitizedHTML }} /> 
+                    <>
+                        <Meta title={note.title} />
+                        <Box sx={outer}>
+                            <Box sx={box}>
+                                <Box sx={inner}>
+                                    <Typography>Title: {note.title}</Typography>
+                                    <Typography>About: {note.about}</Typography>
+                                    <Container 
+                                        className='content-preview' 
+                                        dangerouslySetInnerHTML={{ __html: sanitizedHTML }} /> 
+                                </Box>
+                                <Typography sx={{color:'grey', textAlign:'end'}}>Posted: {note.createdAt?.slice(0,10)}</Typography>
                             </Box>
-                            <Typography sx={{color:'grey', textAlign:'end'}}>Posted: {note.createdAt?.slice(0,10)}</Typography>
                         </Box>
-                    </Box>
+                    </>
             )}
             </Box>
         </Container>

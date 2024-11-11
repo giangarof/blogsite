@@ -11,6 +11,7 @@ import axios from "axios"
 //components
 import CopyLink from '../../components/CopyLink';
 import CircularIndeterminate from '../../components/Spinner';
+import Meta from '../../components/Meta';
 
 export default function () {
     const [post, setPost] = useState([])
@@ -65,6 +66,7 @@ export default function () {
                     </>
                 ) : (
                     <div>
+                        <Meta title={post.title}/>
                         {/* Render or use 'post' */}
                         <Box sx={{
                                 display:'flex', flexDirection:'row', justifyContent:'center',
