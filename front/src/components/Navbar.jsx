@@ -41,17 +41,8 @@ export default function Navbar(props) {
                       <Typography sx={sx} component="a" href="/">
                         <h2>Home</h2>
                       </Typography>
-                      {/* <Typography sx={sx} component="a" href="https://gigadev.onrender.com/">
-                        <h2>About Me</h2>
-                      </Typography> */}
-                      {/* <Typography sx={sx} component="a" href="/#AllPosts">
-                        <h2>Projects</h2>
-                      </Typography> */}
-                      {/* <Typography sx={sx} component="a" href="/now">
-                        <h2>Now</h2>
-                      </Typography> */}
                     </Box>
-                    {/* <Box sx={{display:'flex', gap:'10px', alignItems:"center"}}>
+                    <Box sx={{display:'flex', gap:'10px', alignItems:"center"}}>
                       <Typography sx={sx} component="a" href={`/profile/${userId}` }>
                         <h2>Profile</h2>
                       </Typography>
@@ -59,7 +50,7 @@ export default function Navbar(props) {
                       <Typography sx={sx}>
                         <Logout/>
                       </Typography>
-                    </Box> */}
+                    </Box>
                   </Box>
                 </Toolbar>
               </Box>
@@ -76,42 +67,19 @@ export default function Navbar(props) {
                           display:'flex',
                           gap:'10px',
                           flexDirection:'row',
-                          // justifyContent:{xs:"center",md:'space-between'},
+                          justifyContent:{xs:"center",md:'space-between'},
                         }}>
-                          <Typography sx={sx} component="a" href="/">
+                          <Typography sx={sx} component="a" href="/" >
                             <h2>Home</h2>
                           </Typography>
-                          {/* <Typography sx={sx} component="a" href="https://gigadev.onrender.com/">
-                            <h2>About Me</h2>
-                          </Typography>
-                          <Typography sx={sx} component="a" href="/#AllPosts">
+                          <Typography sx={sx} component="a" href="#AllPosts">
                             <h2>Projects</h2>
                           </Typography>
                           <Typography sx={sx} component="a" href="/now">
-                            <h2>Now</h2>
-                          </Typography> */}
-                        </Box>
-                        <Box>
-                          <Typography sx={sx} component="a" href="/signin">
-                            <h2>Login</h2>
+                            <h2>News</h2>
                           </Typography>
+                          
                         </Box>
-                        {/* <Typography sx={sx} component="a" href="/">
-                          <Tooltip title='login'>
-                              <HomeIcon/>
-                          </Tooltip>
-                        </Typography>
-                        <Typography sx={sx} component="a" href="/signup">Register</Typography>
-                        <Typography sx={sx} component="a" href="https://gigadev.onrender.com/">
-                          <Tooltip title='About me'>
-                            <AccountCircleIcon/>
-                          </Tooltip>
-                        </Typography>
-                        <Typography sx={sx} component="a" href="/signin">
-                          <Tooltip title='Login'>
-                            <LoginIcon/>
-                          </Tooltip>
-                        </Typography> */}
                       </Box>
                     </Toolbar>
                   </Box>

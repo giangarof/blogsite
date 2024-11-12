@@ -1,4 +1,4 @@
-import { Box, Typography,Tooltip, Card, Button, Container, Backdrop } from "@mui/material"
+import { Box, Typography, Tooltip, Card, Button, Container, Backdrop } from "@mui/material"
 
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
@@ -58,20 +58,6 @@ const descriptionBox = {
 }
 
 const BoxDescription = () => {
-    const [user, setUser] = useState('')
-    const userId = localStorage.getItem('userId')
-
-    const fetching = async() => {
-        const res = await axios.get(`/api/user/profile/${userId}`)
-    
-        setUser(res.data.user)
-    }
-
-    useEffect(() => {
-        fetching()
-    },[])
-
-
     return (
         <Box>
             <Typography>Independent and motivated Software Developer; Star Wars ambassador and The Big Bang Theory fan.</Typography>
@@ -82,21 +68,21 @@ const BoxInfo = () =>{
     return (
         <Box sx={boxStyle}>
             <Card sx={cardStyle} className="gradient">
-                <span>Profile</span>
+                <span className="span-header">Profile</span>
                 <div className="show-card">
                     <Button sx={btnStyle} href="https://gigadev.onrender.com/" className="showed">Click</Button>
                     <p className="showed">A bit more about me and about what I do.</p>
                 </div>
             </Card>
             <Card sx={cardStyle} className="gradient" >
-                <span className="center">Projetcs</span>
+                <span className="span-header">Projetcs</span>
                 <div className="show-card" >
                     <Button sx={btnStyle} href="#AllPosts" className="showed">Click</Button>
                     <p className="showed">Check out some of my fullstack projects.</p>
                 </div>
             </Card>
             <Card sx={cardStyle} className="gradient">
-                <span className="center">Now</span>
+                <span className="span-header">News</span>
                 <div className="show-card" >
                     <Button sx={btnStyle} href="/now" className="showed">Click</Button>
                     <p className="showed">What I'm doing now</p>
@@ -110,14 +96,18 @@ const BoxInfo = () =>{
 
 const IconsBox = () => {
     return (
-        <>
-            <Typography component="a" role='link' href="https://github.com/giangarof" aria-label="Github link">
-            <GitHubIcon sx={IconsStyle}/>
-            </Typography>             
+        <>  
+            <Tooltip title="Github Link">
+                <Typography component="a" role='link' href="https://github.com/giangarof" aria-label="Github link">
+                <GitHubIcon sx={IconsStyle}/>
+                </Typography>             
+            </Tooltip>
 
-            <Typography component="a" role='link' href="https://www.linkedin.com/in/gianmarco-g/" aria-label="LinkedIn link">      
-                <LinkedInIcon sx={IconsStyle}/>
-            </Typography>
+            <Tooltip title="LinkedIn Link">
+                <Typography component="a" role='link' href="https://www.linkedin.com/in/gianmarco-g/" aria-label="LinkedIn link">      
+                    <LinkedInIcon sx={IconsStyle}/>
+                </Typography>
+            </Tooltip>
         </>
     )
 }
