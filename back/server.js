@@ -39,6 +39,8 @@ if(process.env.NODE_ENV === 'production'){
     //set static folder
     app.use(express.static(path.join(__dirname, 'front/dist')))
     //any route that is not api will be redirected to index.html
+    app.use('/robots.txt', express.static(path.join(__dirname, 'robots.txt')));
+
     app.get('*', (req,res) => res.sendFile(path.resolve(__dirname, 'front', 'dist', 'index.html')))
 } else {
     app.get('/', (req,res) => {
