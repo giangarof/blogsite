@@ -51,7 +51,7 @@ export default function Navbar(props) {
                         <h2>Now</h2>
                       </Typography> */}
                     </Box>
-                    <Box sx={{display:'flex', gap:'10px', alignItems:"center"}}>
+                    {/* <Box sx={{display:'flex', gap:'10px', alignItems:"center"}}>
                       <Typography sx={sx} component="a" href={`/profile/${userId}` }>
                         <h2>Profile</h2>
                       </Typography>
@@ -59,7 +59,7 @@ export default function Navbar(props) {
                       <Typography sx={sx}>
                         <Logout/>
                       </Typography>
-                    </Box>
+                    </Box> */}
                   </Box>
                 </Toolbar>
               </Box>
