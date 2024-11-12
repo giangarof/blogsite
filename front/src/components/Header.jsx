@@ -75,7 +75,7 @@ export default function Header() {
                         width:{md:'70%'}, color:'#fff',    
                     }}>
                         <Typography variant="h4">Gianmarco Garofalo</Typography>
-                        <Typography variant="h5">Software developer</Typography>
+                        <Typography variant="h5">Software Developer</Typography>
                         <Box sx={{
                             backgroundColor:'#646464',
                             borderRadius:'10px',
