@@ -91,6 +91,7 @@ export default function AllPosts() {
                                 {Array.isArray(item.image) && item.image.length > 0 && (
                                     <CardMedia 
                                         component='img'
+                                        alt={item.title}
                                         // style={{width:'100%', objectFit:'fill'}}
                                         image={item.image[0].url}
                                         sx={{
@@ -118,9 +119,9 @@ export default function AllPosts() {
                                         justifyContent:'center',
                                         gap:'10px'
                                     }}>
-                                    <Typography variant="h5">{item.title}</Typography>
+                                    <Typography style={{ fontWeight: 600 }}>{item.title}</Typography>
                                     <Typography 
-                                        variant="p" 
+                                        // variant="p" 
                                         sx={{
                                             whiteSpace:'nowrap', 
                                             overflow:'hidden', 

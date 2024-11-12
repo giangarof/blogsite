@@ -111,11 +111,11 @@ const BoxInfo = () =>{
 const IconsBox = () => {
     return (
         <>
-            <Typography component="a" href="https://github.com/giangarof">
+            <Typography component="a" role='link' href="https://github.com/giangarof" aria-label="Github link">
             <GitHubIcon sx={IconsStyle}/>
             </Typography>             
 
-            <Typography component="a" href="">      
+            <Typography component="a" role='link' href="https://www.linkedin.com/in/gianmarco-g/" aria-label="LinkedIn link">      
                 <LinkedInIcon sx={IconsStyle}/>
             </Typography>
         </>
