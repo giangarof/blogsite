@@ -1,13 +1,14 @@
 import { Container, Box, colors, Typography } from "@mui/material";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+
 export default function Footer() {
     const cYear = new Date().getFullYear()
 
     const footerBar ={
         paddingTop:4, paddingBottom:4, 
         background: '#000',
-        color: '#fff',
+        // color: '#fff',
     
     }
     const containerDeco = {

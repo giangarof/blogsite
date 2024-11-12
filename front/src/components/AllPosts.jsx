@@ -61,8 +61,7 @@ export default function AllPosts() {
 
     return (
         <>
-            {loading ? <CircularIndeterminate sx={{position:'absolute', left: '50%', 
-        top: '50%', transform: 'translate(-50%, -50%)'}} />  : (
+            {loading ? <CircularIndeterminate />  : (
 
                 <Container id="AllPosts">
                     <Typography sx={{marginTop:'2rem'}}>Total Projects: {post.length}</Typography>

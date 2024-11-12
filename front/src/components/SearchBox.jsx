@@ -33,7 +33,7 @@ export default function SearchBox() {
 
     return (
         <>
-        <Container>
+        <Container sx={{mt:4}}>
             <Box>
                 <Paper component="form" onSubmit={submitHandler} sx={search}>
                     <TextField 

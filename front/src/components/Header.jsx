@@ -2,154 +2,106 @@ import { Box, Typography, Tooltip, Card, Button, Container, Backdrop } from "@mu
 
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import { useEffect, useState } from "react";
-import axios from "axios";
 
 const BoxHeader = {
-    marginBottom:4,
-    textAlign:'center',
+    height:'100vh',
+    // marginBottom:4,
+    // textAlign:'center',
     paddingTop:4, paddingBottom:4, 
     // background: "#000"
     background: "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(97,97,97,1) 59%, rgba(0,0,0,1) 100%)"
     // background:"linear-gradient(0deg, rgba(217,226,223,1) 0%, rgba(254,254,254,1) 28%, rgba(74,113,187,1) 100%)"
 }
 
-const boxStyle = {
-    display:'flex',
-    flexDirection:{xs: 'column',md:'row'},
-    justifyContent:{sm: 'center', md:'space-around'},
-    alignItems:{sm:'center'},
-    gap:{xs:'10px'},
-    padding:'4%',
-
-}
-
-const cardStyle = {
-    display:'flex', flexDirection:'column', justifyContent:'center',
-    width: {sm: '99%', md:'30%'}, 
-    height: '250px',
-    gap:'10px', color:'#fff'
-    
-}
-
 const IconsStyle = {
     textDecoration:"none", color:"#fff", cursor:"pointer", 
-    fontSize: {sm:'20px', lg:'60px'}
-}
-
-const btnStyle = {
-    color:'#fff',
-    backgroundColor:'rgba(0,0,0, .1)'
-}
-
-const view = {
-    color:"#fff",
-    display:'flex', flexDirection:'row', justifyContent:'center',
-    letterSpacing:'4px',
-    width: {sm: '50%', md:'20%'}
-}
-
-const descriptionBox = {
-    width: {xs: '100%', md:'50%'},
-    padding:'15px',
-    color:'#fff',
-    borderRadius: '20px',
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-}
-
-const BoxDescription = () => {
-    return (
-        <Box>
-            <Typography>Independent and motivated Software Developer; Star Wars ambassador and The Big Bang Theory fan.</Typography>
-        </Box>
-    )
-}
-const BoxInfo = () =>{
-    return (
-        <Box sx={boxStyle}>
-            <Card sx={cardStyle} className="gradient">
-                <span className="span-header">Profile</span>
-                <div className="show-card">
-                    <Button sx={btnStyle} href="https://gigadev.onrender.com/" className="showed">Click</Button>
-                    <p className="showed">A bit more about me and about what I do.</p>
-                </div>
-            </Card>
-            <Card sx={cardStyle} className="gradient" >
-                <span className="span-header">Projetcs</span>
-                <div className="show-card" >
-                    <Button sx={btnStyle} href="#AllPosts" className="showed">Click</Button>
-                    <p className="showed">Check out some of my fullstack projects.</p>
-                </div>
-            </Card>
-            <Card sx={cardStyle} className="gradient">
-                <span className="span-header">News</span>
-                <div className="show-card" >
-                    <Button sx={btnStyle} href="/now" className="showed">Click</Button>
-                    <p className="showed">What I'm doing now</p>
-
-                </div>
-            </Card>
-        </Box>
-    )
+    mt:4,
+    fontSize: {xs:'40px', lg:'50px'}
 }
 
 
 const IconsBox = () => {
     return (
         <>  
-            <Tooltip title="Github Link">
-                <Typography component="a" role='link' href="https://github.com/giangarof" aria-label="Github link">
-                <GitHubIcon sx={IconsStyle}/>
-                </Typography>             
-            </Tooltip>
+            <Box sx={{
+                color:'#fff', 
+                // mt:2,
+                display:'flex', flexDirection:'column', alignItems:'center'
+            }}>
+                <Box sx={{display:'flex', gap:4}}>
+                    <Tooltip title="Github Link">
+                        <Typography component="a" role='link' href="https://github.com/giangarof" aria-label="Github link">
+                        <GitHubIcon sx={IconsStyle}/>
+                        </Typography>             
+                    </Tooltip>
 
-            <Tooltip title="LinkedIn Link">
-                <Typography component="a" role='link' href="https://www.linkedin.com/in/gianmarco-g/" aria-label="LinkedIn link">      
-                    <LinkedInIcon sx={IconsStyle}/>
-                </Typography>
-            </Tooltip>
+                    <Tooltip title="LinkedIn Link">
+                        <Typography component="a" role='link' href="https://www.linkedin.com/in/gianmarco-g/" aria-label="LinkedIn link">      
+                            <LinkedInIcon sx={IconsStyle}/>
+                        </Typography>
+                    </Tooltip>
+                </Box>
+                <Box sx={{
+                    mt:{xs:1, md:1},
+                    textAlign:{xs:"center", md:'left'}
+                    
+                    }}>
+                    <p>Feel free to reach me out for jobs and project purposes.</p>
+                    <p>*Note: If you are a recruiter, drop me a message.</p>                     
+                </Box>
+            </Box>
         </>
     )
 }
 
 
+const btns = {
+    border:'2px #fff solid',
+    color:"#fff",
+    '&:hover': {
+        backgroundColor:'#fff',
+        color:'#000'
+    },
+}
+
 export default function Header() {
-    return (
+    return(
         <>
-            <Box 
-                sx={BoxHeader}>
-                <Box sx={boxStyle}>
-                    <Box sx={view}>
-                        {/* <Box className="typing-effect">
-                            <h1>Hello there!</h1>
-                        </Box> */}
-                        <Box>
-                            <h1>Hello, World!</h1>
+            <Box sx={BoxHeader}>
+                <Container>
+
+                    {/* about me */}
+                    <Box sx={{
+                        width:{md:'70%'}, color:'#fff',    
+                    }}>
+                        <Typography variant="h4">Gianmarco Garofalo</Typography>
+                        <Typography variant="h5">Software developer and data analyst</Typography>
+                        <Box sx={{
+                            backgroundColor:'#646464',
+                            borderRadius:'10px',
+                            padding:1,
+                            // textAlign:{xs:'center', md:'left'}  ,
+                            mt:2 
+                            }}>
+                            
+                            <p>Strong and independent Software Developer.</p>
+                            <p>Expertise with UI/UX, OOP, SEO, DOM, API'S, Networking.</p>
+                            <p>Skilled in multiple programming languages principles.</p>
+                            <p>My current stack includes: MERN, MEVN.</p>
+                            <p>With my background, I do provide a combination of technical expertise and collaborative mindset to every project.</p>
+                            <p>AWS Certified.</p>
+                            
                         </Box>
                     </Box>
-                    <Box sx={descriptionBox}>
-                        <BoxDescription/>
-                    </Box>
-                </Box>
 
-                <Box sx={{color:"#fff"}}>
-                    <BoxInfo/>
-                    <p>My social media</p>
-                    <Box sx={{
-                        display:'flex', 
-                        // flexDirection:"row", 
-                        justifyContent:'center', 
-                        gap:'20px',
-                        padding:'15px'
-                    }}
-                    >
-                        <IconsBox/>
+                    {/* btns  */}
+                    <Box sx={{display:'flex', gap:4, mt:4}}>
+                        <Button href="/projects" sx={btns}>Projects</Button>
+                        <Button href="/now" sx={btns}>Notes</Button>
                     </Box>
-                    <div>
-                        <p>Feel free to reach me out for jobs and project purposes.</p>
-                        <p>*Note: If you are a recruiter, drop me a message.</p>
-                    </div>
-                </Box>
+
+                    <IconsBox/>
+                </Container>
             </Box>
         </>
 

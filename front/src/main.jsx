@@ -20,6 +20,7 @@ import Profile from './screen/Profile.jsx'
 import UserUpdate from './screen/UserUpdate.jsx'
 
 import NewPost from './screen/Posts/newPost.jsx'
+import Projects from './screen/Posts/Projects.jsx'
 import AllPosts from './components/AllPosts.jsx'
 import Post from './screen/Posts/Post.jsx'
 import UpdateForm from './screen/Posts/UpdateForm.jsx'
@@ -43,7 +44,8 @@ const router = createBrowserRouter(
 
 
       {/* Posts */}
-      <Route path='/search/:keyword' element={<Main/>} />
+      <Route path='/projects' element={<Projects/>}/>
+      <Route path='/search/:keyword' element={<Projects/>} />
       <Route path='/new' element={<NewPost/>}/>
       <Route path='/post/:id' element={<Post/>}/>
       <Route path='/profile/:id' element={<Profile/>}/>

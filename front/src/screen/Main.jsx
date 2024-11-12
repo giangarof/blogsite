@@ -7,11 +7,11 @@ import Meta from "../components/Meta.jsx";
 
 export default function Main() {
     return(
-        <>
+        <>  
             <Meta />
             <Header/>
-            <SearchBox/>
-            <AllPosts/>
+            {/* <SearchBox/>
+            <AllPosts/> */}
             <Footer/>        
         </>
     )

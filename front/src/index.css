@@ -7,9 +7,9 @@
     font-style: normal;
 }
 
-.span-header{
-    font-size: 1.5rem;
-}
+/* .header-text{
+    font-size: 3.5rem;
+} */
 
 .line:first-child{
     animation: move 33s infinite ease-in-out;
@@ -134,5 +134,7 @@
   }
 
 
+
+  
 
   
