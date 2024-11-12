@@ -7,16 +7,12 @@ export default function Meta({title,description, keywords}) {
         <title>{title}</title>
         <meta  name="description" content={description} />
         <meta name="keywords" content={keywords} />
-
-        {/* Open Graph Meta Tags */}
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
     </Helmet>
   )
 }
 
 Meta.defaultProps={
     title:'Giga Development',
-    description:'Software Development',
-    keywords:'Frontend, backend, fullstack'
+    description:'Professional sofware developer with expertise in UI/UX, data analysis, and web application security. Delivering scalable code with multiple programming languages.',
+    keywords:'Frontend, Backend, Fullstack, React.js, Web Development, Data'
 }

@@ -2,10 +2,12 @@ import { Container, Box, colors, Typography } from "@mui/material";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 export default function Footer() {
+    const cYear = new Date().getFullYear()
+
     const footerBar ={
-    paddingTop:4, paddingBottom:4, 
-    background: '#000',
-    color: '#fff',
+        paddingTop:4, paddingBottom:4, 
+        background: '#000',
+        color: '#fff',
     
     }
     const containerDeco = {
@@ -38,7 +40,7 @@ export default function Footer() {
                         href="https://github.com/giangarof"
                         sx={{textDecoration:"none", color:"white", cursor:"pointer"}}
                     >
-                        Gianmarco Garofalo &#169; 2024
+                        Gianmarco Garofalo &#169; {cYear}
                     </Typography>
 
                 </Box>
