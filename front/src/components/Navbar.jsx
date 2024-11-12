@@ -72,7 +72,7 @@ export default function Navbar(props) {
                           <Typography sx={sx} component="a" href="/" >
                             <h2>Home</h2>
                           </Typography>
-                          <Typography sx={sx} component="a" href="#AllPosts">
+                          <Typography sx={sx} component="a" href="/projects">
                             <h2>Projects</h2>
                           </Typography>
                           <Typography sx={sx} component="a" href="/now">

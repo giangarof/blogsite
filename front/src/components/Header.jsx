@@ -75,7 +75,7 @@ export default function Header() {
                         width:{md:'70%'}, color:'#fff',    
                     }}>
                         <Typography variant="h4">Gianmarco Garofalo</Typography>
-                        <Typography variant="h5">Software developer and data analyst</Typography>
+                        <Typography variant="h5">Software developer</Typography>
                         <Box sx={{
                             backgroundColor:'#646464',
                             borderRadius:'10px',
@@ -85,7 +85,7 @@ export default function Header() {
                             }}>
                             
                             <p>Strong and independent Software Developer.</p>
-                            <p>Expertise with UI/UX, OOP, SEO, DOM, API'S, Networking.</p>
+                            <p>Expertise with UI/UX, OOP, SEO, DOM, JSON, API'S, Networking.</p>
                             <p>Skilled in multiple programming languages principles.</p>
                             <p>My current stack includes: MERN, MEVN.</p>
                             <p>With my background, I do provide a combination of technical expertise and collaborative mindset to every project.</p>
