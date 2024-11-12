@@ -1,0 +1,18 @@
+User-agent: *
+Disallow: /signin
+Disallow: /signup
+Disallow: /post/update/*
+Disallow: /note/update/*
+Disallow: /adminpanel
+Disallow: /adminpanel-notes
+Disallow: /user/update
+
+# Allow crawlers to access the main page, search results, posts, and notes
+Allow: /search/
+Allow: /new
+Allow: /post/*
+Allow: /note/*
+Allow: /now
+Allow: /new-note
+
+sitemap: https://myblogsite-9ndr.onrender.com/
