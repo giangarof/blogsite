@@ -45,7 +45,7 @@ export default function () {
     }
 
     const goBack = async() => {
-        navigate(`/`)
+        navigate(`/projects`)
     }
     
     useEffect(() => {

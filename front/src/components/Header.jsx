@@ -2,6 +2,7 @@ import { Box, Typography, Tooltip, Card, Button, Container, Backdrop } from "@mu
 
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import { Link } from "react-router-dom";
 
 const BoxHeader = {
     height:'100vh',
@@ -85,8 +86,8 @@ export default function Header() {
                             }}>
                             
                             <p>Strong and independent Software Developer.</p>
-                            <p>Expertise with UI/UX, OOP, SEO, DOM, JSON, API'S, Networking.</p>
-                            <p>Skilled in multiple programming languages principles.</p>
+                            <p>Expertise with UI/UX, OOP, SEO, DOM, JSON, API'S, networking, debugging.</p>
+                            <p>Skilled in: javascript, typescript, python, sql.</p>
                             <p>My current stack includes: MERN, MEVN.</p>
                             <p>With my background, I do provide a combination of technical expertise and collaborative mindset to every project.</p>
                             <p>AWS Certified.</p>
@@ -96,8 +97,15 @@ export default function Header() {
 
                     {/* btns  */}
                     <Box sx={{display:'flex', gap:4, mt:4}}>
-                        <Button href="/projects" sx={btns}>Projects</Button>
-                        <Button href="/now" sx={btns}>Notes</Button>
+                        <Link to='/projects'>
+                            <Button sx={btns}>Projects</Button>
+                        </Link>
+                        <Link to="/now">
+                            <Button sx={btns}>My Blog</Button>
+                        </Link>
+                        <Link to="/about">
+                            <Button sx={btns}>About Me</Button>
+                        </Link>
                     </Box>
 
                     <IconsBox/>

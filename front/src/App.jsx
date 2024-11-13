@@ -9,14 +9,14 @@ import Navbar from './components/Navbar.jsx'
 const App = () => {
   return(
     <>
-    <main>
+    {/* <main> */}
       {/* <Container> */}
-        <React.Fragment>
+        {/* <React.Fragment> */}
             <Navbar/>
             <Outlet/> 
-        </React.Fragment>
+        {/* </React.Fragment> */}
       {/* </Container> */}
-    </main>
+    {/* </main> */}
     </>
   )
 }

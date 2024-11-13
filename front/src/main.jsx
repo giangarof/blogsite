@@ -33,6 +33,8 @@ import AdminPanelNotes from './screen/Notes/AdminPanelNotes.jsx'
 import NoteById from './screen/Notes/NoteById.jsx'
 import NoteByIdUpdate from './screen/Notes/NoteByIdUpdate.jsx'
 
+import AboutMe from './screen/About.jsx'
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App/>}>
@@ -61,6 +63,8 @@ const router = createBrowserRouter(
       {/* User */}
       <Route path='/adminpanel' element={<AdminPanel/>}/>
       <Route path='/user/update' element={<UserUpdate/>}/>
+
+      <Route path="/about" element={<AboutMe/>}/>
 
     </Route>
   )

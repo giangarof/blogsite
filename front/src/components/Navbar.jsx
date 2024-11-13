@@ -1,7 +1,7 @@
 import { 
   AppBar, 
   Toolbar, 
-  Typography, Box, Tooltip, IconButton, Icon, Avatar, Stack, Container } from "@mui/material";
+  Typography, Box, Tooltip, IconButton, Icon, Avatar, Stack, Container, Link as A, } from "@mui/material";
 import img from '../assets/react.svg'
 
 import { useEffect, useState } from "react";
@@ -12,13 +12,16 @@ import LoginIcon from '@mui/icons-material/Login';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AddIcon from '@mui/icons-material/Add';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Link } from "react-router-dom";
   
 export default function Navbar(props) {
   const [userInfo, setUserInfo] = useState(null)
   const [userId, setUserId] = useState('')
   const [isAdmin, setIsAdmin] = useState(false)
+
   const sx = {
-    textDecoration:"none", color:'inherit'
+    cursor:'pointer',
+    color:'white'
   }
   
   useEffect(() => {
@@ -38,14 +41,14 @@ export default function Navbar(props) {
                 <Toolbar sx={{backgroundColor:"#000", color:'#fff'}}>
                   <Box sx={{ display:'flex', justifyContent:'space-between', width:'100%'}} >
                     <Box sx={{ display:'flex', gap:'10px'}}>
-                      <Typography sx={sx} component="a" href="/">
+                      <A to='/' component={Link} color="inherit" underline='none'>
                         <h2>Home</h2>
-                      </Typography>
+                      </A>
                     </Box>
                     <Box sx={{display:'flex', gap:'10px', alignItems:"center"}}>
-                      <Typography sx={sx} component="a" href={`/profile/${userId}` }>
+                      <A to={`/profile/${userId}`} component={Link} color="inherit" underline='none' sx={sx}>
                         <h2>Profile</h2>
-                      </Typography>
+                      </A>
                       
                       <Typography sx={sx}>
                         <Logout/>
@@ -69,16 +72,15 @@ export default function Navbar(props) {
                           flexDirection:'row',
                           justifyContent:{xs:"center",md:'space-between'},
                         }}>
-                          <Typography sx={sx} component="a" href="/" >
+                          <A to='/' component={Link} color="inherit" underline='none'>
                             <h2>Home</h2>
-                          </Typography>
-                          <Typography sx={sx} component="a" href="/projects">
-                            <h2>Projects</h2>
-                          </Typography>
-                          <Typography sx={sx} component="a" href="/now">
-                            <h2>News</h2>
-                          </Typography>
-                          
+                          </A>
+                          <A to='/projects' component={Link} color="inherit" underline='none'>
+                          <h2>Projects</h2>
+                          </A>
+                          <A to='/now' component={Link} color="inherit" underline='none'>
+                          <h2>News</h2>
+                          </A>    
                         </Box>
                       </Box>
                     </Toolbar>
