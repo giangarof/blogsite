@@ -1,11 +1,14 @@
-import { Button, Container, Typography } from '@mui/material'
+import { Button, Container, Typography, Link as A } from '@mui/material'
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 export default function AboutMe() {
   return (
     <>
         <Container sx={{mt:3}}>
-            <Button variant='outlined' href='/'>Go Back</Button>
+          <Link to='/'>
+            <Button variant='outlined'>Go Back</Button>
+          </Link>
             <Typography>Under development, come back soon!</Typography>
         </Container>
     </>

@@ -13,26 +13,27 @@ import {HelmetProvider} from 'react-helmet-async'
 // screens
 import Main from './screen/Main.jsx'
 
+//user
 import Signin from './screen/Signin.jsx'
 import Register from './screen/Register.jsx'
-
 import Profile from './screen/Profile.jsx'
 import UserUpdate from './screen/UserUpdate.jsx'
 
+//posts
 import NewPost from './screen/Posts/newPost.jsx'
 import Projects from './screen/Posts/Projects.jsx'
-import AllPosts from './components/AllPosts.jsx'
 import Post from './screen/Posts/Post.jsx'
 import UpdateForm from './screen/Posts/UpdateForm.jsx'
 import AdminPanel from './screen/Posts/AdminPanel.jsx'
 
-
+//notes
 import Now from './screen/Notes/Now.jsx'
 import NewNote from './screen/Notes/newNote.jsx'
 import AdminPanelNotes from './screen/Notes/AdminPanelNotes.jsx'
 import NoteById from './screen/Notes/NoteById.jsx'
 import NoteByIdUpdate from './screen/Notes/NoteByIdUpdate.jsx'
 
+//about me
 import AboutMe from './screen/About.jsx'
 
 const router = createBrowserRouter(

@@ -1,12 +1,17 @@
+//react
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+//mui
 import { Container,Box, Card, Button, CardContent, CardMedia, Typography, Link as A, Tooltip } from "@mui/material";
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-
-import axios from "axios";
-import { useEffect, useState } from "react";
-
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
+//dependencies
+import axios from "axios";
+
+//components
 import CircularIndeterminate from "../../components/Spinner";
 import Meta from "../../components/Meta";
 
@@ -77,8 +82,10 @@ export default function Now() {
             {isLoading ? <CircularIndeterminate /> : (
                 <>
                     <Container sx={{mt:3}}>
-                        <Button variant='outlined' href='/'>Go Back</Button>
-                        <bOX sx={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
+                        <Link to='/'>
+                            <Button variant='outlined'>Go Back</Button>
+                        </Link>
+                        <Box sx={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
                             {data.length == 0 ? 
                                 <Box sx={{marginTop:'2rem'}}>
                                     <Typography>No notes yet ...</Typography>
@@ -115,7 +122,7 @@ export default function Now() {
                                     ))}
                                 </>
                             )}
-                        </bOX>
+                        </Box>
                     </Container>
                     <Meta title="Notes" />
                     

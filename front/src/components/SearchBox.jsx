@@ -27,7 +27,7 @@ export default function SearchBox() {
             setKeyword('')
             navigate(`/search/${keyword}`)
         }else {
-            navigate('/')
+            navigate('/projects')
         }
     }
 
