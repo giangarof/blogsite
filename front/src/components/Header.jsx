@@ -5,7 +5,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Link } from "react-router-dom";
 
 const BoxHeader = {
-    height:'100vh',
+    height:{xs: 'none', md:'100vh'},
     // marginBottom:4,
     // textAlign:'center',
     paddingTop:4, paddingBottom:4, 
@@ -63,6 +63,7 @@ const btns = {
         backgroundColor:'#fff',
         color:'#000'
     },
+    width: {xs:'100%'},
 }
 
 export default function Header() {
@@ -86,17 +87,27 @@ export default function Header() {
                             }}>
                             
                             <p>Strong and independent Software Developer.</p>
+                            <p>Expertise in Frontend and Backend Development.</p>
                             <p>Expertise with UI/UX, OOP, SEO, DOM, JSON, API'S, networking, debugging.</p>
                             <p>Skilled in: javascript, typescript, python, sql.</p>
                             <p>My current stack includes: MERN, MEVN.</p>
                             <p>With my background, I do provide a combination of technical expertise and collaborative mindset to every project.</p>
-                            <p>AWS Certified.</p>
+                            <p>AWS Cloud Practicioner.</p>
+                            
+                            
                             
                         </Box>
                     </Box>
 
                     {/* btns  */}
-                    <Box sx={{display:'flex', gap:4, mt:4}}>
+                    <Box sx={{
+                        display: {xs:"flex", md:'flex'},
+                        flexDirection: {xs:"column", sm:'row'},
+                        width: {xs:'100%'},  
+                        gap:{xs:1, md:4}, 
+                        mt:4,
+                        
+                        }}>
                         <Link to='/projects'>
                             <Button sx={btns}>Projects</Button>
                         </Link>
