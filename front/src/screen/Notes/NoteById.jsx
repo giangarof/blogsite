@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from "react-router-dom"
 
 //mui
-import { Box, Typography, Link as A, Container, Button, } from "@mui/material";
+import { Box, Typography, Link as A, Container, Button, Tooltip, } from "@mui/material";
+import EditIcon from '@mui/icons-material/Edit';
 
 //dependencies
 import axios from "axios"
@@ -23,7 +24,10 @@ import Meta from '../../components/Meta';
 export default function () {
     const [note, setNote] = useState('')
     const [isLoading, setIsLoading] = useState(false)
+
     const [isAdmin, setIsAdmin] = useState(false)
+    const userId = localStorage.getItem('userId')
+
     const {id} = useParams()
     const navigate = useNavigate()
     
@@ -55,6 +59,7 @@ export default function () {
         const isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
         setIsAdmin(isAdmin)
         fetchPosts()
+        // fetchUser()
     }, [id])
     const sanitizedHTML = DOMPurify.sanitize(note.description);
     
@@ -77,6 +82,14 @@ export default function () {
         display:'flex', flexDirection:'column', gap:'1rem'
       }
 
+      const iconUpdate = {
+        cursor:'pointer',
+        "&:hover":{
+            color:'blue'
+
+        }
+    }
+
   return (
 
         <Container sx={{mt:3, mb:3}}>
@@ -96,7 +109,21 @@ export default function () {
                                         className='content-preview' 
                                         dangerouslySetInnerHTML={{ __html: sanitizedHTML }} /> 
                                 </Box>
-                                <Typography sx={{color:'grey', textAlign:'end'}}>Posted: {note.createdAt?.slice(0,10)}</Typography>
+                                <Box sx={{display:'flex', flexDirection:'column', alignItems:'end', gap:'1rem'}}>
+                                    {isAdmin === true ?
+                                    <>
+                                            <Box sx={{display:'flex', gap:'1rem', justifyItems:'center', alignItems:'center'}}>
+                                                <Tooltip title="Update">
+                                                    <A href={`/note/update/${note._id}`}>
+                                                        <EditIcon sx={iconUpdate} />
+                                                    </A>
+                                                </Tooltip>
+                                                <CopyLink/>
+                                            </Box>
+                                    </> : <CopyLink/>
+                                    }
+                                    <Typography sx={{color:'grey', textAlign:'end'}}>Posted: {note.createdAt?.slice(0,10)}</Typography>
+                                </Box>
                             </Box>
                         </Box>
                     </>

@@ -1,8 +1,8 @@
 import { Textarea } from "@mui/joy";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'
@@ -46,7 +46,7 @@ export default function NoteByIdUpdate() {
         const data = await axios.put(`/api/note/${id}`, formData)
 
         // console.log(data);
-        navigate('/now')
+        navigate(`/note/${postId}`)
     }
 
     useEffect(() => {
@@ -55,7 +55,7 @@ export default function NoteByIdUpdate() {
 
     const outer = {
         marginTop:'2rem',
-        display:'flex', flexDirection:'row', justifyContent: 'center',
+        display:'flex', flexDirection:'Column',
     }
     
     const box = {
@@ -94,7 +94,10 @@ export default function NoteByIdUpdate() {
     ];
     return(
         <>
-            <Box sx={outer}>
+            <Container sx={outer}>
+            <Link to={`/note/${postId}`}>
+                <Button variant='outlined'>Go Back</Button>
+            </Link>
                 <Box sx={box}>
                     <Box sx={inner}>
                         <Typography variant="h5">Note's Title</Typography>
@@ -125,7 +128,7 @@ export default function NoteByIdUpdate() {
                     </Button>
                     </Box>
                 </Box>
-            </Box>
+            </Container>
 
         
         </>

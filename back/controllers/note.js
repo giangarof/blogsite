@@ -3,7 +3,7 @@ import Note from '../models/note.js'
 const getAll = async (req,res) => {
     try {
         const note = await Note.find({})
-        console.log(note)
+        // console.log(note)
         res.status(200).json(note)
     } catch (e) {
         res.send(e.message)

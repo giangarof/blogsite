@@ -74,11 +74,13 @@ export default function Header() {
 
                     {/* about me */}
                     <Box sx={{
-                        width:{md:'70%'}, color:'#fff',    
+                        // width:{md:'70%'}, 
+                        color:'#fff',    
                     }}>
                         <Typography variant="h4">Gianmarco Garofalo</Typography>
                         <Typography variant="h5">Software Developer</Typography>
                         <Box sx={{
+                            width:{md:'40%'},
                             backgroundColor:'#646464',
                             borderRadius:'10px',
                             padding:1,
@@ -87,11 +89,9 @@ export default function Header() {
                             }}>
                             
                             <p>Strong and independent Software Developer.</p>
-                            <p>Expertise in Frontend and Backend Development.</p>
-                            <p>Expertise with UI/UX, OOP, SEO, DOM, JSON, API'S, networking, debugging.</p>
-                            <p>Skilled in: javascript, typescript, python, sql.</p>
-                            <p>My current stack includes: MERN, MEVN.</p>
-                            <p>With my background, I do provide a combination of technical expertise and collaborative mindset to every project.</p>
+                            <p>Expertise in Frontend, Backend, and cloud technologies.</p>
+                            
+
                             <p>AWS Cloud Practicioner.</p>
                             
                             

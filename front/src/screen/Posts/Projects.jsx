@@ -8,7 +8,7 @@ import CircularIndeterminate from "../../components/Spinner";
 
 //mui
 import { color, Container, display, positions, textAlign, width } from '@mui/system';
-import { Box, Card, Button, CardContent, CardMedia, Typography, Tooltip, Hidden } from "@mui/material";
+import { Box, Card, Button, CardContent, CardMedia, Typography, Tooltip, Hidden, Link as A } from "@mui/material";
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
 //devpendencies
@@ -125,16 +125,16 @@ export default function Projects() {
                                     </Typography>
 
                                     <Tooltip title="Read article" >
-                                        <Button variant="contained" size="small" sx={{width:"10px", }} href={`/post/${item._id}`}>
-                                            {/* <Typography component='a' sx={{textDecoration:"none", color:"white"}}> */}
-                                            <AutoStoriesIcon />
-                                            {/* </Typography> */}
-                                        </Button>
+                                        <A component={Link} to={`/post/${item._id}`}>
+                                            <Button variant="contained" size="small">
+                                                <AutoStoriesIcon/>
+                                            </Button>
+                                        </A >
                                     </Tooltip>
                                 </Container>
                                 </CardContent>
                             </Card>
-                            ))): 
+                            ))) : 
                                 <Typography sx={emptyQ}>
                                     No technology found with your query. 
                                 </Typography>

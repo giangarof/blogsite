@@ -58,7 +58,7 @@ const UserUpdateForm = () => {
     
             const res = await axios.put(`/api/user/profile/${id}`, formData)
             navigate('/')
-            console.log(res.data)
+            // console.log(res.data)
         } catch (error) {
             console.log(error)
         }

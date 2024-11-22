@@ -18,7 +18,7 @@ export default function Register() {
     try {
       const credentials = {name, username, email, password}
       const newUser = await axios.post('/api/user/signup', credentials)
-      console.log(newUser)
+      // console.log(newUser)
       navigate(`/signin`)
       return newUser
       

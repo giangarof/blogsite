@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 //mui
 import { Container,Box, Card, Button, CardContent, CardMedia, Typography, Link as A, Tooltip } from "@mui/material";
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 
 //dependencies
 import axios from "axios";
@@ -50,20 +48,12 @@ export default function Now() {
         marginTop: '20px',
         display:'flex', flexDirection:'column',
         gap:'1rem',
-        backgroundColor:'rgba(0,0,0,0.03)',
+        // backgroundColor:'rgba(0,0,0,0.03)',
         padding:'9px',
         width: {
             md:{
-                width:'50%'
+                width:'100%'
             }
-        }
-    }
-
-    const iconUpdate = {
-        cursor:'pointer',
-        "&:hover":{
-            color:'blue'
-
         }
     }
     const date = {
@@ -77,6 +67,17 @@ export default function Now() {
         fontStyle:'italic'
     }
 
+    const grid = {
+        width:'100%',
+        display:'grid', 
+        gap:'1rem',
+        gridTemplateColumns: {
+        sm: 'repeat(1, 1fr)',  
+        md: 'repeat(2, 1fr)',  
+    },
+
+    }
+
     return(
         <>  
             {isLoading ? <CircularIndeterminate /> : (
@@ -85,43 +86,25 @@ export default function Now() {
                         <Link to='/'>
                             <Button variant='outlined'>Go Back</Button>
                         </Link>
-                        <Box sx={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
-                            {data.length == 0 ? 
-                                <Box sx={{marginTop:'2rem'}}>
-                                    <Typography>No notes yet ...</Typography>
-                                </Box> : (
-                                <>
-                                    {data.map((i) => (
-                                        <Box sx={sx} key={i._id}>
-                                            <Typography>~ {i.title}</Typography>
-                                            <Typography sx={intro}>{i.about}</Typography>
-                                            <Tooltip title="Read article" >
-                                                <Button variant="contained" size="small" sx={{width:"10px" }} href={`/note/${i._id}`}>
-                                                    {/* <Typography component='a' sx={{textDecoration:"none", color:"white"}}> */}
-                                                    <AutoStoriesIcon />
-                                                    {/* </Typography> */}
-                                                </Button>
-                                            </Tooltip>
-                                            <Box sx={{display:'flex', flexDirection:'column', alignItems:'end' }}>
-                                                <Box>
-                                                    {admin === true ?
-                                                    <>
-                                                            <Box>
-                                                                <Tooltip title="Update">
-                                                                    <A href={`/note/update/${i._id}`}>
-                                                                        <EditIcon sx={iconUpdate} />
-                                                                    </A>
-                                                                </Tooltip>
-                                                            </Box>
-                                                    </> : ''
-                                                    }
-                                                </Box>
-                                                <Typography sx={date}>Last update: {i.createdAt.slice(0,10)}</Typography>
-                                            </Box>
-                                        </Box>
-                                    ))}
-                                </>
-                            )}
+                        <Box sx={grid}>
+                            {data.map((i) => (
+                                <Box sx={sx} key={i._id}>
+                                    <Typography>~ {i.title}</Typography>
+                                    <Typography sx={intro}>{i.about}</Typography>
+                                    <Box sx={{display:'flex', gap:'1rem'}}>
+                                        <Tooltip title="Read article" >
+                                        <A component={Link} to={`/note/${i._id}`}>
+                                            <Button variant="contained" size="small">
+                                                <AutoStoriesIcon/>
+                                            </Button>
+                                        </A >
+                                        </Tooltip>
+                                    </Box>
+                                    <Box sx={{display:'flex', flexDirection:'column', alignItems:'end' }}>
+                                        <Typography sx={date}>Update: {i.createdAt.slice(0,10)}</Typography>
+                                    </Box>
+                                </Box>
+                                    ))} 
                         </Box>
                     </Container>
                     <Meta title="Notes" />
