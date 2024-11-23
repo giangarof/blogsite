@@ -88,10 +88,10 @@ export default function Header() {
                             mt:2 
                             }}>
                             
-                            <p>Strong and independent Software Developer.</p>
+                            <p>3+ years experience as Software Developer.</p>
                             <p>Expertise in Frontend, Backend, and cloud technologies.</p>
+                            <p>Proficient in OOP, DOM, QA, Testing, Debugging.</p>
                             
-
                             <p>AWS Cloud Practicioner.</p>
                             
                             
