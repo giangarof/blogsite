@@ -111,7 +111,7 @@ export default function Header() {
                         <Link to='/projects'>
                             <Button sx={btns}>Projects</Button>
                         </Link>
-                        <Link to="/now">
+                        <Link to="/myblog">
                             <Button sx={btns}>My Blog</Button>
                         </Link>
                         <Link to="/about">

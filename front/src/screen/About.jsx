@@ -16,6 +16,7 @@ const outGrid = {
   backgroundColor:'rgba(0,0,0,0.05)',
   pt:'1rem',
   pb:'1rem',
+  height:'100vh'
 }
 
 const description = {  

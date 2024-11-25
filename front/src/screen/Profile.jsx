@@ -21,7 +21,6 @@ export default function Profile() {
   
   const fetchUser = async() => {
     const res = await axios.get(`/api/user/profile/${id}`);
-    console.log(res)
     setName(res.data.user.name);
     setUsername(res.data.user.username);
     setEmail(res.data.user.email);
@@ -50,7 +49,7 @@ export default function Profile() {
   }
 
   const icons_inner = {
-    display:'flex', flexDirection:'column', gap:'1rem'
+    display:'flex', flexDirection:'row', gap:'1rem'
   }
     
   return (
@@ -59,6 +58,8 @@ export default function Profile() {
       <>
       <Container sx={container}>
         <Box sx={box}>
+          <Typography sx={box} level="body-lg">{isAdmin ? "Admin roles" : 'No admin'}</Typography>
+
           <Typography level="body-lg">
             Name: {name}
           </Typography>
@@ -77,10 +78,8 @@ export default function Profile() {
             
           {isAdmin === true ? (
             <>
-            <Typography sx={box} level="body-lg">Admin: {isAdmin ? "Admin roles" : 'No admin'}</Typography>
-            <Stack display="flex" flexDirection="row" gap={4}>
-
-              {/* Posts */}
+            <Container sx={{display:'flex', gap:'1rem'}}>
+              Projects
               <Box sx={icons_inner}>
                 <Typography component="a" href="/new">
                   <Tooltip title="Add new post">
@@ -93,8 +92,10 @@ export default function Profile() {
                   </Tooltip>
                 </Typography> 
               </Box>
+            </Container>
 
-              {/* Notes */}
+            <Container sx={{display:'flex', gap:'1rem'}}>
+              My Blog
               <Box sx={icons_inner}>
                 <Typography component="a" href="/new-note">
                   <Tooltip title="Add new note">
@@ -107,24 +108,17 @@ export default function Profile() {
                   </Tooltip>
                 </Typography> 
               </Box>
+            </Container>
 
-
-
-
+            <Container sx={{display:'flex', gap:'1rem'}}>
+              Profile Management
               <Typography component="a" href="/user/update">
                 <Tooltip title='Update'>
                   <ManageAccountsIcon sx={box}/>
                 </Tooltip>
               </Typography>
-
-              <Typography component="a" href="https://gigadev.onrender.com/">
-                <Tooltip title='About me'>
-                  <AccountCircleIcon sx={box}/>
-                </Tooltip>
-              </Typography>
-            </Stack>
-
-            </>
+            </Container>
+          </>
 
           ) : (
             <Typography sx={box} level="body-lg">Admin: No Admin Privilege</Typography>

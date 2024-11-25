@@ -1,23 +1,29 @@
 import { 
   AppBar, 
   Toolbar, 
-  Typography, Box, Tooltip, IconButton, Icon, Avatar, Stack, Container, Link as A, } from "@mui/material";
-import img from '../assets/react.svg'
+  Typography, Box, Tooltip, IconButton, Icon, Avatar, Stack, Container, Link as A, 
+  Menu,
+  MenuItem} from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu';
 
 import { useEffect, useState } from "react";
 import Logout from './Logout.jsx'
-import PersonIcon from '@mui/icons-material/Person';
-import HomeIcon from '@mui/icons-material/Home';
-import LoginIcon from '@mui/icons-material/Login';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import AddIcon from '@mui/icons-material/Add';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link } from "react-router-dom";
   
-export default function Navbar(props) {
+export default function Navbar() {
   const [userInfo, setUserInfo] = useState(null)
   const [userId, setUserId] = useState('')
   const [isAdmin, setIsAdmin] = useState(false)
+
+  const [anchorElNav, setAnchorElNav] = useState(null)
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
 
   const sx = {
     cursor:'pointer',
@@ -40,19 +46,66 @@ export default function Navbar(props) {
               <Box sx={{backgroundColor:"#000", color:'#fff'}}>
                 <Toolbar sx={{backgroundColor:"#000", color:'#fff'}}>
                   <Box sx={{ display:'flex', justifyContent:'space-between', width:'100%'}} >
-                    <Box sx={{ display:'flex', gap:'10px'}}>
-                      <A to='/' component={Link} color="inherit" underline='none'>
-                        <h2>Home</h2>
-                      </A>
+
+                    {/* Mobile view */}
+                    <Box sx={{ display:{xs:'flex', md:'none', cursor:"pointer"}}}>
+                      <IconButton
+                        size="large"
+                        aria-label="open navigation menu"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        color='inherit'
+                        onClick={handleOpenNavMenu} >
+                        
+                        <MenuIcon />
+                      </IconButton>
+                      <Menu 
+                        open={Boolean(anchorElNav)} 
+                        onClose={handleCloseNavMenu}
+                        anchorOrigin={{
+                          vertical: 'top',
+                          horizontal: 'left',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        anchorEl={anchorElNav} 
+                        sx={{cursor:'pointer', mt:5}}>
+                          
+                        <MenuItem>
+                          <A to="/" component={Link} color="inherit" underline='none'>
+                            Home
+                          </A>
+                        </MenuItem>
+                        <MenuItem>
+                          <A to={`/profile/${userId}`} component={Link} color="inherit" underline='none'>
+                            Profile
+                          </A>
+                        </MenuItem>
+                        <MenuItem sx={{alignItems:'center'}}>
+                          <Logout/>
+                        </MenuItem>
+                      </Menu>
                     </Box>
-                    <Box sx={{display:'flex', gap:'10px', alignItems:"center"}}>
-                      <A to={`/profile/${userId}`} component={Link} color="inherit" underline='none' sx={sx}>
-                        <h2>Profile</h2>
-                      </A>
-                      
-                      <Typography sx={sx}>
-                        <Logout/>
-                      </Typography>
+
+                    {/* Desktop View */}
+                    <Box sx={{display:{xs:'none', md:'flex'}, justifyContent:'space-between',  width:'100%'}}>
+                      <Box sx={{ display:'flex', gap:'10px'}}>
+                        <A to='/' component={Link} color="inherit" underline='none'>
+                          <h2>Home</h2>
+                        </A>
+                      </Box>
+                      <Box sx={{display:'flex', gap:'10px', alignItems:"center"}}>
+                        <A to={`/profile/${userId}`} component={Link} color="inherit" underline='none' sx={sx}>
+                          <h2>Profile</h2>
+                        </A>
+                        
+                        <Typography sx={sx}>
+                          <Logout/>
+                        </Typography>
+                      </Box>
                     </Box>
                   </Box>
                 </Toolbar>
@@ -66,21 +119,63 @@ export default function Navbar(props) {
                           justifyContent:'space-between', 
                           width:'100%', textAlign:'center'
                         }}>
-                        <Box sx={{
-                          display:'flex',
-                          gap:'10px',
-                          flexDirection:'row',
-                          justifyContent:{xs:"center",md:'space-between'},
-                        }}>
-                          <A to='/' component={Link} color="inherit" underline='none'>
-                            <h2>Home</h2>
-                          </A>
-                          <A to='/projects' component={Link} color="inherit" underline='none'>
-                          <h2>Projects</h2>
-                          </A>
-                          <A to='/now' component={Link} color="inherit" underline='none'>
-                          <h2>News</h2>
-                          </A>    
+                        {/* Mobile view */}
+                        <Box sx={{ display:{xs:'flex', md:'none', cursor:"pointer"}}}>
+                          <IconButton
+                            size="large"
+                            aria-label="open navigation menu"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            color='inherit'
+                            onClick={handleOpenNavMenu} >
+                            
+                            <MenuIcon />
+                          </IconButton>
+                          <Menu 
+                            open={Boolean(anchorElNav)} 
+                            onClose={handleCloseNavMenu}
+                            anchorOrigin={{
+                              vertical: 'top',
+                              horizontal: 'left',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                              vertical: 'top',
+                              horizontal: 'right',
+                            }}
+                            anchorEl={anchorElNav} 
+                            sx={{cursor:'pointer', mt:5}}>
+                              
+                            <MenuItem>
+                              <A to="/" component={Link} color="inherit" underline='none'>
+                                Home
+                              </A>
+                            </MenuItem>
+                            <MenuItem>
+                              <A to="/projects" component={Link} color="inherit" underline='none'>
+                                Projects
+                              </A>
+                            </MenuItem>
+                            <MenuItem>
+                              <A to="/myblog" component={Link} color="inherit" underline='none'>
+                                My Blog
+                              </A>
+                            </MenuItem>
+                            <MenuItem>
+                              <A to="/about" component={Link} color="inherit" underline='none'>
+                                About Me
+                              </A>
+                            </MenuItem>
+                          </Menu>
+                        </Box>
+
+                        {/* Desktop View */}
+                        <Box sx={{display:{xs:'none', md:'flex'}, justifyContent:'space-between',  width:'100%'}}>
+                          <Box sx={{ display:'flex', gap:'10px'}}>
+                            <A to='/' component={Link} color="inherit" underline='none'>
+                              <h3>Home</h3>
+                            </A>
+                          </Box>
                         </Box>
                       </Box>
                     </Toolbar>

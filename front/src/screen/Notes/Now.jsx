@@ -32,14 +32,14 @@ export default function Now() {
         }
     }
 
-    const fetchUser = async () => {
-        const res = await axios.get(`/api/user/profile/${userId}`)
-        setAdmin(res.data.user.isAdmin)
-    }
+    // const fetchUser = async () => {
+    //     const res = await axios.get(`/api/user/profile/${userId}`)
+    //     setAdmin(res.data.user.isAdmin)
+    // }
     
     useEffect(() => {
         fetching()
-        fetchUser()
+        // fetchUser()
     }, [])
     
     const sx = {
@@ -81,8 +81,8 @@ export default function Now() {
     return(
         <>  
             {isLoading ? <CircularIndeterminate /> : (
-                <>
-                    <Container sx={{mt:3}}>
+                <Box sx={{pt:3, backgroundColor:'rgba(0,0,0,0.05)', height:'100vh'}}>
+                    <Container>
                         <Link to='/'>
                             <Button variant='outlined'>Go Back</Button>
                         </Link>
@@ -109,7 +109,7 @@ export default function Now() {
                     </Container>
                     <Meta title="Notes" />
                     
-                </>
+                </Box>
             )}
         </>
     )

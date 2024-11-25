@@ -27,7 +27,7 @@ export default function NewNote() {
             }
             
             const note = await axios.post('/api/note/new', data)
-            navigate('/now')
+            navigate('/myblog')
             // console.log(post)
             // return post
             

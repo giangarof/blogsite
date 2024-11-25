@@ -55,7 +55,7 @@ const router = createBrowserRouter(
       <Route path='/post/update/:id' element={<UpdateForm/>}/>
 
       {/* Notes */}
-      <Route path='/now' element={<Now/>}/>
+      <Route path='/myblog' element={<Now/>}/>
       <Route path='/note/:id' element={<NoteById/>}/>
       <Route path='/note/update/:id' element={<NoteByIdUpdate/>}/>
       <Route path='/new-note' element={<NewNote/>}/>

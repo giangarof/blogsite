@@ -49,8 +49,8 @@ export default function Projects() {
     marginTop:'1rem'
   }
   return (
-    <>  
-      <Container sx={{mt:3}}>
+    <Box sx={{pt:3, backgroundColor:'rgba(0,0,0,0.05)'}}>  
+      <Container>
           <Link to='/'>
             <Button variant='outlined'>Go Back</Button>
           </Link>
@@ -143,6 +143,6 @@ export default function Projects() {
                 </Container>
             </>)}
       </Container>
-    </>
+    </Box>
   )
 }

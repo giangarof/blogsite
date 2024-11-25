@@ -52,7 +52,7 @@ export default function () {
     }
     
     const goBack = async() => {
-        navigate(`/now`)
+        navigate(`/myblog`)
     }
     
     useEffect(() => {
