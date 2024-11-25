@@ -17,6 +17,7 @@ const outGrid = {
   pt:'1rem',
   pb:'1rem',
   height:'100vh'
+  // height:{xs: 'none', md:'100vh'},
 }
 
 const description = {  
@@ -75,7 +76,7 @@ export default function AboutMe() {
           </Container>
         </Box>
 
-        <Footer />
+        {/* <Footer /> */}
     </>
   )
 }

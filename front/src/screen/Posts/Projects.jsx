@@ -49,7 +49,7 @@ export default function Projects() {
     marginTop:'1rem'
   }
   return (
-    <Box sx={{pt:3, backgroundColor:'rgba(0,0,0,0.05)'}}>  
+    <Box sx={{pt:3,pb:3, backgroundColor:'rgba(0,0,0,0.05)'}}>  
       <Container>
           <Link to='/'>
             <Button variant='outlined'>Go Back</Button>
@@ -57,54 +57,49 @@ export default function Projects() {
           {loading ? <CircularIndeterminate /> : (
             <>
             <SearchBox/>
-            <Container id="AllPosts">
-                    <Typography sx={{marginTop:'2rem'}}>Total Projects: {post.length}</Typography>
-                    <Container
-                        sx={{
-                            display: 'grid',
-                            alignContent:'center', 
-                            gridTemplateColumns: {
-                                sm: 'repeat(1, 1fr)',  
-                                md: 'repeat(2, 1fr)',  
-                            },
-                            gap: 4,
-                            marginBottom:5
+            <Box id="AllPosts">
+                <Typography sx={{marginTop:'2rem'}}>Total Projects: {post.length}</Typography>
+                <Box
+                    sx={{
+                        display: 'grid',
+                        alignContent:'center', 
+                        gridTemplateColumns: {
+                            sm: 'repeat(1, 1fr)',  
+                            md: 'repeat(2, 1fr)',  
+                        },
+                        gap: 4,
                     }}>   
                             
-                            {post.length > 0 ? (post.slice().reverse().map((item) => (
-                                <Card 
-                                    key={item._id} 
-                                    sx={{
-                                        marginTop:5, boxShadow:'0px 0px 10px 0px',
-                                        // display: 'flex',
-                                        // flexDirection: {xs: 'row', lg: 'column'}
-                                    }}
-                                >
+                    {post.length > 0 ? (post.slice().reverse().map((item) => (
+                        <Card 
+                            key={item._id} 
+                            sx={{
+                                width:'100%',
+                                marginTop:5, boxShadow:'0px 0px 10px 0px',
+                                // display: 'flex',
+                                // flexDirection: {xs: 'row', lg: 'column'}
+                            }}>
                                             
-                                {Array.isArray(item.image) && item.image.length > 0 && (
-                                    <CardMedia 
-                                        component='img'
-                                        alt={item.title}
-                                        // style={{width:'100%', objectFit:'fill'}}
-                                        image={item.image[0].url}
-                                        sx={{
-                                            display: 'flex',
-                                            justifyContent: 'center', /* Horizontally center the content */
-                                            alignItems: 'center', /* Vertically center the content */
-                                            height: '33vh',
-                                            objectFit:'contain'
-                                        }}
-                                    />
-                                )}
-
-                                <CardContent 
-                                    sx={{
-                                        backgroundColor:'rgb(0, 0, 0, 0.12)',
-                                        display:'flex', 
-                                        flexDirection:"column", 
-                                        justifyContent:'center',                        
-                                    }}
-                                >
+                        {Array.isArray(item.image) && item.image.length > 0 && (
+                            <CardMedia 
+                                component='img'
+                                alt={item.title}
+                                image={item.image[0].url}
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'center', /* Horizontally center the content */
+                                    alignItems: 'center', /* Vertically center the content */
+                                    height: '33vh',
+                                    objectFit:'contain'
+                                    }}/>
+                        )}
+                            <CardContent 
+                                sx={{
+                                    backgroundColor:'rgb(0, 0, 0, 0.12)',
+                                    display:'flex', 
+                                    flexDirection:"column", 
+                                    justifyContent:'center',                        
+                                }}>
                                 <Container 
                                     sx={{
                                         display:'flex', 
@@ -134,13 +129,13 @@ export default function Projects() {
                                 </Container>
                                 </CardContent>
                             </Card>
-                            ))) : 
-                                <Typography sx={emptyQ}>
-                                    No technology found with your query. 
-                                </Typography>
-                            }   
-                    </Container>
-                </Container>
+                    ))) : 
+                        <Typography sx={emptyQ}>
+                            No technology found with your query. 
+                        </Typography>
+                    }   
+                </Box>
+            </Box>
             </>)}
       </Container>
     </Box>

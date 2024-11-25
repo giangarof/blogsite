@@ -33,7 +33,7 @@ export default function SearchBox() {
 
     return (
         <>
-        <Container sx={{mt:4}}>
+        <Box sx={{mt:4, width:'100%'}}>
             <Box>
                 <Paper component="form" onSubmit={submitHandler} sx={search}>
                     <TextField 
@@ -51,7 +51,7 @@ export default function SearchBox() {
                
             </Box>
 
-        </Container>
+        </Box>
             {/* <Container>
                 <Box onSubmit={submitHandler}>
                     <FormLabel>
