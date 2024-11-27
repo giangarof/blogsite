@@ -14,7 +14,7 @@ export default function Meta({title,description, keywords, image}) {
       <meta property="og:description" content={description} />
       <meta property="og:keywords" content={keywords} />
       <meta property="og:image" content={image} />
-      <meta property="og:url" content={url} />
+      {/* <meta property="og:url" content={url} /> */}
       <meta property="og:type" content="website" />
       
       {/* Optional: Twitter Card Tags */}
