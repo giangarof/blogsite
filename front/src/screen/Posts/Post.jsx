@@ -66,7 +66,7 @@ export default function () {
                     </>
                 ) : (
                     <div>
-                        <Meta title={post.title} description={post.description} image={img}/>
+                        <Meta title={post.title} description={post.description}/>
                         {/* Render or use 'post' */}
                         <Box sx={{
                                 display:'flex', flexDirection:'row', justifyContent:'center',

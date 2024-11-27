@@ -23,7 +23,7 @@ import CircularIndeterminate from '../../components/Spinner';
 
 export default function () {
     const [note, setNote] = useState('')
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
     const [isAdmin, setIsAdmin] = useState(false)
     const userId = localStorage.getItem('userId')
@@ -91,45 +91,56 @@ export default function () {
     }
 
   return (
+    <>
+        <Box sx={{backgroundColor:'rgba(0,0,0,0.05)', pt:3, pb:3}}>
 
-        <Container sx={{mt:3, mb:3}}>
-            <Button variant='outlined' onClick={goBack}>Go Back</Button>
-            <Box>
-                {isLoading ? (
-                    <CircularIndeterminate/>
-                ) : (
-                    <>
-                        <Meta title={note.title} description={note.description} />
-                        <Box sx={outer}>
-                            <Box sx={box}>
-                                <Box sx={inner}>
-                                    <Typography variant='h5'>{note.title}</Typography>
-                                    <Typography>{note.about}</Typography>
-                                    <Container 
-                                        className='content-preview' 
-                                        dangerouslySetInnerHTML={{ __html: sanitizedHTML }} /> 
-                                </Box>
-                                <Box sx={{display:'flex', flexDirection:'column', alignItems:'end', gap:'1rem'}}>
-                                    {isAdmin === true ?
-                                    <>
-                                            <Box sx={{display:'flex', gap:'1rem', justifyItems:'center', alignItems:'center'}}>
-                                                <Tooltip title="Update">
-                                                    <A href={`/note/update/${note._id}`}>
-                                                        <EditIcon sx={iconUpdate} />
-                                                    </A>
-                                                </Tooltip>
-                                                <CopyLink/>
-                                            </Box>
-                                    </> : <CopyLink/>
-                                    }
-                                    <Typography sx={{color:'grey', textAlign:'end'}}>Posted: {note.createdAt?.slice(0,10)}</Typography>
+            <Container >
+                <Button variant='outlined' onClick={goBack}>Go Back</Button>
+            </Container>
+        
+            <Container>
+            
+                    {isLoading ? <>
+                        <Box sx={{display:'flex', flexDirection:'column', alignItems:'center', gap:'1rem'}}>
+                            <CircularIndeterminate />
+                            <p>Loading, please wait!</p>
+                        </Box>
+                    </> : (
+                        <>
+                            <Meta title={note.title} description={note.description} />
+                            <Box sx={outer}>
+                                <Box sx={box}>
+                                    <Box sx={inner}>
+                                        <Typography variant='h5'>{note.title}</Typography>
+                                        <Typography>{note.about}</Typography>
+                                        <Container 
+                                            className='content-preview' 
+                                            dangerouslySetInnerHTML={{ __html: sanitizedHTML }} /> 
+                                    </Box>
+                                    <Box sx={{display:'flex', flexDirection:'column', alignItems:'end', gap:'1rem'}}>
+                                        {isAdmin === true ?
+                                        <>
+                                                <Box sx={{display:'flex', gap:'1rem', justifyItems:'center', alignItems:'center'}}>
+                                                    <Tooltip title="Update">
+                                                        <A href={`/note/update/${note._id}`}>
+                                                            <EditIcon sx={iconUpdate} />
+                                                        </A>
+                                                    </Tooltip>
+                                                    <CopyLink/>
+                                                </Box>
+                                        </> : <CopyLink/>
+                                        }
+                                        <Typography sx={{color:'grey', textAlign:'end'}}>Posted: {note.createdAt?.slice(0,10)}</Typography>
+                                    </Box>
                                 </Box>
                             </Box>
-                        </Box>
-                    </>
-            )}
-            </Box>
-        </Container>
+                        </>
+                )}
+                
+            </Container>
+        </Box>
+    </>
+
 
   )
 }

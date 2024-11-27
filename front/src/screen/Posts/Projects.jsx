@@ -50,7 +50,7 @@ export default function Projects() {
     marginTop:'1rem'
   }
   return (
-    <Box sx={{backgroundColor:'rgba(0,0,0,0.05)', pt:3, pb:3, height:'100vh'}}>
+    <Box sx={{backgroundColor:'rgba(0,0,0,0.05)', pt:3, pb:3}}>
         <Meta title="Software development" description="Projects to showcase my expertise as software developer."/>
         <Container>
           <Link to='/'>
