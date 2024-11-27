@@ -80,37 +80,48 @@ export default function Now() {
 
     return(
         <>  
-            {isLoading ? <CircularIndeterminate /> : (
-                <Box sx={{pt:3, backgroundColor:'rgba(0,0,0,0.05)', height:'100vh'}}>
-                    <Container>
-                        <Link to='/'>
-                            <Button variant='outlined'>Go Back</Button>
-                        </Link>
-                        <Box sx={grid}>
-                            {data.map((i) => (
-                                <Box sx={sx} key={i._id}>
-                                    <Typography>~ {i.title}</Typography>
-                                    <Typography sx={intro}>{i.about}</Typography>
-                                    <Box sx={{display:'flex', gap:'1rem'}}>
-                                        <Tooltip title="Read article" >
-                                        <A component={Link} to={`/note/${i._id}`}>
-                                            <Button variant="contained" size="small">
-                                                <AutoStoriesIcon/>
-                                            </Button>
-                                        </A >
-                                        </Tooltip>
-                                    </Box>
-                                    <Box sx={{display:'flex', flexDirection:'column', alignItems:'end' }}>
-                                        <Typography sx={date}>Update: {i.createdAt.slice(0,10)}</Typography>
-                                    </Box>
-                                </Box>
+            <Box sx={{pt:3, backgroundColor:'rgba(0,0,0,0.05)', height:'100vh'}}>
+
+                <Meta title="My Blog" description="Tech related posts"/>
+                <Container>
+                    <Link to='/'>
+                        <Button variant='outlined'>Go Back</Button>
+                    </Link>
+                </Container>
+                <Container>
+                    {isLoading ?  <>
+                            <Box sx={{display:'flex', flexDirection:'column', alignItems:'center', gap:'1rem'}}>
+                                <CircularIndeterminate />
+                                <p>Loading, please wait!</p>
+                            </Box>
+                        </> : (
+                        <Box>
+                            <Container>
+                                <Box sx={grid}>
+                                    {data.slice().reverse().map((i) => (
+                                        <Box sx={sx} key={i._id}>
+                                            <Typography>~ {i.title}</Typography>
+                                            <Typography sx={intro}>{i.about}</Typography>
+                                            <Box sx={{display:'flex', gap:'1rem'}}>
+                                                <Tooltip title="Read article" >
+                                                <A component={Link} to={`/note/${i._id}`}>
+                                                    <Button variant="contained" size="small">
+                                                        <AutoStoriesIcon/>
+                                                    </Button>
+                                                </A >
+                                                </Tooltip>
+                                            </Box>
+                                            <Box sx={{display:'flex', flexDirection:'column', alignItems:'end' }}>
+                                                <Typography sx={date}>Posted: {i.createdAt.slice(0,10)}</Typography>
+                                            </Box>
+                                        </Box>
                                     ))} 
+                                </Box>
+                            </Container>  
                         </Box>
-                    </Container>
-                    <Meta title="Notes" />
-                    
-                </Box>
-            )}
+                    )}
+                </Container>
+            </Box>
         </>
     )
 }

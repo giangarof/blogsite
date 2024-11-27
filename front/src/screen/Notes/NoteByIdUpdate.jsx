@@ -1,12 +1,21 @@
-import { Textarea } from "@mui/joy";
-import { Box, Button, Container, Typography } from "@mui/material";
-import axios from "axios";
+//react
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 
+//mui
+import { Textarea } from "@mui/joy";
+import { Box, Button, Container, Typography } from "@mui/material";
+
+//dependencies
+import axios from "axios";
+
+//quill
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'
 import '../../quill.css'
+
+//components
+import CircularIndeterminate from "../../components/Spinner";
 
 
 export default function NoteByIdUpdate() {
@@ -14,6 +23,7 @@ export default function NoteByIdUpdate() {
     const [about, setAbout] = useState('')
     const [description, setDescription] = useState('')
     const [postId, setPostId] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
     const {id} = useParams()
 
@@ -41,12 +51,18 @@ export default function NoteByIdUpdate() {
     }
 
     const submitUpdate= async(id) => {
-        const formData = {title, description, about}
-        
-        const data = await axios.put(`/api/note/${id}`, formData)
-
-        // console.log(data);
-        navigate(`/note/${postId}`)
+        setIsLoading(true)
+        try {
+            const formData = {title, description, about}
+            const data = await axios.put(`/api/note/${id}`, formData)
+            // console.log(data);
+            navigate(`/note/${postId}`)
+            
+        } catch (error) {
+            console.log(error)
+        } finally{
+            setIsLoading(false)
+        }
     }
 
     useEffect(() => {
@@ -120,11 +136,11 @@ export default function NoteByIdUpdate() {
                             modules={{ toolbar: toolbarOptions }}/>
                         
                     <Button 
-                        sx={{marginTop:4, }}
-                        variant="contained" size='small' 
-                        onClick={() => submitUpdate(postId)} 
-                    >
-                        <Typography sx={{color:'white'}}>Update Changes</Typography>
+                        // sx={{height:'60px'}}
+                        variant="contained"
+                        // size='small' 
+                        onClick={() => submitUpdate(postId)}>
+                        {isLoading ? <CircularIndeterminate/> : "Update Changes"}
                     </Button>
                     </Box>
                 </Box>

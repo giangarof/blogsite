@@ -11,6 +11,7 @@ import axios from "axios"
 
 //components
 import CopyLink from '../../components/CopyLink';
+import Meta from '../../components/Meta';
 
 //quill
 import ReactQuill from 'react-quill';
@@ -18,7 +19,6 @@ import 'react-quill/dist/quill.snow.css';
 import '../../quill.css'
 import DOMPurify from 'dompurify';
 import CircularIndeterminate from '../../components/Spinner';
-import Meta from '../../components/Meta';
 
 
 export default function () {
@@ -99,12 +99,12 @@ export default function () {
                     <CircularIndeterminate/>
                 ) : (
                     <>
-                        <Meta title={note.title} />
+                        <Meta title={note.title} description={note.description} />
                         <Box sx={outer}>
                             <Box sx={box}>
                                 <Box sx={inner}>
-                                    <Typography>Title: {note.title}</Typography>
-                                    <Typography>About: {note.about}</Typography>
+                                    <Typography variant='h5'>{note.title}</Typography>
+                                    <Typography>{note.about}</Typography>
                                     <Container 
                                         className='content-preview' 
                                         dangerouslySetInnerHTML={{ __html: sanitizedHTML }} /> 

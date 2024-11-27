@@ -3,11 +3,14 @@ import Box from '@mui/material/Box';
 
 export default function CircularIndeterminate() {
   return (
-    <Box sx={{ display:'flex', flexDirection:'row', justifyContent:'center', marginTop:'2rem', marginBottom:'2rem' }}>
-      <Box sx={{textAlign:'center'}}>
-        <CircularProgress color='success'/>
-        <p>Loading, Please wait...</p>
-      </Box>
-    </Box>
+    <>
+      <CircularProgress color='success'/>
+    </>
+    // <Box sx={{ display:'flex', flexDirection:'row', justifyContent:'center' }}>
+    //   <Box sx={{textAlign:'center', alignContent:'center', alignItems:'center', verticalAlign:'middle'}}>
+    //     {/* <p>Loading, Please wait...</p> */}
+    //     <CircularProgress color='success'/>
+    //   </Box>
+    // </Box>
   );
 }

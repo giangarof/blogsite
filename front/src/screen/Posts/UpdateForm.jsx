@@ -135,31 +135,22 @@ export default function UpdateForm() {
                 sx={{
                     mt:3,
                     mb:3,
-                    width:{
-                        xs:'90%',
-                        lg: '50%'
-                    }
-                }}     
-            >
+                    width:{ xs:'90%', lg: '50%'}
+                }}>
 
-                <Card 
-                    key={post._id} 
-                    spacing={3} 
-                >
+                <Card key={post._id} spacing={3} >
 
                     {Array.isArray(image) && image.length > 0 && (
                         <CardMedia
                             component='img'
                             image={image[0].url}
-                            sx={{
-                                        
+                            sx={{  
                                 display: 'flex',
                                 justifyContent: 'center', /* Horizontally center the content */
                                 alignItems: 'center', /* Vertically center the content */
                                 height: '40vh',
                                 objectFit:'contain'
-                            }}
-                        />
+                            }}/>
                         )}
 
                     <CardContent 
@@ -216,7 +207,7 @@ export default function UpdateForm() {
                             ) : ''}
 
                             <Button 
-                                sx={{marginTop:4, height:'50px'}}
+                                sx={{marginTop:2}}
                                 variant="contained" size='small' 
                                 onClick={() => submitUpdate(postId)} 
                             >
