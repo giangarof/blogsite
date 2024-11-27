@@ -50,20 +50,27 @@ export default function Projects() {
     marginTop:'1rem'
   }
   return (
-    <Box sx={{backgroundColor:'rgba(0,0,0,0.05)', pt:3, pb:3}}>
+
+    // Box that contains the content
+    <Box sx={{backgroundColor:'rgba(0,0,0,0.05)', pt:3, pb:3, height:'100vh'}}>
         <Meta title="Software development" description="Projects to showcase my expertise as software developer."/>
+        
+        {/* first container | contains the "go back btn" */}
         <Container>
           <Link to='/'>
             <Button variant='outlined'>Go Back</Button>
           </Link>
         </Container>
-        <Container>
+
+        {/* second container | contains the posts */}
+        {/* loads first, then it display it  */}
+        <Container sx={{pb:3}}>
             {loading ? <>
                 <Box sx={{display:'flex', flexDirection:'column', alignItems:'center', gap:'1rem'}}>
                 <CircularIndeterminate />
                 <p>Loading, please wait!</p>
                 </Box>
-            </>: (
+            </> : (
                 <>
                 <SearchBox/>
                 <Box id="AllPosts">

@@ -80,14 +80,19 @@ export default function Now() {
 
     return(
         <>  
+            {/* Box that contains the content */}
             <Box sx={{pt:3, backgroundColor:'rgba(0,0,0,0.05)', height:'100vh'}}>
-
                 <Meta title="My Blog" description="Tech related posts"/>
+
+                {/* first container | contains the "go back btn" */}
                 <Container>
                     <Link to='/'>
                         <Button variant='outlined'>Go Back</Button>
                     </Link>
                 </Container>
+
+                {/* second container | contains the posts */}
+                {/* loads first, then it display it  */}
                 <Container>
                     {isLoading ?  <>
                             <Box sx={{display:'flex', flexDirection:'column', alignItems:'center', gap:'1rem'}}>
