@@ -14,11 +14,18 @@ const getAll = async (req,res) => {
 
 const createPost = async(req, res) => {
     try{
-
         const post = new Post(req.body)
         post.image = req.files.map(f => ({url: f.path, filename: f.filename, originalname:f.originalname}));
-        await post.save()
-        res.status(201).json({post})
+        if(!post.title || !post.description || !post.link || !post.tech || !post.repo || post.image.length == 0){
+            res.status(401).json({message: 'fill out all the fields'})
+        }else{
+            await post.save()
+            console.log(post)
+            res.status(201).json({post})
+        }
+        // if(!post){
+        //     res.status(400).json({message: 'fill out'})
+        // }
     } catch(e){
         res.status(400).json({e, error: 'Please fill out all fields'})
         // res.send(e.message)

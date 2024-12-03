@@ -5,6 +5,7 @@ import {admin, protect} from '../config/authMiddleware.js'
 
 import {
     // signinUser,
+    isIn,
     loginUser,
     logoutUser, 
     signupUser, 
@@ -12,6 +13,8 @@ import {
     userProfile, 
     userUpdateProfile
 } from '../controllers/user.js';
+
+router.get('/loggedIn', protect, asyncHandler(isIn))
 
 // router.get('/login', signinUser)
 router.post('/signin', asyncHandler(loginUser));

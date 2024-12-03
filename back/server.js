@@ -17,6 +17,9 @@ import user from './routes/user.js'
 import post from './routes/post.js'
 import note from './routes/note.js'
 
+//errorHandler
+import { errorHandler } from './config/errorHandler.js';
+
 // run mongodb
 connectDB();
 
@@ -47,6 +50,9 @@ if(process.env.NODE_ENV === 'production'){
         res.send('API is running.')
     })
 }
+
+// using error handler
+app.use(errorHandler)
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`running on port ${port}`))

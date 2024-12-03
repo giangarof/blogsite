@@ -2,6 +2,14 @@ import User from '../models/users.js'
 import { generateToken } from '../config/generateToken.js'
 import jwt from "jsonwebtoken";
 
+const isIn = async(req,res) => {
+    try {
+        res.status(200).json({message:'User identified.'})
+    } catch (error) {
+        res.status(401).json({message:'Looks like youre not admin and not even a identified user... go away!'})
+    }
+}
+
 // login user
 // route: /api/user/login
 // Post
@@ -142,6 +150,7 @@ const userUpdateProfile = async(req,res) => {
 
 export {
     // signinUser,
+    isIn,
     loginUser,
     logoutUser,
     signupUser,

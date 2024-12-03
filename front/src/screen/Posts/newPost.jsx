@@ -1,9 +1,9 @@
 //react
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 
 //mui
-import { Box, TextField, Stack, Button, Grid } from "@mui/material";
+import { Box, TextField, Stack, Button, Grid, Container } from "@mui/material";
 import { Typography, Textarea } from "@mui/joy";
 
 //components
@@ -23,11 +23,23 @@ export default function NewPost() {
     const [tech, setTech] = useState('')
 
     const [errorMsg, setErrorMsg] = useState('')
+    const [forbidden, setForbidden] = useState(null)
 
     const FileUpload = (e) => {
         const file = e.target.files[0]
         setImage(file)
         // console.log(file)
+    }
+
+    const verify = async() =>{
+        try {
+            const user = await axios.get('/api/user/loggedIn')
+            console.log(user)
+            setForbidden(false)
+        } catch (error) {
+            console.log(error.response.data.message)
+            setForbidden(true)
+        }
     }
 
     const newPost = async(e) => {
@@ -45,74 +57,85 @@ export default function NewPost() {
             const post = await axios.post('/api/post/new', formData)
             setIsLoading(true)
             navigate('/')
-            // console.log(post)
+            console.log(post)
             // return post
             
             
         } catch (err) {
             // console.error(typeof(err.response.data.error))
             setErrorMsg(err.response.data.error)
+            setErrorMsg(err.response.data.message)
         } finally {
             setIsLoading(false) //stop loading
         }
     }
 
+    
+    useEffect(() => {
+        verify()
+    }, [])
+    
     return (
         <>
-        <Grid container justifyContent="center" >
-            <Box 
-                    sx={{
-                        mt:10,
-                        mb:10,
-                        width:{
-                        xs:'90%',
-                        lg: '50%'
-                        }
-                    }} 
-                    display="flex"
-                    flexDirection="column"
-                    gap={3}
-                    
-                >   
-                        <Typography level="h3">New Post</Typography>
+        {forbidden ? <>
+            <Container sx={{mt:3}}>
+                <h3>Not allowed to be here. Please, go back.</h3>
+            </Container>
+        </> : <>
+        
+            <Grid container justifyContent="center">
+                
+                    <Box 
+                            sx={{
+                                mt:3,
+                                mb:3,
+                                width:{
+                                xs:'90%',
+                                lg: '50%'
+                                }
+                            }} 
+                            display="flex"
+                            flexDirection="column"
+                            gap={2}
+                            
+                        >   
+                                <Typography level="h3">New Post</Typography>
 
-                        <TextField  id="outlined-basic" label="Title" variant="outlined" 
-                                    value={title} 
-                                    onChange={(e) => setTitle(e.target.value) }/>
-                        <TextField  id="outlined-basic" label="Repository" variant="outlined" 
-                                    value={repo}
-                                    onChange={(e) => setRepo(e.target.value) }/>
-                        <TextField  id="outlined-basic" label="Link" variant="outlined" 
-                                    value={link}
-                                    onChange={(e) => setLink(e.target.value) }/>
-                        <TextField  id="outlined-basic" label="Technologies" variant="outlined" 
-                                    value={tech} 
-                                    onChange={(e) => setTech(e.target.value) }/>
-                        <Textarea  id="outlined-basic" placeholder="Description" variant="outlined"
-                                    minRows={5}  
-                                    xs={{width:'90%'}}
-                                    value={description}
-                                    onChange={(e) => setDescription(e.target.value) }/>
+                                <TextField  id="outlined-basic" label="Title" variant="outlined" 
+                                            value={title} 
+                                            onChange={(e) => setTitle(e.target.value) }/>
+                                <TextField  id="outlined-basic" label="Repository" variant="outlined" 
+                                            value={repo}
+                                            onChange={(e) => setRepo(e.target.value) }/>
+                                <TextField  id="outlined-basic" label="Link" variant="outlined" 
+                                            value={link}
+                                            onChange={(e) => setLink(e.target.value) }/>
+                                <TextField  id="outlined-basic" label="Technologies" variant="outlined" 
+                                            value={tech} 
+                                            onChange={(e) => setTech(e.target.value) }/>
+                                <Textarea  id="outlined-basic" placeholder="Description" variant="outlined"
+                                            minRows={5}  
+                                            xs={{width:'90%'}}
+                                            value={description}
+                                            onChange={(e) => setDescription(e.target.value) }/>
 
-                        {/* enable file upload */}
-                        <input type='File' onChange={FileUpload}/>
-                        {/* <Button  id="outlined-basic" label="Image" variant="outlined" 
-                                    value={image} onChange={(e) => setImage(e.target.value) } >
-                                        Upload Image
-                        </Button> */}
+                                <input type='File' onChange={FileUpload}/>
 
-                        {errorMsg ? (
-                            <Typography level="body-lg" textColor='red'>{errorMsg}</Typography>
-                            ) : ''}
+                                {errorMsg ? (
+                                    <Typography level="body-lg" textColor='red'>{errorMsg}</Typography>
+                                    ) : ''}
 
-                        <Button variant="contained" size="large" sx={{height:'50px',}}
-                                onClick={newPost}>
-                                    {isLoading ? <CircularIndeterminate/> : "Submit"}
-                        </Button>
+                                <Button variant="contained" size="large" sx={{height:'50px',}}
+                                        onClick={newPost}>
+                                            {isLoading ? <CircularIndeterminate/> : "Submit"}
+                                </Button>
 
-                        
-            </Box>
-        </Grid>
+                                
+                    </Box>
+                
+            </Grid>
+        
+        </>}
         </>
   )
 }

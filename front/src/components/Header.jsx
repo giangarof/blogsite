@@ -6,12 +6,8 @@ import { Link } from "react-router-dom";
 
 const BoxHeader = {
     height:{xs: 'none', md:'100vh'},
-    // marginBottom:4,
-    // textAlign:'center',
     paddingTop:4, paddingBottom:4, 
-    // background: "#000"
     background: "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(97,97,97,1) 59%, rgba(0,0,0,1) 100%)"
-    // background:"linear-gradient(0deg, rgba(217,226,223,1) 0%, rgba(254,254,254,1) 28%, rgba(74,113,187,1) 100%)"
 }
 
 const IconsStyle = {
