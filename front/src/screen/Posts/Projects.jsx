@@ -72,86 +72,91 @@ export default function Projects() {
                 </Box>
             </> : (
                 <>
-                <SearchBox/>
-                <Box id="AllPosts">
-                    <Typography sx={{marginTop:'2rem'}}>Total Projects: {post.length}</Typography>
-                    <Box
-                        sx={{
-                            display: 'grid',
-                            alignContent:'center', 
-                            gridTemplateColumns: {
-                                sm: 'repeat(1, 1fr)',  
-                                md: 'repeat(2, 1fr)',  
-                            },
-                            gap: 4,
-                        }}>   
-                                
-                        {post.length > 0 ? (post.slice().reverse().map((item) => (
-                            <Card 
-                                key={item._id} 
-                                sx={{
-                                    width:'100%',
-                                    marginTop:5, boxShadow:'0px 0px 10px 0px',
-                                    // display: 'flex',
-                                    // flexDirection: {xs: 'row', lg: 'column'}
-                                }}>
-                                                
-                            {Array.isArray(item.image) && item.image.length > 0 && (
-                                <CardMedia 
-                                    component='img'
-                                    alt={item.title}
-                                    image={item.image[0].url}
+                    <SearchBox/>
+                    <Box id="AllPosts">
+                        <Typography sx={{marginTop:'2rem'}}>Total Projects: {post.length}</Typography>
+                        <Box
+                            sx={{
+                                display: 'grid',
+                                alignContent:'center', 
+                                gridTemplateColumns: {
+                                    sm: 'repeat(1, 1fr)',  
+                                    md: 'repeat(2, 1fr)',  
+                                },
+                                gap: 4,
+                            }}>   
+                                    
+                            {post.length > 0 ? (post.slice().reverse().map((item) => (
+                                <Card 
+                                    key={item._id} 
                                     sx={{
-                                        display: 'flex',
-                                        justifyContent: 'center', /* Horizontally center the content */
-                                        alignItems: 'center', /* Vertically center the content */
-                                        height: '33vh',
-                                        objectFit:'contain'
-                                        }}/>
-                            )}
-                                <CardContent 
-                                    sx={{
-                                        backgroundColor:'rgb(0, 0, 0, 0.12)',
-                                        display:'flex', 
-                                        flexDirection:"column", 
-                                        justifyContent:'center',                        
+                                        marginTop:5,
+                                        width:'100%',
+                                        // height:'500px',
+                                        boxShadow:'0px 0px 10px 0px',
                                     }}>
-                                    <Container 
+                                                    
+                                {Array.isArray(item.image) && item.image.length > 0 && (
+                                    <CardMedia 
+                                        component='img'
+                                        alt={item.title}
+                                        image={item.image[0].url}
                                         sx={{
+                                            backgroundColor:'rgb(0, 0, 0, 0.12)',
+                                            display: 'flex',
+                                            justifyContent: 'center', /* Horizontally center the content */
+                                            alignItems: 'center', /* Vertically center the content */
+                                            height: '300px',
+                                            width: '100%',
+                                            objectFit:{
+                                                xs:'cover',
+                                                md:'contain'
+                                            }
+                                            }}/>
+                                )}
+                                    <CardContent 
+                                        sx={{
+                                            backgroundColor:'rgb(0, 0, 0, 0.12)',
                                             display:'flex', 
                                             flexDirection:"column", 
-                                            justifyContent:'center',
-                                            gap:'10px'
+                                            justifyContent:'center',                        
                                         }}>
-                                        <Typography style={{ fontWeight: 600 }}>{item.title}</Typography>
-                                        <Typography 
-                                            // variant="p" 
+                                        <Container 
                                             sx={{
-                                                whiteSpace:'nowrap', 
-                                                overflow:'hidden', 
-                                                textOverflow:'ellipsis',
-                                            }}
-                                        >
-                                            {item.description}
-                                        </Typography>
+                                                display:'flex', 
+                                                flexDirection:"column", 
+                                                justifyContent:'center',
+                                                gap:'10px'
+                                            }}>
+                                            <Typography style={{ fontWeight: 600 }}>{item.title}</Typography>
+                                            <Typography 
+                                                // variant="p" 
+                                                sx={{
+                                                    whiteSpace:'nowrap', 
+                                                    overflow:'hidden', 
+                                                    textOverflow:'ellipsis',
+                                                }}
+                                            >
+                                                {item.description}
+                                            </Typography>
 
-                                        <Tooltip title="Read article" >
-                                            <A component={Link} to={`/post/${item._id}`}>
-                                                <Button variant="contained" size="small">
-                                                    <AutoStoriesIcon/>
-                                                </Button>
-                                            </A >
-                                        </Tooltip>
-                                    </Container>
-                                    </CardContent>
-                                </Card>
-                        ))) : 
-                            <Typography sx={emptyQ}>
-                                No technology found with your query. 
-                            </Typography>
-                        }   
+                                            <Tooltip title="Read article" >
+                                                <A component={Link} to={`/post/${item._id}`}>
+                                                    <Button variant="contained" size="small">
+                                                        <AutoStoriesIcon/>
+                                                    </Button>
+                                                </A >
+                                            </Tooltip>
+                                        </Container>
+                                        </CardContent>
+                                    </Card>
+                            ))) : 
+                                <Typography sx={emptyQ}>
+                                    No technology found with your query. 
+                                </Typography>
+                            }   
+                        </Box>
                     </Box>
-                </Box>
                 </>)}
         </Container>
     </Box>
