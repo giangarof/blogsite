@@ -43,8 +43,9 @@ export default function SearchBox() {
         const suggest = async () => {
             const {data} = await axios.get(`/api/post?keyword=${keyword}`)
             if(keyword !== ''){
-
                 setSuggestion(data)
+            } else {
+                setSuggestion([])
             }
             console.log(data)
         }
