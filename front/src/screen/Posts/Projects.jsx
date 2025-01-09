@@ -9,7 +9,7 @@ import Meta from "../../components/Meta";
 
 //mui
 import { color, Container, display, positions, textAlign, width } from '@mui/system';
-import { Box, Card, Button, CardContent, CardMedia, Typography, Tooltip, Hidden, Link as A } from "@mui/material";
+import { Box, Card, Button, CardContent, CardMedia, Typography, Tooltip, Hidden, Link as A, Divider } from "@mui/material";
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
 //devpendencies
@@ -77,10 +77,11 @@ export default function Projects() {
                         <Typography sx={{marginTop:'2rem'}}>Total Projects: {post.length}</Typography>
                         <Box
                             sx={{
+                                paddingTop:'1rem',
                                 display: 'grid',
                                 alignContent:'center', 
                                 gridTemplateColumns: {
-                                    sm: 'repeat(1, 1fr)',  
+                                    xs: 'repeat(1, 1fr)',  
                                     md: 'repeat(2, 1fr)',  
                                 },
                                 gap: 4,
@@ -90,10 +91,9 @@ export default function Projects() {
                                 <Card 
                                     key={item._id} 
                                     sx={{
-                                        marginTop:5,
-                                        width:'100%',
-                                        // height:'500px',
                                         boxShadow:'0px 0px 10px 0px',
+                                        display: 'flex', flexDirection: 'column',
+                                        // height:'100%'
                                     }}>
                                                     
                                 {Array.isArray(item.image) && item.image.length > 0 && (
@@ -102,35 +102,31 @@ export default function Projects() {
                                         alt={item.title}
                                         image={item.image[0].url}
                                         sx={{
-                                            backgroundColor:'rgb(0, 0, 0, 0.12)',
-                                            display: 'flex',
-                                            justifyContent: 'center', /* Horizontally center the content */
-                                            alignItems: 'center', /* Vertically center the content */
-                                            height: '300px',
+                                            backgroundColor:'rgb(0, 0, 0, 0.12)', 
+                                            padding:1,
+                                            height: 'auto',
+                                              objectFit: {
+                                                xs:'contain',
+                                                sm: 'fill',
+                                              },
+                                            height: {
+                                                xs:'auto',
+                                                md: '300px',
+                                            },
                                             width: '100%',
-                                            objectFit:{
-                                                xs:'cover',
-                                                md:'contain'
-                                            }
-                                            }}/>
+                                           
+                                        }}/>
                                 )}
+                                    <Divider sx={{backgroundColor:'rgb(0, 0, 0, 0.12)',}}/>
                                     <CardContent 
                                         sx={{
+                                            flexGrow:1,
                                             backgroundColor:'rgb(0, 0, 0, 0.12)',
-                                            display:'flex', 
-                                            flexDirection:"column", 
-                                            justifyContent:'center',                        
+                                            display:'flex', flexDirection:'column', gap:1                 
                                         }}>
-                                        <Container 
-                                            sx={{
-                                                display:'flex', 
-                                                flexDirection:"column", 
-                                                justifyContent:'center',
-                                                gap:'10px'
-                                            }}>
+                                       
                                             <Typography style={{ fontWeight: 600 }}>{item.title}</Typography>
                                             <Typography 
-                                                // variant="p" 
                                                 sx={{
                                                     whiteSpace:'nowrap', 
                                                     overflow:'hidden', 
@@ -145,9 +141,8 @@ export default function Projects() {
                                                     <Button variant="contained" size="small">
                                                         <AutoStoriesIcon/>
                                                     </Button>
-                                                </A >
+                                                </A>
                                             </Tooltip>
-                                        </Container>
                                         </CardContent>
                                     </Card>
                             ))) : 
