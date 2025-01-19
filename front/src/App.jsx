@@ -7,6 +7,16 @@ import Navbar from './components/Navbar.jsx'
 
 
 const App = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (window.gtag) {
+      window.gtag("event", "page_view", {
+        page_path: location.pathname,
+      });
+    }
+  }, [location]);
+  
   return(
     <>
     {/* <main> */}
