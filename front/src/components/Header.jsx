@@ -84,11 +84,11 @@ export default function Header() {
                             mt:2 
                             }}>
                             
-                            <p>3+ years experience as Software Developer.</p>
-                            <p>Expertise in Frontend, Backend, and cloud technologies.</p>
-                            <p>Proficient in OOP, DOM, QA, Testing, Debugging.</p>
-                            
-                            <p>AWS Cloud Practicioner.</p>
+                            <p>Software Developer with expertise in multiple fields.</p>
+                            <p>QA, DOM, Testing, Degugging, SEO.</p>
+                            <p>Skilled in frontend and backend.</p>
+                            <p>Web and mobile developer.</p>
+                            <p>AWS and Azure certified.</p>
                             
                             
                             
