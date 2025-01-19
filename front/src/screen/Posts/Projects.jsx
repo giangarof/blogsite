@@ -104,7 +104,7 @@ export default function Projects() {
                                         sx={{
                                             backgroundColor:'rgb(0, 0, 0, 0.12)', 
                                             padding:1,
-                                            height: 'auto',
+                                            // height: 'auto',
                                               objectFit: {
                                                 xs:'contain',
                                                 sm: 'fill',

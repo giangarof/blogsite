@@ -36,6 +36,10 @@ import NoteByIdUpdate from './screen/Notes/NoteByIdUpdate.jsx'
 //about me
 import AboutMe from './screen/About.jsx'
 
+//Analytics
+import AnalyticsTracker from "./screen/analysisTracker.jsx";
+
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App/>}>
@@ -74,7 +78,9 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HelmetProvider>
-      <RouterProvider router={router} />
+      <RouterProvider router={router}>
+        <AnalyticsTracker />
+      </RouterProvider>
     </HelmetProvider>
   </React.StrictMode>
 )
