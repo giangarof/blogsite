@@ -10,6 +10,10 @@ import {
 } from 'react-router-dom'
 import {HelmetProvider} from 'react-helmet-async'
 
+import ReactGA from "react-ga4";
+const trackingID = 'G-K83VLD00TY'
+ReactGA.initialize(trackingID);
+
 // screens
 import Main from './screen/Main.jsx'
 
@@ -35,13 +39,6 @@ import NoteByIdUpdate from './screen/Notes/NoteByIdUpdate.jsx'
 
 //about me
 import AboutMe from './screen/About.jsx'
-
-//Analytics
-import { initializeGoogleAnalytics } from "./analytics";
-initializeGoogleAnalytics();
-
-// import AnalyticsTracker from "./screen/analysisTracker.jsx";
-
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -81,9 +78,7 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HelmetProvider>
-      <RouterProvider router={router}>
-        {/* <AnalyticsTracker /> */}
-      </RouterProvider>
+      <RouterProvider router={router} />
     </HelmetProvider>
   </React.StrictMode>
 )
