@@ -84,14 +84,11 @@ export default function Header() {
                             mt:2 
                             }}>
                             
-                            <p>Software Developer with expertise in multiple fields.</p>
-                            <p>QA, DOM, Testing, Degugging, SEO.</p>
+                            <p>Full Stack Software Developer.</p>
+                            <p>Expertise in OOP, QA, DOM, Testing, Degugging, SEO, and more.</p>
                             <p>Skilled in frontend and backend.</p>
                             <p>Web and mobile developer.</p>
                             <p>AWS and Azure certified.</p>
-                            
-                            
-                            
                         </Box>
                     </Box>
 

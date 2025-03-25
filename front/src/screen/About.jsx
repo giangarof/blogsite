@@ -10,14 +10,17 @@ const grid = {
   display:'grid',
   gridTemplateColumns:{xs:'repeat(1,1fr)' ,md:'repeat(2,2fr)'},
   gap:'1rem',
+  // pb: "2rem",
 }
 
 const outGrid = {
+  pb:'2rem',
   backgroundColor:'rgba(0,0,0,0.05)',
   pt:'1rem',
-  pb:'1rem',
+  // pb:'2rem',
+  // mb:'2rem',
   // height:{xs:'100vh', md:'none'},
-  height:{xs: 'none', md:'100vh'},
+  // height:{xs: 'none', md:'100vh'},
 }
 
 const description = {  
@@ -49,7 +52,7 @@ export default function AboutMe() {
                 <p>Deployed fully scalable fullstack projects from end-to-end.</p>
                 <p>Achieved 99% performance optimization for using google lighthouse.</p>
                 <p>Proficient in UI/UX, OOP, DOM, QA, Testing, Debugging.</p>
-                <p>I do code in: JS/TS, SQL, PHP.</p>
+                <p>I do code in: Java, JS/TS, SQL, PHP.</p>
                 <p>My stack: MERN, MEVN, LAMP.</p>
               </Box>
 
@@ -84,7 +87,7 @@ export default function AboutMe() {
           </Container>
         </Box>
 
-        {/* <Footer /> */}
+        <Footer />
     </>
   )
 }
