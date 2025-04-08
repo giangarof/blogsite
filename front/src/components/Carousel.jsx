@@ -34,34 +34,34 @@ export default function Carousel() {
     }, 3000);
   
     return () => clearInterval(interval); // cleanup on unmount
-  }, []);
+  }, [post.length]);
 
   return (
     <>
         <Box className='container'>
-  <Box className='slider-wrapper'>
-    <Box className='slider' id='slider'>
-      {post.map((x, index) => (
-        <Box className='slide' key={x._id}>
-          <img
-            id={`slide-${index}`}
-            src={x.image[0].url}
-            sx={{ height: '40vh', width: '100%', objectFit: 'cover' }}
-          />
-          <Box className='description-overlay'>
-            <Typography variant="h6" color="white">{x.description}</Typography>
-          </Box>
-        </Box>
-      ))}
-    </Box>
+            <Box className='slider-wrapper'>
+                <Box className='slider' id='slider'>
+                {post.map((x, index) => (
+                    <Box className='slide' key={x._id}>
+                    <img
+                        id={`slide-${index}`}
+                        src={x.image[0].url}
+                        sx={{ height: '40vh', width: '100%', objectFit: 'cover' }}
+                    />
+                    <Box className='description-overlay'>
+                        <Typography variant="h6" color="white">{x.description}</Typography>
+                    </Box>
+                    </Box>
+                ))}
+                </Box>
 
-    <Box className='slider-nav'>
-      {post.map((x, index) => (
-        <a key={x._id} href={`/post/${x._id}`}></a>
-      ))}
-    </Box>
-  </Box>
-</Box>
+                <Box className='slider-nav'>
+                {post.map((x, index) => (
+                    <a key={x._id} href={`/post/${x._id}`}></a>
+                ))}
+                </Box>
+            </Box>
+        </Box>
 
     </>
   );
