@@ -17,17 +17,17 @@ const createPost = async(req, res) => {
         const post = new Post(req.body)
         post.image = req.files.map(f => ({url: f.path, filename: f.filename, originalname:f.originalname}));
         if(!post.title || !post.description || !post.link || !post.tech || !post.repo || post.image.length == 0){
-            res.status(401).json({message: 'fill out all the fields'})
+            return res.status(401).json({message: 'fill out all the fields'})
         }else{
             await post.save()
             console.log(post)
-            res.status(201).json({post})
+            return res.status(201).json({post, message:'Post created!'})
         }
         // if(!post){
         //     res.status(400).json({message: 'fill out'})
         // }
     } catch(e){
-        res.status(400).json({e, error: 'Please fill out all fields'})
+        return res.status(400).json({e, error: 'Please fill out all fields'})
         // res.send(e.message)
     }
 }
@@ -36,10 +36,10 @@ const findPost = async(req,res) => {
     try{
         const {id} = req.params;
         const post = await Post.findById(id)
-        res.send(post)
+        return res.send(post)
 
     } catch(e){
-        res.send(e.message)
+        return res.send(e.message)
     }
 }
 
@@ -83,27 +83,30 @@ const updatePost = async(req,res) => {
                 post.tech = tech;
     
                 const savedPost = await post.save()
-                res.status(200).json({savedPost, message: 'Post updated successfuly'})
+                return res.status(200).json({savedPost, message: 'Post updated successfuly'})
             } else {
-                res.status(404)
+                // return res.status(404)
                 throw new Error('Resource not found')
             }
 
     }catch(e){
         // res.send(e.message)
-        res.status(400).json({e, error: 'Please dont leave fields empty.'})
+        return res.status(400).json({e, error: 'Please dont leave fields empty.'})
     }
 }
 
 const deletePost = async(req, res) => {
     try{
         const post = await Post.findById(req.params.id)
+        if(!post) {
+            return res.status(404).json({message:`Post doesn't exist!`})
+        }
         if(post){
             await Post.deleteOne({_id: post._id})
-            res.send(post)
+            return res.status(200).json({message:`Post deleted!`})
         }
     }catch(e){
-        res.send(e.message)
+        return res.send(e.message)
     }
 }
 

@@ -11,9 +11,13 @@ import Logout from './Logout.jsx'
 import { Link } from "react-router-dom";
   
 export default function Navbar() {
-  const [userInfo, setUserInfo] = useState(null)
-  const [userId, setUserId] = useState('')
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [profile, setProfile] = useState({
+    id:'',
+    name:'',
+    isAdmin:Boolean
+  })
+  const data = JSON.parse(localStorage.getItem('profile')) ?? ''
+  // console.log(profile)
 
   const [anchorElNav, setAnchorElNav] = useState(null)
 
@@ -31,18 +35,16 @@ export default function Navbar() {
   }
   
   useEffect(() => {
-    const name = localStorage.getItem('name')
-    const id = localStorage.getItem('userId')
-    const isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
-    setUserInfo(name)
-    setUserId(id)
-    setIsAdmin(isAdmin)
+    setProfile({
+      id:data.id,
+      name:data.name,
+    })
 
   }, [])
 
         return(
             <>
-              {userInfo ? (
+              {profile.id ? (
               <Box sx={{backgroundColor:"#000", color:'#fff'}}>
                 <Toolbar sx={{backgroundColor:"#000", color:'#fff'}}>
                   <Box sx={{ display:'flex', justifyContent:'space-between', width:'100%'}} >
@@ -80,8 +82,8 @@ export default function Navbar() {
                           </A>
                         </MenuItem>
                         <MenuItem>
-                          <A to={`/profile/${userId}`} component={Link} color="inherit" underline='none'>
-                            Profile
+                          <A to={`/profile/${profile.id}`} component={Link} color="inherit" underline='none'>
+                            {profile.name}
                           </A>
                         </MenuItem>
                         <MenuItem sx={{alignItems:'center'}}>
@@ -98,8 +100,8 @@ export default function Navbar() {
                         </A>
                       </Box>
                       <Box sx={{display:'flex', gap:'10px', alignItems:"center"}}>
-                        <A to={`/profile/${userId}`} component={Link} color="inherit" underline='none' sx={sx}>
-                          <h2>Profile</h2>
+                        <A to={`/profile/${profile.id}`} component={Link} color="inherit" underline='none' sx={sx}>
+                          <h2>{profile.name}</h2>
                         </A>
                         
                         <Typography sx={sx}>

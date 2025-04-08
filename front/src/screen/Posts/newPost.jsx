@@ -15,26 +15,28 @@ import axios from 'axios';
 export default function NewPost() {
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(false)
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [image, setImage] = useState('')
-    const [repo, setRepo] = useState('')
-    const [link, setLink] = useState('')
-    const [tech, setTech] = useState('')
+    const [post ,setPost] = useState({
+        title:'',
+        description:'',
+        image:'',
+        repo:'',
+        link:'',
+        tech:'',
+    })
 
     const [errorMsg, setErrorMsg] = useState('')
     const [forbidden, setForbidden] = useState(null)
 
     const FileUpload = (e) => {
         const file = e.target.files[0]
-        setImage(file)
+        setPost({ ...post, image: file });
         // console.log(file)
     }
 
     const verify = async() =>{
         try {
             const user = await axios.get('/api/user/loggedIn')
-            console.log(user)
+            // console.log(user)
             setForbidden(false)
         } catch (error) {
             console.log(error.response.data.message)
@@ -47,28 +49,31 @@ export default function NewPost() {
         setIsLoading(true) //starts to load
         try {
             const formData = new FormData();
-            formData.append("title", title);
-            formData.append("description", description);
-            formData.append("image", image);
-            formData.append("repo", repo)
-            formData.append("link", link)
-            formData.append("tech", tech)
+            formData.append("title", post.title);
+            formData.append("description", post.description);
+            formData.append("image", post.image);
+            formData.append("repo", post.repo)
+            formData.append("link", post.link)
+            formData.append("tech", post.tech)
 
-            const post = await axios.post('/api/post/new', formData)
-            setIsLoading(true)
-            navigate('/')
-            console.log(post)
+            const created = await axios.post('/api/post/new', formData)
+            sessionStorage.setItem('notification',created.data.message)
+            navigate('/projects')
             // return post
             
             
         } catch (err) {
-            // console.error(typeof(err.response.data.error))
-            setErrorMsg(err.response.data.error)
-            setErrorMsg(err.response.data.message)
+            console.error(err)
+            // setErrorMsg(err.response?.data?.error)
+            // setErrorMsg(err.response?.data?.message)
         } finally {
             setIsLoading(false) //stop loading
         }
     }
+
+    const handleChange = (e) => {
+        setPost({ ...post, [e.target.name]: e.target.value });
+      };
 
     
     useEffect(() => {
@@ -102,22 +107,22 @@ export default function NewPost() {
                                 <Typography level="h3">New Post</Typography>
 
                                 <TextField  id="outlined-basic" label="Title" variant="outlined" 
-                                            value={title} 
-                                            onChange={(e) => setTitle(e.target.value) }/>
+                                            value={post.title} name='title' 
+                                            onChange={handleChange}/>
                                 <TextField  id="outlined-basic" label="Repository" variant="outlined" 
-                                            value={repo}
-                                            onChange={(e) => setRepo(e.target.value) }/>
+                                            value={post.repo} name='repo'
+                                            onChange={handleChange}/>
                                 <TextField  id="outlined-basic" label="Link" variant="outlined" 
-                                            value={link}
-                                            onChange={(e) => setLink(e.target.value) }/>
+                                            value={post.link} name='link'
+                                            onChange={handleChange}/>
                                 <TextField  id="outlined-basic" label="Technologies" variant="outlined" 
-                                            value={tech} 
-                                            onChange={(e) => setTech(e.target.value) }/>
+                                            value={post.tech} name='tech' 
+                                            onChange={handleChange}/>
                                 <Textarea  id="outlined-basic" placeholder="Description" variant="outlined"
                                             minRows={5}  
                                             xs={{width:'90%'}}
-                                            value={description}
-                                            onChange={(e) => setDescription(e.target.value) }/>
+                                            value={post.description} name='description'
+                                            onChange={handleChange}/>
 
                                 <input type='File' onChange={FileUpload}/>
 

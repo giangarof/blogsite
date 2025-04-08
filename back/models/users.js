@@ -29,6 +29,9 @@ const userSchema = new mongoose.Schema({
     about: {
         type: String,
         required: true
+    },
+    expertise: {
+        type: String,
     }
 
 }, {timestamps:true})

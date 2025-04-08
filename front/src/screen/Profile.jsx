@@ -12,21 +12,24 @@ import CreateIcon from '@mui/icons-material/Create';
 
 export default function Profile() {
   const {id} = useParams();
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [username, setUsername] = useState('')
-  const [isAdmin, setIsAdmin] = useState(Boolean)
-  const [about, setAbout] = useState('')
-
+  const [user, setUser] = useState({
+    name: '',
+    username: '',
+    email:'',
+    about:'',
+    isAdmin: Boolean
+  })
   
   const fetchUser = async() => {
     const res = await axios.get(`/api/user/profile/${id}`);
-    setName(res.data.user.name);
-    setUsername(res.data.user.username);
-    setEmail(res.data.user.email);
-    setAbout(res.data.user.about);
-    setIsAdmin(res.data.user.isAdmin)
-    // console.log(res)
+    const data = res.data.user;
+    setUser({
+      name: data.name,
+      username: data.username,
+      email: data.email,
+      about: data.about,
+      isAdmin: data.isAdmin
+    })
     return res;
   }
   
@@ -58,25 +61,25 @@ export default function Profile() {
       <>
       <Container sx={container}>
         <Box sx={box}>
-          <Typography sx={box} level="body-lg">{isAdmin ? "Admin roles" : 'No admin'}</Typography>
+          <Typography sx={box} level="body-lg">{user.isAdmin ? "Admin roles" : 'No admin'}</Typography>
 
           <Typography level="body-lg">
-            Name: {name}
+            Name: {user.name}
           </Typography>
 
           <Typography sx={box} level="body-lg">
-            Email: {email}
+            Email: {user.email}
           </Typography>
 
           <Typography sx={box}level="body-lg">
-            Username: {username}
+            Username: {user.username}
           </Typography>
 
           <Typography  sx={box}level="body-lg">
-            Description Header: <br/>{about}
+            Description Header: <br/>{user.about}
             </Typography>
             
-          {isAdmin === true ? (
+          {user.isAdmin === true ? (
             <>
             <Container sx={{display:'flex', gap:'1rem'}}>
               Projects

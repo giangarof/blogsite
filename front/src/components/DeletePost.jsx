@@ -24,7 +24,7 @@ export default function DeletePost(props) {
         try {
             const data = await axios.delete(`/api/post/${id}`)
             const res = data
-            // console.log(data)
+            sessionStorage.setItem('notification', res.data.message)
             props.refetch()
             return res.data
             

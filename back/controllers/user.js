@@ -18,25 +18,22 @@ const loginUser = async(req,res) => {
     const user = await User.findOne({email})
     console.log(user)
     try {
+
+        if(!user){
+            return res.status(400).json({message:`Credentials doesn't found`})
+        }
+        if(!email || !password){
+            return res.status(400).json({message:'Please, fill out all fields.'})
+
+        }
         if(user && (await user.matchPassword(password))){
             const token = generateToken(res, user._id)
-    
-            // res.status(200).json({
-            //     _id: user._id,
-            //     name: user.name,
-            //     email: user.email,
-            //     isAdmin: user.isAdmin,
-            //     message:`Welcome back, ${user.name}`,
-            //     token: token
-            // })
-            res.status(200).json({userProfile: user, _id: user._id, message: 'Welcome Back!'})
-        } else {
-            res.status(401)
-            throw new Error('Invalid email or password')
+
+            return res.status(200).json({userProfile: user, _id: user._id, message: 'Welcome Back!'})
         }
         
     } catch (error) {
-        res.status(401).json({error, message:'Email or password are incorrect'})
+        return res.status(400).json({message:'Email or password are incorrect'})
         
     }
     
@@ -87,7 +84,7 @@ const logoutUser = async(req,res) => {
         httpOnly: true,
         expires: new Date(0)
     })
-    res.status(200).json({message: 'Logged out successfully'})
+    return res.status(200).json({message: 'Logged out successfully'})
 }
 
 // delete user from database
@@ -136,14 +133,14 @@ const userUpdateProfile = async(req,res) => {
             user.password = password;
             user.about = about;
             const update = await user.save()
-            res.status(201).send({message:'Profile updated successfully', update })
+            return res.status(201).send({message:'Profile updated successfully', update })
         } else {
-            res.status(400).send({error:'something went wrong in update controller.'})
+            return res.status(400).send({error:'something went wrong in update controller.'})
     
         }
         
     } catch (error) {
-        res.send({message:error})
+        return res.send({message:error})
     }
 }
 

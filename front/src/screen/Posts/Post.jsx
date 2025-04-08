@@ -12,6 +12,7 @@ import axios from "axios"
 import CopyLink from '../../components/CopyLink';
 import CircularIndeterminate from '../../components/Spinner';
 import Meta from '../../components/Meta';
+import Message from '../../components/Message';
 
 export default function () {
     const [post, setPost] = useState([])
@@ -45,7 +46,7 @@ export default function () {
     }
 
     const goBack = async() => {
-        navigate(`/projects`)
+        window.history.back()
     }
     
     useEffect(() => {
@@ -59,6 +60,7 @@ export default function () {
         <>
             <Container sx={{mt:3}}>
                 <Button variant='outlined' onClick={goBack}>Go Back</Button>
+                <Message />
                 {isLoading ? (
                     <>
                         <CircularIndeterminate size={90} />

@@ -6,6 +6,7 @@ import {useParams, useNavigate, Link} from 'react-router-dom'
 import SearchBox from '../../components/SearchBox'
 import CircularIndeterminate from "../../components/Spinner";
 import Meta from "../../components/Meta";
+import Message from '../../components/Message'
 
 //mui
 import { color, Container, display, positions, textAlign, width } from '@mui/system';
@@ -73,6 +74,7 @@ export default function Projects() {
             </> : (
                 <>
                     <SearchBox/>
+                    <Message sx={{marginTopTop:'1rem'}}/>
                     <Box id="AllPosts">
                         <Typography sx={{marginTop:'2rem'}}>Total Projects: {post.length}</Typography>
                         <Box

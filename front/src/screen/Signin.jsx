@@ -1,48 +1,52 @@
+//React
 import React, {useEffect, useState} from "react";
 import {useNavigate} from 'react-router-dom'
 
+// MUI
 import { Box, TextField, Stack, Button, Typography, } from "@mui/material";
 import { Container } from '@mui/system';
-// import { Typography } from "@mui/joy";
+
+//Others
 import axios from 'axios';
 
+// Components
 import Message from "../components/Message.jsx";
 
 export default function Signin() {
   const navigate = useNavigate()
+  const [user, setUser] = useState({
+    email:'',
+    password:''
+  })
 
-  const [password, setPswd] = useState('')
-  const [email, setEmail] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
-  const loginUser = async () => {
 
-  const credentials = {email, password}
-  const login = await axios.post('/api/user/signin', credentials)
-      .then((response) => {
-        const result = {
-            message:response.data.message, 
-            data:response.data,
-            id:response.data._id
-          }
-          // console.log(result);
-
-          localStorage.setItem("name", result.data.userProfile.name)
-          localStorage.setItem("userId", result.data.userProfile._id)
-          localStorage.setItem("isAdmin", result.data.userProfile.isAdmin)
-          
-          navigate(`/profile/${result.id}`)
-          location.reload()
-        })
-        .catch((error) => {
-          console.log({'Login Failed': error.response.data.message})
-          setErrorMsg(error.response.data.message)
-        })
+  const login = async(e) => {
+    e.preventDefault()
+    try {
+      const response = await axios.post('/api/user/signin', user)
+      const message  = response.data.message;
+      const profile = {
+        id: response.data._id,
+        name: response.data.userProfile.name
+      }
+      localStorage.setItem('profile', JSON.stringify(profile))
+      sessionStorage.setItem('notification', message)
+      navigate(`/`)
+      location.reload()
+      
+    } catch (error) {
+      setErrorMsg(error.response.data.message)
+    }
   }
 
-      useEffect(() => {
+  const handleChange = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+  useEffect(() => {
         
 
-      },[])
+  },[])
   
         return(
             <>
@@ -79,7 +83,8 @@ export default function Signin() {
                       label="Email" 
                       maxRows={4}
                       variant="filled"
-                      value={email} onChange={(e) => setEmail(e.target.value) }
+                      value={user.email} name="email"
+                      onChange={handleChange}
                       sx={{backgroundColor:'#fff'}}
                       />
                     {/* <TextField id="outlined-basic" label="Email" variant="outlined" /> */}
@@ -90,7 +95,8 @@ export default function Signin() {
                         id="outlined-basic"
                         type="password"
                         label="Password" 
-                        value={password} onChange={(e) => setPswd(e.target.value)} 
+                        value={user.password} name="password"
+                        onChange={handleChange}
                         sx={{backgroundColor:'#fff'}}
                     />
 
@@ -98,7 +104,7 @@ export default function Signin() {
                       variant="contained" 
                       fullWidth
                       // sx={{marginBottom:4}} 
-                      onClick={loginUser}>Sign In</Button>
+                      onClick={login}>Sign In</Button>
                     
                   <Typography 
                     sx={{

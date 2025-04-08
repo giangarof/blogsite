@@ -14,6 +14,7 @@ import {Link as A } from "@mui/material";
 //components
 import DeletePost from "../../components/DeletePost";
 import CircularIndeterminate from "../../components/Spinner";
+import Message from '../../components/Message'
 
 
 export default function AdminPanel() {
@@ -64,37 +65,39 @@ export default function AdminPanel() {
         {/* table to show all the posts */}
         {/* id, description, link to post itself, link to repo, see more, delete */}
         {isLoading ? <CircularIndeterminate /> : 
-
-            <TableContainer >
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>ID</TableCell>
-                            <TableCell>Posted</TableCell>
-                            <TableCell>Title</TableCell>
-                            <TableCell>Full Project</TableCell>
-                            <TableCell>Repository</TableCell>
-                            <TableCell>Update Form</TableCell>
-                            <TableCell>Delete</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {post.slice().reverse().map(p =>(
-                            <TableRow key={p._id}>
-                                <TableCell>{p._id.substr(-4)}</TableCell>
-                                <TableCell>{p.createdAt.substr(0,10)}</TableCell>
-                                <TableCell>{p.title}</TableCell>
-                                <TableCell><A sx={box} href={p.link} target="_blank">Full Project</A></TableCell>
-                                <TableCell><A sx={box} href={p.repo} target="_blank">Github Code</A></TableCell>
-                                <TableCell><A sx={box} href={`/post/update/${p._id}`}>Update Post Form</A></TableCell>
-                                <TableCell>
-                                    <DeletePost postId={p._id} refetch={fetchPosts}/>
-                                </TableCell>
+            <>
+                <Message/>
+                <TableContainer >
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>ID</TableCell>
+                                <TableCell>Posted</TableCell>
+                                <TableCell>Title</TableCell>
+                                <TableCell>Full Project</TableCell>
+                                <TableCell>Repository</TableCell>
+                                <TableCell>Update Form</TableCell>
+                                <TableCell>Delete</TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                        </TableHead>
+                        <TableBody>
+                            {post.slice().reverse().map(p =>(
+                                <TableRow key={p._id}>
+                                    <TableCell>{p._id.substr(-4)}</TableCell>
+                                    <TableCell>{p.createdAt.substr(0,10)}</TableCell>
+                                    <TableCell>{p.title}</TableCell>
+                                    <TableCell><A sx={box} href={p.link} target="_blank">Full Project</A></TableCell>
+                                    <TableCell><A sx={box} href={p.repo} target="_blank">Github Code</A></TableCell>
+                                    <TableCell><A sx={box} href={`/post/update/${p._id}`}>Update Post Form</A></TableCell>
+                                    <TableCell>
+                                        <DeletePost postId={p._id} refetch={fetchPosts}/>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </>
         }
     </>
   )
