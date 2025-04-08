@@ -4,7 +4,8 @@ export default function Footer() {
     const cYear = new Date().getFullYear()
 
     const footerBar ={
-        paddingTop:4, paddingBottom:4, 
+        pt:4, pb:4,
+        // marginTop:4, marginBottom:4, 
         background: '#000',
     
     }

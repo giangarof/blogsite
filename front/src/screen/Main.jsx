@@ -10,13 +10,13 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const BoxHeader = {
     height:{xs: 'none'},
-    paddingTop:4, paddingBottom:4, 
+    // paddingTop:4, paddingBottom:4, 
     background: "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(97,97,97,1) 59%, rgba(0,0,0,1) 100%)"
 }
 
 const IconsStyle = {
     textDecoration:"none", color:"#fff", cursor:"pointer", 
-    mt:4,
+    // mt:4,
     fontSize: {xs:'40px', lg:'50px'}
 }
 
@@ -52,6 +52,7 @@ const IconsBox = () => {
                     </Tooltip>
                 </Box>
                 <Box sx={{
+                    pb:3,
                     mt:{xs:1, md:1},
                     textAlign:{xs:"center", md:'left'}
                     
@@ -76,7 +77,7 @@ export default function Main() {
                 <Header/>
                 <Carousel/>
                 <IconsBox />
-                <Footer/>        
+                      
             </Box>
         </>
     )
