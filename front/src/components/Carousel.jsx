@@ -3,12 +3,16 @@ import { Box, IconButton, Typography, Stack, CardMedia, Container } from '@mui/m
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import axios from 'axios';
 
+import CircularIndeterminate from "../components/Spinner";
+
 import '../App.css'
 
 export default function Carousel() {
+  const [loading, setLoading] = useState(false);
   const [post, setPost] = useState([]);
 
   const fetch = async () => {
+    setLoading(true)
     try {
       const res = await axios.get(`/api/post/`);
       const data = res.data;
@@ -16,6 +20,9 @@ export default function Carousel() {
       setPost(format.slice(-4).reverse());
     } catch (err) {
       console.error('Failed to fetch posts:', err);
+      setLoading(false)
+    } finally{
+      setLoading(false)
     }
   };
 
@@ -38,30 +45,53 @@ export default function Carousel() {
 
   return (
     <>
-        <Box className='container'>
-            <Box className='slider-wrapper'>
-                <Box className='slider' id='slider'>
-                {post.map((x, index) => (
-                    <Box className='slide' key={x._id}>
-                    <img
-                        id={`slide-${index}`}
-                        src={x.image[0].url}
-                        sx={{ height: '40vh', width: '100%', objectFit: 'cover' }}
-                    />
-                    <Box className='description-overlay'>
-                        <Typography variant="h6" color="white">{x.description}</Typography>
-                    </Box>
-                    </Box>
-                ))}
+      {loading ? (
+        <>
+          <Box sx={{display:'flex', flexDirection:'column', alignItems:'center', gap:'1rem', mb:4}}>
+            <CircularIndeterminate />
+            <Typography sx={{color:'#fff'}}>Loading Carousel, please wait!</Typography>
+          </Box>
+        </>
+      ) : (
+        <>
+          <Box className='carousel-container'>
+            <Typography sx={{textAlign:'center', color:'#fff', mb:2}} variant='h4'>Latest Projects</Typography>
+            <Box className='carousel-track' id='slider'>
+              {post.map((x, index) => (
+                <Box className='carousel-card' key={x._id}>
+                  <img
+                    src={x.image[0].url}
+                    alt={`slide-${index}`}
+                    className='carousel-image'
+                  />
+                  <Box className='carousel-description'>
+                    <Typography variant='subtitle1'>{x.description}</Typography>
+                    <Typography component='a' href={`/post/${x._id}`} variant='subtitle1' sx={{ textDecoration: 'underline', color: 'blue' }}>Link</Typography>
+                  </Box>
                 </Box>
-
-                <Box className='slider-nav'>
-                {post.map((x, index) => (
-                    <a key={x._id} href={`/post/${x._id}`}></a>
-                ))}
-                </Box>
+              ))}
             </Box>
-        </Box>
+
+            <Box className='carousel-nav'>
+              {post.map((x, index) => (
+                <a
+                  key={x._id}
+                  href={`/post/${x._id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const slider = document.getElementById('slider');
+                    slider.scrollTo({
+                      left: index * slider.clientWidth,
+                      behavior: 'smooth',
+                    });
+                  }}
+                />
+              ))}
+            </Box>
+          </Box>
+        </>
+      )}  
+
 
     </>
   );
