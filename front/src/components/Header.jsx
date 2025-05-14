@@ -21,7 +21,7 @@ export default function Header() {
     
     return(
         <>
-            <Box>
+            <Box sx={{pt:3}}>
                 <Container>
                     {/* about me */}
                     <Box sx={{

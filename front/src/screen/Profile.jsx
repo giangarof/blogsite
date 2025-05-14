@@ -44,11 +44,16 @@ export default function Profile() {
   }
 
   const container = {
+
     borderRadius:'8px',
-    margin:'10px',
+    marginTop:'1rem',
+    marginBottom:'1rem',
+
+
+    // margin:'10px',
     backgroundColor:'rgba(0,0,0,0.07)',
     padding:'10px',
-    width:'50%'
+    // width:'100%'
   }
 
   const icons_inner = {
@@ -79,7 +84,7 @@ export default function Profile() {
             Description Header: <br/>{user.about}
             </Typography>
             
-          {user.isAdmin === true ? (
+          {user.isAdmin ? (
             <>
             <Container sx={{display:'flex', gap:'1rem'}}>
               Projects

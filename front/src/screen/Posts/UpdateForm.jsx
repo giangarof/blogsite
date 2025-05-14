@@ -64,7 +64,7 @@ export default function UpdateForm() {
             const formData = new FormData();
             formData.append("title", post.title);
             formData.append("description", post.description);
-            formData.append("image", post.mage);
+            formData.append("image", post.image);
             formData.append("repo", post.repo);
             formData.append("link", post.link);
             formData.append("tech", post.tech);
