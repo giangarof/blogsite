@@ -9,8 +9,10 @@ import AddIcon from '@mui/icons-material/Add';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import CreateIcon from '@mui/icons-material/Create';
+import DOMPurify from 'dompurify';
 
 export default function Profile() {
+  
   const {id} = useParams();
   const [user, setUser] = useState({
     name: '',
@@ -32,6 +34,7 @@ export default function Profile() {
     })
     return res;
   }
+  const sanitizedHTML = DOMPurify.sanitize(user.about);
   
   useEffect(() => {
     fetchUser()
@@ -80,9 +83,12 @@ export default function Profile() {
             Username: {user.username}
           </Typography>
 
-          <Typography  sx={box}level="body-lg">
-            Description Header: <br/>{user.about}
+          <Typography  sx={box}level="body-lg" >
+            Description Header
             </Typography>
+            <Box dangerouslySetInnerHTML={{ __html: sanitizedHTML }}>
+
+            </Box>
             
           {user.isAdmin ? (
             <>
