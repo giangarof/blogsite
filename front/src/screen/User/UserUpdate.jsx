@@ -1,4 +1,4 @@
-import UserUpdateForm from "../components/UserUpdateForm.jsx";
+import UserUpdateForm from "../../components/UserUpdateForm.jsx";
 
 const UserUpdate = () => {
     return (

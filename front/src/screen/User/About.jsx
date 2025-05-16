@@ -3,7 +3,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 // components
-import Footer from '../components/Footer'
+import Footer from '../../components/Footer'
 
 const grid = {
   mt:'1rem',

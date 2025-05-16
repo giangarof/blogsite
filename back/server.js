@@ -7,7 +7,6 @@ import express from "express";
 import cookieParser from 'cookie-parser';
 import connectDB from "./config/db.js";
 import session from 'express-session'
-// import connectFlash from 'connect-flash';
 
 import User from './models/users.js';
 import sessionConfig from './config/session.js';

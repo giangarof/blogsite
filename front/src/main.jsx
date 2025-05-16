@@ -18,10 +18,10 @@ ReactGA.initialize(trackingID);
 import Main from './screen/Main.jsx'
 
 //user
-import Signin from './screen/Signin.jsx'
-import Register from './screen/Register.jsx'
-import Profile from './screen/Profile.jsx'
-import UserUpdate from './screen/UserUpdate.jsx'
+import Signin from './screen/User/Signin.jsx'
+import Register from './screen/User/Register.jsx'
+import Profile from './screen/User/Profile.jsx'
+import UserUpdate from './screen/User/UserUpdate.jsx'
 
 //posts
 import NewPost from './screen/Posts/newPost.jsx'
@@ -38,7 +38,10 @@ import NoteById from './screen/Notes/NoteById.jsx'
 import NoteByIdUpdate from './screen/Notes/NoteByIdUpdate.jsx'
 
 //about me
-import AboutMe from './screen/About.jsx'
+import AboutMe from './screen/User/About.jsx'
+
+//Component 
+import NotFound from './components/NotFound.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -71,6 +74,8 @@ const router = createBrowserRouter(
 
       <Route path="/about" element={<AboutMe/>}/>
 
+
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 )

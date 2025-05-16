@@ -10,7 +10,7 @@ import { Container } from '@mui/system';
 import axios from 'axios';
 
 // Components
-import Message from "../components/Message.jsx";
+import Message from "../../components/Message.jsx";
 
 export default function Signin() {
   const navigate = useNavigate()
