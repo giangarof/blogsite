@@ -51,11 +51,10 @@ const UserUpdate = () => {
       })
 
     const profile = JSON.parse(localStorage.getItem('profile'));
-    console.log(profile.id)
     const fetching = async() => {
         const res = await axios.get(`/api/user/profile/${profile.id}`)
         const user = res.data.user;
-        console.log(user)
+        // console.log(user)
         setUser({
             name:  user.name,
             username:  user.username,

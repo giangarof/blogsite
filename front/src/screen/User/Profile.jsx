@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import {useNavigate, useParams} from 'react-router-dom'
+import { Link, useNavigate, useParams} from 'react-router-dom'
 import axios from 'axios';
-import {Container, Tooltip, Stack,Box } from '@mui/material';
+import {Container, Tooltip, Stack,Box, Link as A} from '@mui/material';
 import Typography from '@mui/joy/Typography';
 
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
@@ -84,11 +84,11 @@ export default function Profile() {
           </Typography>
 
           <Typography  sx={box}level="body-lg" >
-            Description Header
-            </Typography>
-            <Box dangerouslySetInnerHTML={{ __html: sanitizedHTML }}>
-
+            <Box> 
+              Description: <A href="/about">See here</A>
             </Box>
+          </Typography>
+        
             
           {user.isAdmin ? (
             <>
