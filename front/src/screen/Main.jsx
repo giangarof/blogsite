@@ -1,10 +1,15 @@
+//react
 import React, { useState, useEffect } from "react"
+
+//components
 import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
 import Meta from "../components/Meta.jsx";
 import Carousel from "../components/Carousel.jsx";
-import { Box, Tooltip, Typography } from "@mui/material";
+import Cards from "../components/Cards.jsx";
 
+//MUI
+import { Box, Tooltip, Typography } from "@mui/material";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
@@ -76,6 +81,7 @@ export default function Main() {
                 <Meta />
                 <Header/>
                 <Carousel/>
+                <Cards />
                 <IconsBox />
                       
             </Box>
