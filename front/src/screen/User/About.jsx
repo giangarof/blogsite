@@ -44,7 +44,7 @@ export default function AboutMe() {
   const profile = JSON.parse(localStorage.getItem('profile'));
   
   const fetching = async() => {
-    const res = await axios.get(`/api/user/profile/${profile.id}`)
+    const res = await axios.get(`/api/user/profile/667f4bd0fb08d6e4e721b6fe`)
     setUser({ about: res.data.user.about})
   }
   const sanitizedHTML = DOMPurify.sanitize(user.about);

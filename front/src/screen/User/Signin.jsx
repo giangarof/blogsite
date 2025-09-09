@@ -25,6 +25,7 @@ export default function Signin() {
     e.preventDefault()
     try {
       const response = await axios.post('/api/user/signin', user)
+      console.log(response)
       const message  = response.data.message;
       const profile = {
         id: response.data._id,

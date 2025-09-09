@@ -15,7 +15,7 @@ router.post('/signup', user.signupUser)
 router.post('/logout', user.logoutUser)
 
 // router.get('/delete/:id', deleteUser)
-router.get('/profile/:id', protect, asyncHandler(user.userProfile))
+router.get('/profile/:id', asyncHandler(user.userProfile))
 router.put('/profile/:id', asyncHandler(user.userUpdateProfile))
 
 export default router;
