@@ -1,90 +1,86 @@
-//react
-import React, { useState, useEffect } from "react"
+import React from "react";
 
-//components
+// Components
 import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
 import Meta from "../components/Meta.jsx";
 import Carousel from "../components/Carousel.jsx";
 import Cards from "../components/Cards.jsx";
 
-//MUI
+// MUI
 import { Box, Tooltip, Typography } from "@mui/material";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const BoxHeader = {
-    height:{xs: 'none'},
-    // paddingTop:4, paddingBottom:4, 
-    background: "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(97,97,97,1) 59%, rgba(0,0,0,1) 100%)"
-}
+    minHeight: '100vh',
+    background: "#000",
+    color: "#fff",
+    fontFamily: 'Roboto, sans-serif',
+};
 
 const IconsStyle = {
-    textDecoration:"none", color:"#fff", cursor:"pointer", 
-    // mt:4,
-    fontSize: {xs:'40px', lg:'50px'}
-}
+    color: "#fff",
+    cursor: "pointer",
+    fontSize: { xs: 40, md: 50 },
+    transition: 'all 0.3s ease',
+    '&:hover': { transform: 'scale(1.2)', color: '#90caf9' }
+};
 
-const btns = {
-    border:'2px #fff solid',
-    color:"#fff",
-    '&:hover': {
-        backgroundColor:'#fff',
-        color:'#000'
-    },
-    width: {xs:'100%'},
-}
-
-const IconsBox = () => {
-    return (
-        <>  
-            <Box sx={{
-                color:'#fff', 
-                pb:3,
-                display:'flex', flexDirection:'column', alignItems:'center'
-            }}>
-                <Box sx={{display:'flex', gap:4}}>
-                    <Tooltip title="Github Link">
-                        <Typography component="a" role='link' href="https://github.com/giangarof" aria-label="Github link">
-                        <GitHubIcon sx={IconsStyle}/>
-                        </Typography>             
-                    </Tooltip>
-
-                    <Tooltip title="LinkedIn Link">
-                        <Typography component="a" role='link' href="https://www.linkedin.com/in/gianmarco-g/" aria-label="LinkedIn link">      
-                            <LinkedInIcon sx={IconsStyle}/>
-                        </Typography>
-                    </Tooltip>
-                </Box>
-                <Box sx={{
-                    pb:3,
-                    mt:{xs:1, md:1},
-                    textAlign:{xs:"center", md:'left'}
-                    
-                    }}>
-                    <p>Feel free to reach me out for jobs and project purposes.</p>
-                    <p>*Note: If you are a recruiter, drop me a message.</p>                     
-                </Box>
-            </Box>
-        </>
-    )
-}
+const IconsBox = () => (
+    <Box sx={{
+        color:'#fff', 
+        py: 6,
+        display:'flex',
+        flexDirection:'column',
+        alignItems:'center'
+    }}>
+        <Box sx={{ display:'flex', gap: 6 }}>
+            <Tooltip title="Github Link">
+                <Typography component="a" href="https://github.com/giangarof" aria-label="Github link">
+                    <GitHubIcon sx={IconsStyle}/>
+                </Typography>             
+            </Tooltip>
+            <Tooltip title="LinkedIn Link">
+                <Typography component="a" href="https://www.linkedin.com/in/gianmarco-g/" aria-label="LinkedIn link">      
+                    <LinkedInIcon sx={IconsStyle}/>
+                </Typography>
+            </Tooltip>
+        </Box>
+        <Box sx={{ mt: 4, textAlign: 'center', maxWidth: 600 }}>
+            <Typography variant="body1" sx={{ mb: 1, color:'#fff', opacity: 0.8 }}>
+                Feel free to reach out for jobs and project purposes.
+            </Typography>
+            <Typography variant="body2" sx={{ color:'#fff', opacity: 0.6 }}>
+                *Note: If you are a recruiter, drop me a message.
+            </Typography>
+        </Box>
+    </Box>
+);
 
 export default function Main() {
-
-
-
-    return(
-        <>  
-            <Box sx={BoxHeader}>
-
-                <Meta />
-                <Header/>
-                <Carousel/>
-                <Cards />
-                <IconsBox />
-                      
+    return (
+        <Box sx={BoxHeader}>
+            <Meta />
+            <Header />
+            
+            {/* Carousel Section */}
+            <Box sx={{ py: 8 }}>
+                <Carousel />
             </Box>
-        </>
+            
+            {/* Cards Section */}
+            <Box sx={{ py: 8 }}>
+                <Cards />
+            </Box>
+            
+            {/* Social & Contact Section */}
+            <IconsBox />
+
+            {/* Footer
+            <Footer /> */}
+        </Box>
     )
-}       
+}
+
+       

@@ -1,149 +1,161 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams} from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import {Container, Tooltip, Stack,Box, Link as A} from '@mui/material';
-import Typography from '@mui/joy/Typography';
-
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import AddIcon from '@mui/icons-material/Add';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import CreateIcon from '@mui/icons-material/Create';
 import DOMPurify from 'dompurify';
 
+import {
+  Container,
+  Paper,
+  Stack,
+  Box,
+  Typography,
+  Link as MuiLink,
+  Divider,
+} from '@mui/material';
+
+import AddIcon from '@mui/icons-material/Add';
+import CreateIcon from '@mui/icons-material/Create';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+
 export default function Profile() {
-  
-  const {id} = useParams();
+  const { id } = useParams();
   const [user, setUser] = useState({
     name: '',
     username: '',
-    email:'',
-    about:'',
-    isAdmin: Boolean
-  })
-  
-  const fetchUser = async() => {
-    const res = await axios.get(`/api/user/profile/${id}`);
-    const data = res.data.user;
-    setUser({
-      name: data.name,
-      username: data.username,
-      email: data.email,
-      about: data.about,
-      isAdmin: data.isAdmin
-    })
-    return res;
-  }
-  const sanitizedHTML = DOMPurify.sanitize(user.about);
-  
+    email: '',
+    about: '',
+    isAdmin: false,
+  });
+
+  // Fetch user info
+  const fetchUser = async () => {
+    try {
+      const res = await axios.get(`/api/user/profile/${id}`);
+      const data = res.data.user;
+      setUser({
+        name: data.name,
+        username: data.username,
+        email: data.email,
+        about: data.about,
+        isAdmin: data.isAdmin,
+      });
+    } catch (err) {
+      console.error('Failed to fetch user:', err.message);
+    }
+  };
+
   useEffect(() => {
-    fetchUser()
-  }, [id])
+    fetchUser();
+  }, [id]);
 
-  const box = {
-    display:'flex', flexDirection:'column', gap:'1rem',
-    // backgroundColor:'red',
-    // width:'500px'
-  }
+  const sanitizedAbout = DOMPurify.sanitize(user.about);
 
-  const container = {
-
-    borderRadius:'8px',
-    marginTop:'1rem',
-    marginBottom:'1rem',
-
-
-    // margin:'10px',
-    backgroundColor:'rgba(0,0,0,0.07)',
-    padding:'10px',
-    // width:'100%'
-  }
-
-  const icons_inner = {
-    display:'flex', flexDirection:'row', gap:'1rem'
-  }
-    
   return (
-    <>
-    {/* Profile */}
-      <>
-      <Container sx={container}>
-        <Box sx={box}>
-          <Typography sx={box} level="body-lg">{user.isAdmin ? "Admin roles" : 'No admin'}</Typography>
+    <Container maxWidth="md" sx={{ py: 4 }}>
+      <Paper elevation={3} sx={{ p: 4, borderRadius: 3, backgroundColor: 'rgba(0,0,0,0.05)' }}>
+        <Stack spacing={3}>
+          {/* User Basic Info */}
+          <Stack spacing={1}>
+            <Typography variant="h5" fontWeight="bold">
+              {user.name} {user.isAdmin && '(Admin)'}
+            </Typography>
+            <Typography variant="body1" color="text.secondary">
+              Username: {user.username}
+            </Typography>
+            <Typography variant="body1" color="text.secondary">
+              Email: {user.email}
+            </Typography>
+          </Stack>
 
-          <Typography level="body-lg">
-            Name: {user.name}
-          </Typography>
-
-          <Typography sx={box} level="body-lg">
-            Email: {user.email}
-          </Typography>
-
-          <Typography sx={box}level="body-lg">
-            Username: {user.username}
-          </Typography>
-
-          <Typography  sx={box}level="body-lg" >
-            <Box> 
-              Description: <A href="/about">See here</A>
-            </Box>
-          </Typography>
-        
-            
-          {user.isAdmin ? (
-            <>
-            <Container sx={{display:'flex', gap:'1rem'}}>
-              Projects
-              <Box sx={icons_inner}>
-                <Typography component="a" href="/new">
-                  <Tooltip title="Add new post">
-                    <AddIcon sx={box}/>
-                  </Tooltip>
-                </Typography>
-                <Typography  component="a" href="/adminpanel">
-                  <Tooltip title="Admin Panel - Posts">
-                    <AdminPanelSettingsIcon sx={box}/>
-                  </Tooltip>
-                </Typography> 
-              </Box>
-            </Container>
-
-            <Container sx={{display:'flex', gap:'1rem'}}>
-              My Blog
-              <Box sx={icons_inner}>
-                <Typography component="a" href="/new-note">
-                  <Tooltip title="Add new note">
-                    <CreateIcon sx={box}/>
-                  </Tooltip>
-                </Typography>
-                <Typography  component="a" href="/adminpanel-notes">
-                  <Tooltip title="Admin Panel - Notes">
-                    <AdminPanelSettingsIcon sx={box}/>
-                  </Tooltip>
-                </Typography> 
-              </Box>
-            </Container>
-
-            <Container sx={{display:'flex', gap:'1rem'}}>
-              Profile Management
-              <Typography component="a" href="/user/update">
-                <Tooltip title='Update'>
-                  <ManageAccountsIcon sx={box}/>
-                </Tooltip>
+          {/* About Section */}
+          {user.about && (
+            <Box>
+              <Typography variant="body1" fontWeight="bold" mb={1}>
+                About
               </Typography>
-            </Container>
-          </>
+              <Typography
+                variant="body2"
+                component="div"
+                dangerouslySetInnerHTML={{ __html: sanitizedAbout }}
+                sx={{
+                  backgroundColor: 'rgba(0,0,0,0.02)',
+                  p: 2,
+                  borderRadius: 2,
+                }}
+              />
+            </Box>
+          )}
 
+          <Divider />
+
+          {/* Admin Actions */}
+          {user.isAdmin ? (
+            <Stack spacing={3}>
+              {/* Projects */}
+              <Stack spacing={1}>
+                <Typography fontWeight="bold">Projects</Typography>
+                <Stack direction="row" spacing={2} flexWrap="wrap">
+                  <ActionButton to="/new" icon={<AddIcon fontSize="large" />} text="Add Project" />
+                  <ActionButton to="/adminpanel" icon={<AdminPanelSettingsIcon fontSize="large" />} text="Admin Panel" />
+                </Stack>
+              </Stack>
+
+              {/* My Blog */}
+              <Stack spacing={1}>
+                <Typography fontWeight="bold">My Blog</Typography>
+                <Stack direction="row" spacing={2} flexWrap="wrap">
+                  <ActionButton to="/new-note" icon={<CreateIcon fontSize="large" />} text="Add Note" />
+                  <ActionButton to="/adminpanel-notes" icon={<AdminPanelSettingsIcon fontSize="large" />} text="Notes Panel" />
+                </Stack>
+              </Stack>
+
+              {/* Profile Management */}
+              <Stack spacing={1}>
+                <Typography fontWeight="bold">Profile Management</Typography>
+                <Stack direction="row" spacing={2} flexWrap="wrap">
+                  <ActionButton to="/user/update" icon={<ManageAccountsIcon fontSize="large" />} text="Update Profile" />
+                </Stack>
+              </Stack>
+            </Stack>
           ) : (
-            <Typography sx={box} level="body-lg">Admin: No Admin Privilege</Typography>
-          )
-            }
-        </Box>
-      
-
-    
-      </Container>
-      </>      
-    </>
-  )
+            <Typography variant="body1" color="text.secondary">
+              Admin Privileges: None
+            </Typography>
+          )}
+        </Stack>
+      </Paper>
+    </Container>
+  );
 }
+
+// Reusable Action Button Component
+function ActionButton({ to, icon, text }) {
+  return (
+    <MuiLink component={Link} to={to} underline="none">
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 0.5,
+          p: 1.5,
+          borderRadius: 2,
+          boxShadow: 1,
+          cursor: 'pointer',
+          transition: '0.2s',
+          '&:hover': {
+            boxShadow: 3,
+            backgroundColor: 'rgba(0,0,0,0.05)',
+          },
+        }}
+      >
+        {icon}
+        <Typography variant="body2">{text}</Typography>
+      </Box>
+    </MuiLink>
+  );
+}
+
+
+

@@ -1,132 +1,96 @@
-//react
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 //mui
-import { Container,Box, Card, Button, CardContent, CardMedia, Typography, Link as A, Tooltip } from "@mui/material";
+import { Container, Box, Card, CardContent, Button, Typography, Link as MuiLink, Tooltip } from "@mui/material";
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-
-//dependencies
-import axios from "axios";
 
 //components
 import CircularIndeterminate from "../../components/Spinner";
 import Meta from "../../components/Meta";
 
 export default function Now() {
-    const [isLoading, setIsLoading] = useState(false)
-    const [data,setData] = useState([]);
-    const [admin,setAdmin] = useState(false);
-    const userId = localStorage.getItem('userId')
+    const [isLoading, setIsLoading] = useState(false);
+    const [data, setData] = useState([]);
 
-    const fetching = async() => {
-        setIsLoading(true)
+    const fetching = async () => {
+        setIsLoading(true);
         try {
-            const res = await axios.get(`/api/note/`)
-            setData(res.data)
+            const res = await axios.get(`/api/note/`);
+            setData(res.data);
         } catch (error) {
-            console.log(error)
-            
-        } finally{
-            setIsLoading(false)
+            console.error(error);
+        } finally {
+            setIsLoading(false);
         }
-    }
+    };
 
-    // const fetchUser = async () => {
-    //     const res = await axios.get(`/api/user/profile/${userId}`)
-    //     setAdmin(res.data.user.isAdmin)
-    // }
-    
     useEffect(() => {
-        fetching()
-        // fetchUser()
-    }, [])
-    
-    const sx = {
-        borderRadius:'7px',
-        boxShadow:'0px 0px 10px 0px',
-        marginTop: '20px',
-        display:'flex', flexDirection:'column',
-        gap:'1rem',
-        // backgroundColor:'rgba(0,0,0,0.03)',
-        padding:'9px',
-        width: {
-            md:{
-                width:'100%'
-            }
-        }
-    }
-    const date = {
-        color:'gray',
-        textAlign:'right',
-        // margin:'50px'
-    }
-
-    const intro ={
-        color:'#666565',
-        fontStyle:'italic'
-    }
+        fetching();
+    }, []);
 
     const grid = {
-        width:'100%',
-        display:'grid', 
-        gap:'1rem',
-        gridTemplateColumns: {
-        sm: 'repeat(1, 1fr)',  
-        md: 'repeat(2, 1fr)',  
-    },
+        display: 'grid',
+        gap: 3,
+        gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
+    };
 
-    }
+    return (
+        <>
+            <Box sx={{ pt: 3, backgroundColor: 'rgba(0,0,0,0.05)', minHeight: '100vh' }}>
+                <Meta title="My Blog" description="Tech related posts" />
 
-    return(
-        <>  
-            {/* Box that contains the content */}
-            <Box sx={{pt:3, backgroundColor:'rgba(0,0,0,0.05)', height:'100vh'}}>
-                <Meta title="My Blog" description="Tech related posts"/>
-
-                {/* first container | contains the "go back btn" */}
-                <Container>
-                    <Link to='/'>
-                        <Button variant='outlined'>Go Back</Button>
+                <Container sx={{ mb: 3 }}>
+                    <Link to="/">
+                        <Button variant="outlined">Go Back</Button>
                     </Link>
                 </Container>
 
-                {/* second container | contains the posts */}
-                {/* loads first, then it display it  */}
                 <Container>
-                    {isLoading ?  <>
-                            <Box sx={{display:'flex', flexDirection:'column', alignItems:'center', gap:'1rem'}}>
-                                <CircularIndeterminate />
-                                <p>Loading, please wait!</p>
-                            </Box>
-                        </> : (
-                        <Box>
-                            <Container>
-                                <Box sx={grid}>
-                                    {data.slice().reverse().map((i) => (
-                                        <Box sx={sx} key={i._id}>
-                                            <Typography>~ {i.title}</Typography>
-                                            <Typography sx={intro}>{i.about}</Typography>
-                                            <Box sx={{display:'flex', gap:'1rem'}}>
-                                                <Tooltip title="Read article" >
-                                                <A component={Link} to={`/note/${i._id}`}>
-                                                    <Button variant="contained" size="small">
-                                                        <AutoStoriesIcon/>
-                                                    </Button>
-                                                </A >
-                                                </Tooltip>
-                                            </Box>
-                                            <Box sx={{display:'flex', flexDirection:'column', alignItems:'end' }}>
-                                                <Typography sx={date}>Posted: {i.createdAt.slice(0,10)}</Typography>
-                                            </Box>
-                                        </Box>
-                                    ))} 
-                                </Box>
-                            </Container>  
+                    {isLoading ? (
+                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+                            <CircularIndeterminate />
+                            <Typography>Loading, please wait!</Typography>
+                        </Box>
+                    ) : (
+                        <Box sx={grid}>
+                            {data.slice().reverse().map((note) => (
+                                <Card key={note._id} sx={{ p: 2, boxShadow: 3, borderRadius: 2, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                                    <CardContent sx={{ p: 0 }}>
+                                        <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
+                                            {note.title}
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary" sx={{
+                                            display: '-webkit-box',
+                                            WebkitLineClamp: 3,
+                                            WebkitBoxOrient: 'vertical',
+                                            overflow: 'hidden',
+                                            textOverflow: 'ellipsis',
+                                            mb: 1
+                                        }}>
+                                            {note.about}
+                                        </Typography>
+                                    </CardContent>
+
+                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 2 }}>
+                                        <Tooltip title="Read article">
+                                            <MuiLink component={Link} to={`/note/${note._id}`} underline="none">
+                                                <Button variant="contained" size="small" startIcon={<AutoStoriesIcon />}>
+                                                    Read
+                                                </Button>
+                                            </MuiLink>
+                                        </Tooltip>
+                                        <Typography variant="caption" color="text.secondary">
+                                            Posted: {note.createdAt.slice(0, 10)}
+                                        </Typography>
+                                    </Box>
+                                </Card>
+                            ))}
                         </Box>
                     )}
                 </Container>
             </Box>
         </>
-    )
+    );
 }

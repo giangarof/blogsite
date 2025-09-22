@@ -1,139 +1,174 @@
-//react
-import React, { useState, useEffect } from 'react'
-import { Link, useParams, useNavigate } from "react-router-dom"
+// React
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from "react-router-dom";
 
-//mui
-import { Box, Card, Button, CardContent, CardMedia, Typography, Tooltip, Snackbar, Link as A, SnackbarContent, Container } from "@mui/material";
+// MUI
+import {
+  Box,
+  Card,
+  Button,
+  CardContent,
+  CardMedia,
+  Typography,
+  Container,
+  Link as MuiLink,
+  Chip,
+  Stack
+} from "@mui/material";
 
-//dependencies
-import axios from "axios"
+// Dependencies
+import axios from "axios";
 
-//components
+// Components
 import CopyLink from '../../components/CopyLink';
 import CircularIndeterminate from '../../components/Spinner';
 import Meta from '../../components/Meta';
 import Message from '../../components/Message';
 
-export default function () {
-    const [post, setPost] = useState([])
-    const [img, setImg] = useState()
-    const [isLoading, setIsLoading] = useState(false)
-    const [isAdmin, setIsAdmin] = useState(false)
-    const {id} = useParams()
-    const navigate = useNavigate()
+export default function PostDetail() {
+  const [post, setPost] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
-    // const [open, setOpen]= useState(false)
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-    const fetchPosts = async() =>{
-        setIsLoading(true)
-        try {
-            const data = await axios.get(`/api/post/${id}`)
-            const res = data
-            // console.log(res.data.image[0].url)
-            setPost(res.data)
-            setImg(res.data.image[0].url)
-            return res.data
-            
-        } catch (err) {
-            console.log('something went wrong: ', err.message)
-        } finally{
-            setIsLoading(false)
-        }
+  const fetchPost = async () => {
+    setIsLoading(true);
+    try {
+      const { data } = await axios.get(`/api/post/${id}`);
+      setPost(data);
+    } catch (err) {
+      console.error('Failed to fetch post:', err.message);
+    } finally {
+      setIsLoading(false);
     }
+  };
 
-    const updatePostScreen = async(id) => {
-        navigate(`/post/update/${id}`)
-    }
+  const handleUpdatePost = () => navigate(`/post/update/${id}`);
+  const handleGoBack = () => window.history.back();
 
-    const goBack = async() => {
-        window.history.back()
-    }
-    
-    useEffect(() => {
-          const isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
-          setIsAdmin(isAdmin)
-          fetchPosts()
-      }, [id])
+  useEffect(() => {
+    const adminStatus = JSON.parse(localStorage.getItem('isAdmin'));
+    setIsAdmin(adminStatus);
+    fetchPost();
+  }, [id]);
+
+  if (isLoading) {
+    return (
+      <Container sx={{ mt: 3, textAlign: 'center' }}>
+        <CircularIndeterminate size={90} />
+        <Typography mt={2}>Loading... Please wait</Typography>
+      </Container>
+    );
+  }
+
+  if (!post) {
+    return (
+      <Container sx={{ mt: 3, textAlign: 'center' }}>
+        <Message severity="error">Post not found</Message>
+      </Container>
+    );
+  }
 
   return (
+    <Container sx={{ mt: 3 }}>
+      <Button variant="outlined" onClick={handleGoBack} sx={{ mb: 2 }}>
+        Go Back
+      </Button>
+      <Message />
+      <Meta title={post.title} description={post.description} />
 
-        <>
-            <Container sx={{mt:3}}>
-                <Button variant='outlined' onClick={goBack}>Go Back</Button>
-                <Message />
-                {isLoading ? (
-                    <>
-                        <CircularIndeterminate size={90} />
-                        <Typography sx={{textAlign:'center'}}>Loading... Please wait</Typography>
-                    </>
-                ) : (
-                    <div>
-                        <Meta title={post.title} description={post.description}/>
-                        {/* Render or use 'post' */}
-                        <Box sx={{
-                                display:'flex', flexDirection:'row', justifyContent:'center',
-                                width:{
-                                    sm: '100%',
-                                    md: '100%'
-                                }
-                        }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          width: '100%',
+        }}
+      >
+        <Card
+          sx={{
+            width: { xs: '95%', sm: '80%', md: '70%' },
+            mt: 2,
+            mb: 2,
+            boxShadow: 3,
+          }}
+        >
+          {/* Full image visible on all devices */}
+          {post.image?.[0]?.url && (
+            <CardMedia
+              component="img"
+              image={post.image[0].url}
+              alt={post.title}
+              sx={{
+                width: '100%',
+                height: 'auto',  // keeps natural aspect ratio
+                maxHeight: '80vh', // optional: prevent extremely tall images
+                objectFit: 'contain', // ensures entire image is visible
+              }}
+            />
+          )}
 
-                                <Card 
-                                    key={post._id} 
-                                    sx={{
-                                        width:{
-                                            sm: '90%',
-                                            md: '60%'
-                                        },
-                                        margin: '2rem 0 2rem 0',
-                                        boxShadow:'0px 0px 20px 0px'
+          <CardContent
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 2,
+              backgroundColor: 'rgba(0,0,0,0.08)',
+            }}
+          >
+            <Typography variant="h5">{post.title}</Typography>
+            <Typography variant="body1">{post.description}</Typography>
 
-                                    }}
-                                >
-                                    <CardMedia
-                                        sx={{
-                                            display: 'flex',
-                                            justifyContent: 'center', /* Horizontally center the content */
-                                            alignItems: 'center', /* Vertically center the content */
-                                            height: '50vh',
-                                            objectFit:'contain'
-                                        }}
-                                        component="img"
-                                        image={img}
-                                    />
-                                    <CardContent
-                                        sx={{
-                                            display:'flex', flexDirection:'column', gap:2,
-                                            backgroundColor:'rgb(0, 0, 0, 0.12)',
-                                            }}
-                                        >
-                                        {/* {Array.isArray(post.image) && post.image.length > 0 && (
-                                            <img src={post.image[0].url} width={250} height={250} />     
-                                            )} */}
-                                        <Typography variant="h5" >{post.title}</Typography>
-                                        <Typography variant='p'>{post.description}</Typography>
-                                        <A variant='p' style={{width:'100px'}} sx={{display:'inline-block', cursor:'pointer'}} href={post.repo} target="_blank" >Github Code</A>
-                                        <A variant='p' style={{width:'100px'}} sx={{cursor:'pointer'}} href={post.link} target="_blank">Full Project</A>
-                                        <Typography variant='p'>Technologies used: {post.tech}</Typography>
-                                        
-                                        {isAdmin == true ? 
-                                            <Box sx={{display:'flex', gap:'1rem'}}>
-                                                <Button variant="contained" onClick={() => updatePostScreen(post._id)}>
-                                                    <Typography>Options</Typography>
-                                                </Button>
+            <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+              {post.repo && (
+                <MuiLink
+                  href={post.repo}
+                  target="_blank"
+                  rel="noopener"
+                  underline="hover"
+                >
+                  Github Code
+                </MuiLink>
+              )}
+              {post.link && (
+                <MuiLink
+                  href={post.link}
+                  target="_blank"
+                  rel="noopener"
+                  underline="hover"
+                >
+                  Full Project
+                </MuiLink>
+              )}
+            </Box>
 
-                                                <CopyLink/>
-                                            </Box>
-                                         : <Box >
-                                                <CopyLink/>
-                                            </Box> }
-                                    </CardContent>
-                                </Card>
-                        </Box>
-                    </div>
+            {/* Technologies as Pills */}
+            {post.tech && (
+              <Stack direction="row" spacing={1} flexWrap="wrap">
+                {post.tech.split(',').map((techItem, index) => (
+                  <Chip
+                    key={index}
+                    label={techItem.trim()}
+                    color="primary"
+                    size="small"
+                  />
+                ))}
+              </Stack>
             )}
-            </Container>
-        </>
 
-  )
+            <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mt: 1 }}>
+              {isAdmin && (
+                <Button variant="contained" onClick={handleUpdatePost}>
+                  Options
+                </Button>
+              )}
+              <CopyLink />
+            </Box>
+          </CardContent>
+        </Card>
+      </Box>
+    </Container>
+  );
 }
+
