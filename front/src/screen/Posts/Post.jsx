@@ -28,7 +28,7 @@ import Message from '../../components/Message';
 export default function PostDetail() {
   const [post, setPost] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false) || '';
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -50,8 +50,12 @@ export default function PostDetail() {
   
   useEffect(() => {
     
-    const adminStatus = JSON.parse(localStorage.getItem('isAdmin'));
-    setIsAdmin(adminStatus);
+    const profile = JSON.parse(localStorage.getItem('profile'));
+    const isAdmin = profile?.isAdmin
+    if (profile?.isAdmin){
+      setIsAdmin(true);
+      
+    } 
     fetchPost();
   }, [id]);
 

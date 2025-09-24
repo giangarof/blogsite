@@ -29,7 +29,8 @@ export default function Signin() {
       const message  = response.data.message;
       const profile = {
         id: response.data._id,
-        name: response.data.userProfile.name
+        name: response.data.userProfile.name,
+        isAdmin:response.data.userProfile.isAdmin,
       }
       localStorage.setItem('profile', JSON.stringify(profile))
       sessionStorage.setItem('notification', message)
