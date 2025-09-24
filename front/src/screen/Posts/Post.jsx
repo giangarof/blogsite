@@ -32,7 +32,7 @@ export default function PostDetail() {
 
   const { id } = useParams();
   const navigate = useNavigate();
-
+  
   const fetchPost = async () => {
     setIsLoading(true);
     try {
@@ -44,11 +44,12 @@ export default function PostDetail() {
       setIsLoading(false);
     }
   };
-
+  
   const handleUpdatePost = () => navigate(`/post/update/${id}`);
   const handleGoBack = () => window.history.back();
-
+  
   useEffect(() => {
+    
     const adminStatus = JSON.parse(localStorage.getItem('isAdmin'));
     setIsAdmin(adminStatus);
     fetchPost();

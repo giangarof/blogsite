@@ -1,114 +1,192 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
-// MUI
-import { AppBar, Toolbar, Box, IconButton, Menu, MenuItem, Link as MuiLink, Button } from "@mui/material";
+import { 
+  AppBar, 
+  Toolbar, 
+  Typography, Box, Tooltip, IconButton, Icon, Avatar, Stack, Container, Link as A, 
+  Menu,
+  MenuItem} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 
-// Components
-import Logout from './Logout.jsx';
-
-const menuItems = [
-  { label: "Home", to: "/" },
-  { label: "Projects", to: "/projects" },
-  { label: "My Blog", to: "/myblog" },
-  { label: "About Me", to: "/about" },
-];
-
+import { useEffect, useState } from "react";
+import Logout from './Logout.jsx'
+import { Link } from "react-router-dom";
+  
 export default function Navbar() {
-  const [profile, setProfile] = useState({ id: '', name: '', isAdmin: false });
-  const data = JSON.parse(localStorage.getItem('profile')) ?? {};
+  const [profile, setProfile] = useState({
+    id:'',
+    name:'',
+    isAdmin:Boolean
+  })
+  const data = JSON.parse(localStorage.getItem('profile')) ?? ''
+  // console.log(profile)
 
-  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null)
 
-  const handleOpenNavMenu = (event) => setAnchorElNav(event.currentTarget);
-  const handleCloseNavMenu = () => setAnchorElNav(null);
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
 
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const sx = {
+    cursor:'pointer',
+    color:'white'
+  }
+  
   useEffect(() => {
-    if (data.id) setProfile({ id: data.id, name: data.name, isAdmin: data.isAdmin || false });
-  }, [data]);
+    setProfile({
+      id:data.id,
+      name:data.name,
+    })
 
-  const desktopLinkStyle = {
-    color: 'white',
-    textDecoration: 'none',
-    fontWeight: 500,
-    '&:hover': { color: 'rgba(255,255,255,0.7)' }
-  };
+  }, [])
 
-  const mobileLinkStyle = {
-    color: 'black',
-    textDecoration: 'none',
-    '&:hover': { color: 'primary.main' }
-  };
-
-  return (
-    <AppBar position="static" sx={{ backgroundColor: "#000" }}>
-      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-        
-        {/* Logo / Home */}
-        <MuiLink component={Link} to="/" sx={{ color: 'white', fontWeight: 600, fontSize: 20, textDecoration: 'none' }}>
-          MyPortfolio
-        </MuiLink>
-
-        {/* Mobile Menu */}
-        <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-          <IconButton size="large" color="inherit" onClick={handleOpenNavMenu}>
-            <MenuIcon />
-          </IconButton>
-          <Menu
-            anchorEl={anchorElNav}
-            open={Boolean(anchorElNav)}
-            onClose={handleCloseNavMenu}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-            transformOrigin={{ vertical: 'top', horizontal: 'left' }}
-            PaperProps={{ sx: { backgroundColor: 'white' } }}
-          >
-            {menuItems.map((item) => (
-              <MenuItem key={item.to} onClick={handleCloseNavMenu}>
-                <MuiLink component={Link} to={item.to} sx={mobileLinkStyle}>
-                  {item.label}
-                </MuiLink>
-              </MenuItem>
-            ))}
-
-            {profile.id && (
-              <>
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <MuiLink component={Link} to={`/profile/${profile.id}`} sx={mobileLinkStyle}>
-                    {profile.name}
-                  </MuiLink>
-                </MenuItem>
-                <MenuItem>
-                  <Logout />
-                </MenuItem>
-              </>
-            )}
-          </Menu>
-        </Box>
-
-        {/* Desktop Menu */}
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 3 }}>
-          {menuItems.map((item) => (
-            <MuiLink key={item.to} component={Link} to={item.to} sx={desktopLinkStyle}>
-              {item.label}
-            </MuiLink>
-          ))}
-          {profile.id && (
+        return(
             <>
-              <MuiLink component={Link} to={`/profile/${profile.id}`} sx={desktopLinkStyle}>
-                {profile.name}
-              </MuiLink>
-              <Logout />
+              {profile.id ? (
+              <Box sx={{backgroundColor:"#000", color:'#fff'}}>
+                <Toolbar sx={{backgroundColor:"#000", color:'#fff'}}>
+                  <Box sx={{ display:'flex', justifyContent:'space-between', width:'100%'}} >
+
+                    {/* Mobile view */}
+                    <Box sx={{ display:{xs:'flex', md:'none', cursor:"pointer"}}}>
+                      <IconButton
+                        size="large"
+                        aria-label="open navigation menu"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        color='inherit'
+                        onClick={handleOpenNavMenu} >
+                        
+                        <MenuIcon />
+                      </IconButton>
+                      <Menu 
+                        open={Boolean(anchorElNav)} 
+                        onClose={handleCloseNavMenu}
+                        anchorOrigin={{
+                          vertical: 'top',
+                          horizontal: 'left',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        anchorEl={anchorElNav} 
+                        sx={{cursor:'pointer', mt:5}}>
+                          
+                        <MenuItem>
+                          <A to="/" component={Link} color="inherit" underline='none'>
+                            Home
+                          </A>
+                        </MenuItem>
+                        <MenuItem>
+                          <A to={`/profile/${profile.id}`} component={Link} color="inherit" underline='none'>
+                            {profile.name}
+                          </A>
+                        </MenuItem>
+                        <MenuItem sx={{alignItems:'center'}}>
+                          <Logout/>
+                        </MenuItem>
+                      </Menu>
+                    </Box>
+
+                    {/* Desktop View */}
+                    <Box sx={{display:{xs:'none', md:'flex'}, justifyContent:'space-between',  width:'100%'}}>
+                      <Box sx={{ display:'flex', gap:'10px'}}>
+                        <A to='/' component={Link} color="inherit" underline='none'>
+                          <h2>Home</h2>
+                        </A>
+                      </Box>
+                      <Box sx={{display:'flex', gap:'10px', alignItems:"center"}}>
+                        <A to={`/profile/${profile.id}`} component={Link} color="inherit" underline='none' sx={sx}>
+                          <h2>{profile.name}</h2>
+                        </A>
+                        
+                        <Typography sx={sx}>
+                          <Logout/>
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Toolbar>
+              </Box>
+              ) : (
+                // <div>
+                  <Box sx={{backgroundColor:"#000", color:'#fff'}}>
+                    <Toolbar sx={{backgroundColor:"#000", color:'#fff'}}>
+                      <Box sx={{
+                          display:'flex', 
+                          justifyContent:'space-between', 
+                          width:'100%', textAlign:'center'
+                        }}>
+                        {/* Mobile view */}
+                        <Box sx={{ display:{xs:'flex', md:'none', cursor:"pointer"}}}>
+                          <IconButton
+                            size="large"
+                            aria-label="open navigation menu"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            color='inherit'
+                            onClick={handleOpenNavMenu} >
+                            
+                            <MenuIcon />
+                          </IconButton>
+                          <Menu 
+                            open={Boolean(anchorElNav)} 
+                            onClose={handleCloseNavMenu}
+                            anchorOrigin={{
+                              vertical: 'top',
+                              horizontal: 'left',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                              vertical: 'top',
+                              horizontal: 'right',
+                            }}
+                            anchorEl={anchorElNav} 
+                            sx={{cursor:'pointer', mt:5}}>
+                              
+                            <MenuItem>
+                              <A to="/" component={Link} color="inherit" underline='none'>
+                                Home
+                              </A>
+                            </MenuItem>
+                            <MenuItem>
+                              <A to="/projects" component={Link} color="inherit" underline='none'>
+                                Projects
+                              </A>
+                            </MenuItem>
+                            <MenuItem>
+                              <A to="/myblog" component={Link} color="inherit" underline='none'>
+                                My Blog
+                              </A>
+                            </MenuItem>
+                            <MenuItem>
+                              <A to="/about" component={Link} color="inherit" underline='none'>
+                                About Me
+                              </A>
+                            </MenuItem>
+                          </Menu>
+                        </Box>
+
+                        {/* Desktop View */}
+                        <Box sx={{display:{xs:'none', md:'flex'}, justifyContent:'space-between',  width:'100%'}}>
+                          <Box sx={{ display:'flex', gap:'10px'}}>
+                            <A to='/' component={Link} color="inherit" underline='none'>
+                              <h3>Home</h3>
+                            </A>
+                          </Box>
+                        </Box>
+                      </Box>
+                    </Toolbar>
+                  </Box>
+                // </div>
+              )}
             </>
-          )}
-        </Box>
-      </Toolbar>
-    </AppBar>
-  );
+        )
 }
-
-
-
 
 
 
