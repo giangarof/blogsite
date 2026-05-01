@@ -1,123 +1,150 @@
 //React
-import React, {useEffect, useState} from "react";
-import {useNavigate} from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // MUI
-import { Box, TextField, Stack, Button, Typography, } from "@mui/material";
-import { Container } from '@mui/system';
+import {
+	Box,
+	TextField,
+	Stack,
+	Button,
+	Typography,
+	Paper,
+	InputAdornment,
+	IconButton,
+	Link,
+} from "@mui/material";
+import { Container } from "@mui/system";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 //Others
-import axios from 'axios';
-
-// Components
-import Message from "../../components/Message.jsx";
+import axios from "axios";
 
 export default function Signin() {
-  const navigate = useNavigate()
-  const [user, setUser] = useState({
-    email:'',
-    password:''
-  })
+	const navigate = useNavigate();
+	const [user, setUser] = useState({
+		email: "",
+		password: "",
+		// showPassword:''
+	});
 
-  const [errorMsg, setErrorMsg] = useState('')
+	const [errorMsg, setErrorMsg] = useState("");
+	const [showPassword, setShowPassword] = useState(false);
 
-  const login = async(e) => {
-    e.preventDefault()
-    try {
-      const response = await axios.post('/api/user/signin', user)
-      console.log(response)
-      const message  = response.data.message;
-      const profile = {
-        id: response.data._id,
-        name: response.data.userProfile.name,
-        isAdmin:response.data.userProfile.isAdmin,
-      }
-      localStorage.setItem('profile', JSON.stringify(profile))
-      sessionStorage.setItem('notification', message)
-      navigate(`/`)
-      location.reload()
-      
-    } catch (error) {
-      setErrorMsg(error.response.data.message)
-    }
-  }
+	const login = async (e) => {
+		e.preventDefault();
+		try {
+			const response = await axios.post("/api/user/signin", user);
+			console.log(response);
+			const message = response.data.message;
+			const profile = {
+				id: response.data._id,
+				name: response.data.userProfile.name,
+				isAdmin: response.data.userProfile.isAdmin,
+			};
+			// localStorage.setItem("profile", JSON.stringify(profile));
+			sessionStorage.setItem("notification", message);
+			navigate(`/`);
+			location.reload();
+		} catch (error) {
+			console.log(error.message);
+			setErrorMsg(error.response.data.message);
+		}
+	};
 
-  const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
-  useEffect(() => {
-        
+	const handleChange = (e) => {
+		setUser({ ...user, [e.target.name]: e.target.value });
+	};
+	useEffect(() => {}, []);
 
-  },[])
-  
-        return(
-            <>
-              <Box sx={{
-                width: {
-                  sm:'100%',
-                  md:'100%'
-                },
-                display:'flex', 
-                flexDirection:'row', 
-                justifyContent:'center', 
-                margin: 'auto auto 15px auto'
-                // gap:8
-                }}>
-                <Container 
-                  sx={{
-                    width:{
-                      sm:'100%',
-                      md:'40%'
-                    },
-                    display:'flex', 
-                    flexDirection:'column', 
-                    alignItems:'center',
-                    gap:5,
-                  }}
-                >
-                    <Typography level="h3" sx={{marginTop:4}}>Credentials</Typography>
+	return (
+		<Box
+			sx={{
+				minHeight: "80vh",
+				display: "flex",
+				justifyContent: "center",
+				alignItems: "center",
+				px: 2,
+			}}
+		>
+			<Paper
+				elevation={6}
+				sx={{
+					width: "100%",
+					maxWidth: 420,
+					p: 4,
+					borderRadius: 3,
+				}}
+			>
+				<Stack spacing={3} marginBottom={3}>
+					{/* Header */}
+					<Box sx={{ textAlign: "center" }}>
+						<Typography variant="h5" fontWeight={600}>
+							Welcome Back
+						</Typography>
+						<Typography variant="body2" color="text.secondary">
+							Sign in to continue
+						</Typography>
+					</Box>
 
-                    {/* <TextField id="outlined-basic" label="Full Name" variant="outlined" /> */}
-                    <TextField
-                      fullWidth
-                      multiline
-                      id="outlined-basic" 
-                      label="Email" 
-                      maxRows={4}
-                      variant="filled"
-                      value={user.email} name="email"
-                      onChange={handleChange}
-                      sx={{backgroundColor:'#fff'}}
-                      />
-                    {/* <TextField id="outlined-basic" label="Email" variant="outlined" /> */}
-                    <TextField 
-                        fullWidth
-                        maxRows={4}
-                        variant="filled"
-                        id="outlined-basic"
-                        type="password"
-                        label="Password" 
-                        value={user.password} name="password"
-                        onChange={handleChange}
-                        sx={{backgroundColor:'#fff'}}
-                    />
+					{/* Email */}
+					<TextField
+						fullWidth
+						label="Email"
+						type="email"
+						variant="outlined"
+						value={user.email}
+						name="email"
+						onChange={handleChange}
+					/>
 
-                    <Button 
-                      variant="contained" 
-                      fullWidth
-                      // sx={{marginBottom:4}} 
-                      onClick={login}>Sign In</Button>
-                    
-                  <Typography 
-                    sx={{
-                      color:'red',
-                      
-                    }}>{errorMsg}</Typography>
-                </Container>
+					{/* Password */}
+					<TextField
+						fullWidth
+						label="Password"
+						variant="outlined"
+						type={showPassword ? "text" : "password"}
+						value={user.password}
+						name="password"
+						onChange={handleChange}
+						InputProps={{
+							endAdornment: (
+								<InputAdornment position="end">
+									<IconButton
+										onClick={() => setShowPassword(!showPassword)}
+										edge="end"
+									>
+										{showPassword ? <VisibilityOff /> : <Visibility />}
+									</IconButton>
+								</InputAdornment>
+							),
+						}}
+					/>
 
-                <Message/>
+					{/* Error */}
+					{errorMsg && (
+						<Typography
+							variant="body2"
+							sx={{ color: "error.main", textAlign: "center" }}
+						>
+							{errorMsg}
+						</Typography>
+					)}
 
-              </Box>
-            </>
-        )
+					{/* Button */}
+					<Button
+						variant="contained"
+						size="large"
+						fullWidth
+						onClick={login}
+						sx={{ py: 1.2, borderRadius: 2 }}
+					>
+						Sign In
+					</Button>
+				</Stack>
+				<Link href="/recover">Forgot password?</Link>
+			</Paper>
+		</Box>
+	);
 }

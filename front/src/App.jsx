@@ -1,29 +1,31 @@
 import React, { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import Navbar from './components/Navbar.jsx'
+import Navbar from "./components/Navbar.jsx";
 import ReactGA from "react-ga4";
 import Footer from "./components/Footer.jsx";
+import Message from "./components/Message.jsx";
 const App = () => {
-  const location = useLocation();
+	const location = useLocation();
 
-  useEffect(() => {
-    // Send pageview event on location change
-    ReactGA.send({ hitType: "pageview", page: location.pathname });
-  }, [location]);
+	useEffect(() => {
+		// Send pageview event on location change
+		ReactGA.send({ hitType: "pageview", page: location.pathname });
+	}, [location]);
 
-  return(
-    <>
-    {/* <main> */}
-      {/* <Container> */}
-        {/* <React.Fragment> */}
-            <Navbar/>
-            <Outlet/> 
-            <Footer/>  
-        {/* </React.Fragment> */}
-      {/* </Container> */}
-    {/* </main> */}
-    </>
-  )
-}
+	return (
+		<>
+			{/* <main> */}
+			{/* <Container> */}
+			{/* <React.Fragment> */}
+			<Navbar />
+			<Message />
+			<Outlet />
+			<Footer />
+			{/* </React.Fragment> */}
+			{/* </Container> */}
+			{/* </main> */}
+		</>
+	);
+};
 
 export default App;

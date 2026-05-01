@@ -1,67 +1,161 @@
-/* General styling for the content */
+/* =========================
+   OUTER BACKGROUND (Docs workspace)
+========================= */
+
 .content-preview {
-    font-family: 'Arial', sans-serif; /* Default font family */
-    padding: 20px; /* General padding around the content */
-    line-height: 1.6; /* Improve readability with line height */
-    color: #333; /* Default text color */
-  }
-  
-  /* Bold text styling */
-  .content-preview b,
-  .content-preview strong {
-    font-weight: bold; /* Make bold text */
-  }
-  
-  /* Italic text styling */
-  .content-preview i,
-  .content-preview em {
-    font-style: italic; /* Make italic text */
-  }
-  
-  /* Underline text styling */
-  .content-preview u {
-    text-decoration: underline; /* Underline text */
-  }
-  
-  /* Blockquote styling */
-  .content-preview blockquote {
-    border-left: 5px solid #ccc; /* Left border for the blockquote */
-    margin: 1em 0; /* Margin above and below the blockquote */
-    padding: 10px 20px; /* Padding inside the blockquote */
-    color: #555; /* Text color for blockquote */
-    font-style: italic; /* Italicize blockquote text */
-  }
-  
-  /* Code block styling */
-  .content-preview .ql-syntax {
-    color: #ccc;
-    background-color: #000000; /* Light background for code blocks */
-    border: 1px solid #ddd; /* Border around the code block */
-    border-radius: 4px; /* Rounded corners */
-    padding: 10px; /* Padding inside the code block */
-    font-family: 'Courier New', Courier, monospace; /* Monospace font for code */
-    overflow: auto; /* Enable scrolling for long code blocks */
-  }
-  
-  /* Combined styling for unordered and ordered lists */
-  .content-preview ul,
-  .content-preview ol {
-    padding-left: 40px; /* Padding on the left side of ul and ol */
-    margin: 1em 0; /* Margin above and below the ul and ol */
-  }
-  
-  /* List item styling */
-  .content-preview li {
-    margin-bottom: 0.5em; /* Spacing between list items */
-  }
-  
-  /* Additional styling for links */
-  .content-preview a {
-    color: #007bff; /* Link color */
-    text-decoration: none; /* Remove underline from links */
-  }
-  
-  .content-preview a:hover {
-    text-decoration: underline; /* Underline links on hover */
-  }
-  
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.docs-wrapper {
+  background: #f1f3f4;
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* =========================
+   "PAGE" CONTAINER (THIS IS KEY)
+========================= */
+
+.docs-page {
+  background: white;
+  width: 100%;
+  max-width: 850px;
+
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* =========================
+   TOOLBAR (Docs-like clean bar)
+========================= */
+
+.ql-toolbar {
+  border: none !important;
+  border-bottom: 1px solid #e0e0e0 !important;
+  background: #fafafa;
+}
+
+/* =========================
+   EDITOR CORE (Google Docs typography)
+========================= */
+
+.docs-editor .ql-container {
+  border: none !important;
+}
+
+.docs-editor .ql-editor {
+  padding: 60px 70px !important; /* page margins */
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #202124;
+
+  min-height: 600px;
+}
+
+/* =========================
+   PARAGRAPH RHYTHM (VERY IMPORTANT)
+========================= */
+
+.docs-editor .ql-editor p {
+  margin: 0 0 12px;
+}
+
+/* =========================
+   HEADINGS (Docs spacing feel)
+========================= */
+
+.docs-editor .ql-editor h1 {
+  font-size: 26px;
+  margin: 20px 0 10px;
+  font-weight: 600;
+}
+
+.docs-editor .ql-editor h2 {
+  font-size: 20px;
+  margin: 18px 0 10px;
+  font-weight: 600;
+}
+
+/* =========================
+   LISTS (FIX YOUR ORIGINAL ISSUE)
+========================= */
+
+.docs-editor .ql-editor ul,
+.docs-editor .ql-editor ol {
+  padding-left: 1.8rem;
+  margin: 8px 0 12px;
+}
+
+.docs-editor .ql-editor li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+/* nested lists */
+.docs-editor .ql-editor ul ul,
+.docs-editor .ql-editor ol ol {
+  padding-left: 1.4rem;
+}
+
+/* =========================
+   BLOCKQUOTE (Docs style)
+========================= */
+
+.docs-editor .ql-editor blockquote {
+  border-left: 4px solid #d0d0d0;
+  margin: 12px 0;
+  padding: 10px 15px;
+  color: #555;
+  background: #f8f9fa;
+}
+
+/* =========================
+   CODE BLOCKS
+========================= */
+
+.docs-editor .ql-editor pre.ql-syntax {
+  background: #1e1e1e;
+  color: #eee;
+  padding: 12px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+/* =========================
+   LINKS
+========================= */
+
+.docs-editor .ql-editor a {
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.docs-editor .ql-editor a:hover {
+  text-decoration: underline;
+}
+
+/* IMPORTANT: LIST INDENTATION */
+.content-preview ul,
+.content-preview ol {
+  padding-left: 1.8rem;
+  margin: 8px 0 12px;
+}
+
+.content-preview li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+/* nested lists */
+.content-preview ul ul,
+.content-preview ol ol {
+  padding-left: 1.4rem;
+}

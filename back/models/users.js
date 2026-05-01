@@ -32,7 +32,16 @@ const userSchema = new mongoose.Schema({
     },
     expertise: {
         type: String,
-    }
+    },
+    
+    // reset fields
+    resetPasswordToken: {
+        type: String,
+    },
+
+    resetPasswordExpire: {
+        type: Date,
+    },
 
 }, {timestamps:true})
 

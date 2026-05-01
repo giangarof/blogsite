@@ -1,0 +1,2 @@
+- backend port: 8000
+- frontend port: 5173

@@ -70,7 +70,7 @@ export default function AdminPanel() {
     <>
       {isLoading ? <CircularIndeterminate /> : 
         <>
-          <Message />
+          
           <TableContainer component={Paper} sx={{ mt: 2, boxShadow: 3 }}>
             <Table>
               <TableHead sx={{ backgroundColor: 'rgba(0,0,0,0.05)' }}>

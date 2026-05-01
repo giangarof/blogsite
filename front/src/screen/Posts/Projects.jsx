@@ -65,8 +65,7 @@ export default function Projects() {
         ) : (
           <>
             <SearchBox />
-            <Message sx={{ mt: 2 }} />
-
+          
             <Typography variant="h6" sx={{ mt: 3, mb: 2 }}>
               Total Projects: {posts.length}
             </Typography>
