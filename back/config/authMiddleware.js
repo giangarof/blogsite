@@ -12,14 +12,14 @@ export const protect = asyncHandler(async (req, res, next) => {
 		}
 
 		if (!token) {
-			return res.status(401).json({ message: "Not authorized" });
+			return res.status(401).json({ message: "Not authorized, no token" });
 		}
 		const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
 		const user = await User.findById(decoded.userId).select("-password");
-		console.log("USER FROM DB:", user);
+
 		if (!user) {
-			return res.status(404).json({ message: "Invalid user..." });
+			return res.status(401).json({ message: "Invalid user..." });
 		}
 		req.user = user;
 

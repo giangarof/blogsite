@@ -16,7 +16,8 @@ export default function AboutMe() {
 
 	const fetching = async () => {
 		try {
-			const res = await axios.get(`/api/user/profile`);
+			const res = await axios.get(`/api/user/aboutme`);
+			// console.log(res);
 			setUser({ about: res.data.user.about });
 		} catch (err) {
 			console.error(err);

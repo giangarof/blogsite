@@ -22,22 +22,19 @@ import Message from "./Message.jsx";
 import axios from "axios";
 
 export default function Navbar() {
-	const [profile, setProfile] = useState({
-		id: "",
-		name: "",
-		isAdmin: false,
-	});
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const [profile, setProfile] = useState(null);
 
 	const fetching = async () => {
-		const res = await axios.get(`/api/user/profile`);
+		try {
+			const res = await axios.get(`/api/user/profile`);
 
-		const dataUser = res.data.user;
-		console.log(dataUser);
-		setProfile({
-			id: dataUser._id,
-			name: dataUser.name,
-			isAdmin: dataUser.isAdmin,
-		});
+			const dataUser = res.data.user;
+			setProfile(dataUser);
+			setIsAuthenticated(true);
+		} catch (error) {
+			console.log(error?.response?.data?.message);
+		}
 	};
 
 	const [anchorElNav, setAnchorElNav] = useState(null);
@@ -61,7 +58,7 @@ export default function Navbar() {
 
 	return (
 		<>
-			{profile.id ? (
+			{isAuthenticated ? (
 				<Box sx={{ backgroundColor: "#000", color: "#fff" }}>
 					<Toolbar sx={{ backgroundColor: "#000", color: "#fff" }}>
 						<Box

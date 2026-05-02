@@ -18,7 +18,12 @@ router.post("/recover", user.restorePassword);
 router.put("/recover/:token", user.updatePassword);
 
 // router.get('/delete/:id', deleteUser)
+
+// User profile
 router.get("/profile", protect, asyncHandler(user.userProfile));
 router.put("/profile", protect, asyncHandler(user.userUpdateProfile));
+
+// About user
+router.get("/aboutme", asyncHandler(user.aboutMe));
 
 export default router;

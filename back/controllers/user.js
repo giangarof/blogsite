@@ -256,4 +256,19 @@ export class UserController {
 			return res.status(500).json({ message: "server error" });
 		}
 	}
+
+	// About user (the field)
+	// route: /api/user/aboutme
+	// Method: Get
+	async aboutMe(req, res) {
+		const user = await User.findOne({ isAdmin: true }).select("about");
+
+		try {
+			return res.status(200).json({
+				user: user,
+			});
+		} catch (error) {
+			return res.status(500).json({ message: "Server error" });
+		}
+	}
 }
