@@ -26,6 +26,8 @@ import CircularIndeterminate from "../../components/Spinner";
 import Meta from "../../components/Meta";
 import Message from "../../components/Message";
 
+// Description: FETCH one single post by id
+
 export default function PostDetail() {
 	const [post, setPost] = useState(null);
 	const [notFound, setNotFound] = useState(false);
@@ -39,7 +41,7 @@ export default function PostDetail() {
 		setIsLoading(true);
 		try {
 			const { data } = await axios.get(`/api/post/${id}`);
-			console.log(data);
+			// console.log(data);
 			setPost(data.post);
 		} catch (err) {
 			setNotFound(err.response.data.message);

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 // MUI
 import {
+	FormControl,
 	Box,
 	TextField,
 	Stack,
@@ -26,7 +27,6 @@ export default function Signin() {
 	const [user, setUser] = useState({
 		email: "",
 		password: "",
-		// showPassword:''
 	});
 
 	const [errorMsg, setErrorMsg] = useState("");
@@ -77,73 +77,75 @@ export default function Signin() {
 					borderRadius: 3,
 				}}
 			>
-				<Stack spacing={3} marginBottom={3}>
-					{/* Header */}
-					<Box sx={{ textAlign: "center" }}>
-						<Typography variant="h5" fontWeight={600}>
-							Welcome Back
-						</Typography>
-						<Typography variant="body2" color="text.secondary">
-							Sign in to continue
-						</Typography>
-					</Box>
+				<form onSubmit={login}>
+					<Stack spacing={3} marginBottom={3}>
+						{/* Header */}
+						<Box sx={{ textAlign: "center" }}>
+							<Typography variant="h5" fontWeight={600}>
+								Welcome Back
+							</Typography>
+							<Typography variant="body2" color="text.secondary">
+								Sign in to continue
+							</Typography>
+						</Box>
 
-					{/* Email */}
-					<TextField
-						fullWidth
-						label="Email"
-						type="email"
-						variant="outlined"
-						value={user.email}
-						name="email"
-						onChange={handleChange}
-					/>
+						{/* Email */}
+						<TextField
+							fullWidth
+							label="Email"
+							type="email"
+							variant="outlined"
+							value={user.email}
+							name="email"
+							onChange={handleChange}
+						/>
 
-					{/* Password */}
-					<TextField
-						fullWidth
-						label="Password"
-						variant="outlined"
-						type={showPassword ? "text" : "password"}
-						value={user.password}
-						name="password"
-						onChange={handleChange}
-						InputProps={{
-							endAdornment: (
-								<InputAdornment position="end">
-									<IconButton
-										onClick={() => setShowPassword(!showPassword)}
-										edge="end"
-									>
-										{showPassword ? <VisibilityOff /> : <Visibility />}
-									</IconButton>
-								</InputAdornment>
-							),
-						}}
-					/>
+						{/* Password */}
+						<TextField
+							fullWidth
+							label="Password"
+							variant="outlined"
+							type={showPassword ? "text" : "password"}
+							value={user.password}
+							name="password"
+							onChange={handleChange}
+							InputProps={{
+								endAdornment: (
+									<InputAdornment position="end">
+										<IconButton
+											onClick={() => setShowPassword(!showPassword)}
+											edge="end"
+										>
+											{showPassword ? <VisibilityOff /> : <Visibility />}
+										</IconButton>
+									</InputAdornment>
+								),
+							}}
+						/>
 
-					{/* Error */}
-					{errorMsg && (
-						<Typography
-							variant="body2"
-							sx={{ color: "error.main", textAlign: "center" }}
+						{/* Error */}
+						{errorMsg && (
+							<Typography
+								variant="body2"
+								sx={{ color: "error.main", textAlign: "center" }}
+							>
+								{errorMsg}
+							</Typography>
+						)}
+
+						{/* Button */}
+						<Button
+							variant="contained"
+							size="large"
+							fullWidth
+							type="submit"
+							sx={{ py: 1.2, borderRadius: 2 }}
 						>
-							{errorMsg}
-						</Typography>
-					)}
-
-					{/* Button */}
-					<Button
-						variant="contained"
-						size="large"
-						fullWidth
-						onClick={login}
-						sx={{ py: 1.2, borderRadius: 2 }}
-					>
-						Sign In
-					</Button>
-				</Stack>
-				<Link href="/recover">Forgot password?</Link>
+							Sign In
+						</Button>
+					</Stack>
+					<Link href="/recover">Forgot password?</Link>
+				</form>
 			</Paper>
 		</Box>
 	);

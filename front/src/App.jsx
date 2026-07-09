@@ -14,16 +14,10 @@ const App = () => {
 
 	return (
 		<>
-			{/* <main> */}
-			{/* <Container> */}
-			{/* <React.Fragment> */}
 			<Navbar />
 			<Message />
 			<Outlet />
 			<Footer />
-			{/* </React.Fragment> */}
-			{/* </Container> */}
-			{/* </main> */}
 		</>
 	);
 };

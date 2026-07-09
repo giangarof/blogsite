@@ -57,7 +57,10 @@ export class UserController {
 		} catch (error) {
 			return res
 				.status(500)
-				.json({ message: "Server side error... try again later." });
+				.json({
+					message: "Server side error... try again later.",
+					error: error,
+				});
 		}
 	}
 
